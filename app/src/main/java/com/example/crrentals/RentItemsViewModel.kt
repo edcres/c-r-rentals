@@ -1,6 +1,7 @@
 package com.example.crrentals
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,8 +23,8 @@ class RentItemsViewModel : ViewModel() {
     val rentedItem: LiveData<MutableList<RentedItem>> get() = _rentedItem
 
     // SETUP //
-    fun startApplication(application: Application) {
-        roomDb = RentsRoomDatabase.getInstance(application)
+    fun startApplication(context: Context) {
+        roomDb = RentsRoomDatabase.getInstance(context)
         repo = Repository(roomDb)
         collectAllRentItems()
     }
