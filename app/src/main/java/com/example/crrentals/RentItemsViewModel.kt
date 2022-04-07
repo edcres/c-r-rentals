@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class SharedViewModel : ViewModel() {
+class RentItemsViewModel : ViewModel() {
 
     private val tag = "ViewModel_TAG"
     private lateinit var roomDb: RentsRoomDatabase
