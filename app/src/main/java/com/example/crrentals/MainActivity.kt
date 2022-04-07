@@ -23,4 +23,9 @@ class MainActivity : AppCompatActivity() {
         }
         vm.startApplication(this)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }
