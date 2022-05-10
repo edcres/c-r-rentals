@@ -1,10 +1,12 @@
-package com.example.crrentals
+package com.example.crrentals.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.example.crrentals.R
 import com.example.crrentals.databinding.ActivityMainBinding
+import com.example.crrentals.ui.RentItemsViewModel
 
 // Have different viewModels.
 
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
     private lateinit var vm: RentItemsViewModel
+    private lateinit var rentalsAdapter: RentalsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             lifecycleOwner = this@MainActivity
         }
         vm = ViewModelProvider(this).get(RentItemsViewModel::class.java)
+        rentalsAdapter = RentalsAdapter(vm, this, this)
         vm.setUpDatabase(this)
     }
 

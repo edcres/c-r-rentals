@@ -1,6 +1,5 @@
-package com.example.crrentals
+package com.example.crrentals.ui
 
-import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
