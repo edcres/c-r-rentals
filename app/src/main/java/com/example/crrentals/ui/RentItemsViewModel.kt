@@ -37,5 +37,18 @@ class RentItemsViewModel : ViewModel() {
             }
         }
     }
+    private fun insertRental(rentedItem: RentedItem): MutableLiveData<Long> {
+        val itemId = MutableLiveData<Long>()
+        CoroutineScope(Dispatchers.IO).launch {
+            itemId.postValue(repo.insertRental(rentedItem))
+        }
+        return itemId
+    }
+    private fun updateRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
+        repo.updateRental(rentedItem)
+    }
+    private fun deleteRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
+        repo.deleteRental(rentedItem)
+    }
     // DATABASE QUERIES //
 }

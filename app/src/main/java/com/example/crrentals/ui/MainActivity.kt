@@ -8,8 +8,6 @@ import com.example.crrentals.R
 import com.example.crrentals.databinding.ActivityMainBinding
 import com.example.crrentals.ui.RentItemsViewModel
 
-// Have different viewModels.
-
 private const val MAIN_ACT_TAG = "MainAct_TAG"
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding?.apply {
             lifecycleOwner = this@MainActivity
+
         }
         vm = ViewModelProvider(this).get(RentItemsViewModel::class.java)
         rentalsAdapter = RentalsAdapter(vm, this, this)
