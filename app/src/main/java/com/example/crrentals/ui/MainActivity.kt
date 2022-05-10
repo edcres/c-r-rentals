@@ -26,10 +26,17 @@ class MainActivity : AppCompatActivity() {
         vm = ViewModelProvider(this).get(RentItemsViewModel::class.java)
         rentalsAdapter = RentalsAdapter(vm, this, this)
         vm.setUpDatabase(this)
+        setObservers()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    private fun setObservers() {
+        vm.rentedItems.observe(this) { rentals ->
+            rentalsAdapter.submitList(rentals)
+        }
     }
 }

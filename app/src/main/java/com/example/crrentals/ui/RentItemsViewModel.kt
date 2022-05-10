@@ -18,8 +18,8 @@ class RentItemsViewModel : ViewModel() {
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
 
-    private val _rentedItem = MutableLiveData<MutableList<RentedItem>>()
-    val rentedItem: LiveData<MutableList<RentedItem>> get() = _rentedItem
+    private val _rentedItems = MutableLiveData<MutableList<RentedItem>>()
+    val rentedItems: LiveData<MutableList<RentedItem>> get() = _rentedItems
 
     // SETUP //
     fun setUpDatabase(context: Context) {
@@ -33,7 +33,7 @@ class RentItemsViewModel : ViewModel() {
     private fun collectAllRentItems() {
         CoroutineScope(Dispatchers.IO).launch {
             repo.allRentedItems.collect {
-                _rentedItem.postValue(it.toMutableList())
+                _rentedItems.postValue(it.toMutableList())
             }
         }
     }
