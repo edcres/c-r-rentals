@@ -23,7 +23,7 @@ class RentItemsViewModel : ViewModel() {
     val rentedItem: LiveData<MutableList<RentedItem>> get() = _rentedItem
 
     // SETUP //
-    fun startApplication(context: Context) {
+    fun setUpDatabase(context: Context) {
         roomDb = RentsRoomDatabase.getInstance(context)
         repo = Repository(roomDb)
         collectAllRentItems()

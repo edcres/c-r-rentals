@@ -11,7 +11,7 @@ data class RentedItem (
     @ColumnInfo(name = "id")
     var id: Long = 0,
     @ColumnInfo(name = "item")
-    var item: String,
+    var item: ItemType,
     @ColumnInfo(name = "room_number")
     var roomNumber: Int,
     @ColumnInfo(name = "daily_rentals")
@@ -25,9 +25,9 @@ data class RentedItem (
     @ColumnInfo(name = "paid")
     var paid: Boolean
 ) {
-    companion object {
-        const val BIKE_TYPE = "bike"
-        const val PADDLE_BOARD_TYPE = "paddleBoard"
-        const val CHAIRS_TYPE = "chairs"
+    enum class ItemType(val type: String) {
+        BIKE("bike"),
+        PADDLE_BOARD("paddleBoard"),
+        CHAIR("chair")
     }
 }
