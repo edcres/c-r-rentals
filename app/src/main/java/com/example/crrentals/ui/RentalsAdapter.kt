@@ -11,23 +11,25 @@ import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.RentalListItemBinding
 
 class RentalsAdapter(
-    private val rentItemsViewModel: RentItemsViewModel,
+    private val vm: RentItemsViewModel,
     private val context: Context,
     private val viewLifecycleOwner: LifecycleOwner
 ) : ListAdapter<RentedItem, RentalsAdapter.RentalsViewHolder>(RentalsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        RentalsViewHolder.from(rentItemsViewModel, context, viewLifecycleOwner, parent)
+        RentalsViewHolder.from(vm, context, viewLifecycleOwner, parent)
 
     override fun onBindViewHolder(rentalsViewHolder: RentalsViewHolder, position: Int) =
         rentalsViewHolder.bind(getItem(position))
 
     class RentalsViewHolder private constructor(
-        private val rentItemsViewModel: RentItemsViewModel,
+        private val vm: RentItemsViewModel,
         private val context: Context,
         private val viewLifecycleOwner: LifecycleOwner,
         private val binding: RentalListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        // todo: handle when a rental item is swipe deleted
 
         fun bind(rentedItem: RentedItem) {
             binding.apply {
@@ -40,14 +42,14 @@ class RentalsAdapter(
 
         companion object {
             fun from(
-                rentItemsViewModel: RentItemsViewModel,
+                vm: RentItemsViewModel,
                 context: Context,
                 viewLifecycleOwner: LifecycleOwner,
                 parent: ViewGroup
             ): RentalsViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RentalListItemBinding.inflate(layoutInflater, parent, false)
-                return RentalsViewHolder(rentItemsViewModel, context, viewLifecycleOwner, binding)
+                return RentalsViewHolder(vm, context, viewLifecycleOwner, binding)
             }
         }
     }
