@@ -1,4 +1,4 @@
-package com.example.crrentals.helpers
+package com.example.crrentals.util
 
 import android.graphics.Canvas
 import androidx.recyclerview.widget.ItemTouchHelper

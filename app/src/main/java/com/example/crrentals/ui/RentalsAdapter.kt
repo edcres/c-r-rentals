@@ -29,8 +29,6 @@ class RentalsAdapter(
         private val binding: RentalListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        // todo: handle when a rental item is swipe deleted
-
         fun bind(rentedItem: RentedItem) {
             binding.apply {
 

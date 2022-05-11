@@ -1,4 +1,4 @@
-package com.example.crrentals.helpers;
+package com.example.crrentals.util;
 
 import android.content.Context;
 import android.graphics.Canvas;

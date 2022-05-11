@@ -2,12 +2,17 @@ package com.example.crrentals.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.ActivityMainBinding
-import com.example.crrentals.ui.RentItemsViewModel
+import com.example.crrentals.util.ItemMoveCallback
+import com.example.crrentals.util.getRentalAtListPosition
+import java.util.*
 
 private const val TAG = "MainAct_TAG"
 
@@ -34,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         rentalsAdapter = RentalsAdapter(vm, this, this)
         vm.setUpDatabase(this)
         setObservers()
+        setUpItemEdit()
     }
 
     override fun onDestroy() {
@@ -45,5 +51,29 @@ class MainActivity : AppCompatActivity() {
         vm.rentedItems.observe(this) { rentals ->
             rentalsAdapter.submitList(rentals)
         }
+    }
+
+    private fun setUpItemEdit() {
+        val editItemCallback = object : ItemMoveCallback(
+            ContextCompat.getColor(this, R.color.delete_color),
+            R.drawable.ic_delete_24
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition // position of the item in the UI
+                vm.deleteRental(
+                    getRentalAtListPosition(position, vm.rentedItems.value ?: mutableListOf())
+                )
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(editItemCallback)
+        itemTouchHelper.attachToRecyclerView(binding!!.rentalsRecycler)
     }
 }
