@@ -11,7 +11,6 @@ import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.ActivityMainBinding
 import com.example.crrentals.util.ItemMoveCallback
-import com.example.crrentals.util.getRentalAtListPosition
 import java.util.*
 
 private const val TAG = "MainAct_TAG"
@@ -63,16 +62,13 @@ class MainActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
+                // Fill this when integrating feature to change item position.
                 return false
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition // position of the item in the UI
-                vm.deleteRental(
-                    getRentalAtListPosition(position, vm.rentedItems.value ?: mutableListOf())
-                )
+                vm.deleteRentalAt(viewHolder.adapterPosition)
             }
         }
-
         val itemTouchHelper = ItemTouchHelper(editItemCallback)
         itemTouchHelper.attachToRecyclerView(binding!!.rentalsRecycler)
     }

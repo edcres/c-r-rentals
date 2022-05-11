@@ -21,6 +21,14 @@ class RentItemsViewModel : ViewModel() {
     private val _rentedItems = MutableLiveData<MutableList<RentedItem>>()
     val rentedItems: LiveData<MutableList<RentedItem>> get() = _rentedItems
 
+    // HELPERS //
+    fun deleteRentalAt(position: Int) {
+        if (rentedItems.value != null) {
+            deleteRental(rentedItems.value!![position])
+        }
+    }
+    // HELPERS //
+
     // SETUP //
     fun setUpDatabase(context: Context) {
         roomDb = RentsRoomDatabase.getInstance(context)
