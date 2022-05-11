@@ -1,6 +1,7 @@
 package com.example.crrentals.ui
 
 import android.content.Context
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,9 +13,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+private const val TAG = "ViewModel_TAG"
+
 class RentItemsViewModel : ViewModel() {
 
-    private val tag = "ViewModel_TAG"
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
 
@@ -55,7 +57,7 @@ class RentItemsViewModel : ViewModel() {
     fun updateRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
         repo.updateRental(rentedItem)
     }
-    fun deleteRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
+    private fun deleteRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
         repo.deleteRental(rentedItem)
     }
     // DATABASE QUERIES //

@@ -3,10 +3,14 @@ package com.example.crrentals.ui
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.Placeholder
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.RentalListItemBinding
 
@@ -31,9 +35,13 @@ class RentalsAdapter(
 
         fun bind(rentedItem: RentedItem) {
             binding.apply {
-
-
-
+                Glide.with(rentalImage.context)
+                    .load(rentedItem.itemImage)
+                    .apply(
+                        RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_baseline_broken_image))
+                    .into(rentalImage)
                 binding.executePendingBindings()
             }
         }

@@ -9,5 +9,5 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="delete_color">#FA0000</color>
-
+    <color name="grey">#B3B3B3</color>
 </resources>

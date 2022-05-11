@@ -1,5 +1,6 @@
 package com.example.crrentals.data
 
+import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -12,6 +13,14 @@ data class RentedItem (
     var id: Long = 0,
     @ColumnInfo(name = "item")
     var item: ItemType,
+
+
+
+    @ColumnInfo(name = "item_image")
+    var itemImage: Bitmap?,
+
+
+
     @ColumnInfo(name = "room_number")
     var roomNumber: Int,
     @ColumnInfo(name = "daily_rentals")

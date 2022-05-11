@@ -40,6 +40,7 @@ dependencies {
     def roomVersion = '2.3.0'
     def coroutines = '1.4.3'
     def lifecycleVersion = '2.3.1'
+    def glideVersion = '4.13.0'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -61,4 +62,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
 }

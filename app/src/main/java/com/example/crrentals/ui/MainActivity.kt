@@ -38,8 +38,9 @@ class MainActivity : AppCompatActivity() {
         }
         vm = ViewModelProvider(this).get(RentItemsViewModel::class.java)
         rentalsAdapter = RentalsAdapter(vm, this, this)
-        vm.setUpDatabase(this)
+        setUpItemAnimation()
         setObservers()
+        vm.setUpDatabase(this)
         setUpItemEdit()
     }
 
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                // Fill this when integrating feature to change item position.
+                // Fill this when integrating a feature to change item position.
                 return false
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
