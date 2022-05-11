@@ -2,6 +2,8 @@ package com.example.crrentals.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -50,6 +52,15 @@ class MainActivity : AppCompatActivity() {
         vm.rentedItems.observe(this) { rentals ->
             rentalsAdapter.submitList(rentals)
         }
+    }
+
+    private fun setUpItemAnimation() {
+        val animController = LayoutAnimationController(
+            AnimationUtils
+            .loadAnimation(this, R.anim.item_anim))
+        animController.delay = 0.20f
+        animController.order = LayoutAnimationController.ORDER_NORMAL
+        binding!!.rentalsRecycler.layoutAnimation = animController
     }
 
     private fun setUpItemEdit() {
