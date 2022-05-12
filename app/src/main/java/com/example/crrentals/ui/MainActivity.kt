@@ -1,5 +1,6 @@
 package com.example.crrentals.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
         binding?.apply {
             lifecycleOwner = this@MainActivity
             addRentalFab.setOnClickListener {
@@ -42,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         setObservers()
         vm.setUpDatabase(this)
         setUpItemEdit()
+
+        val sdds = Context.MODE_PRIVATE
     }
 
     override fun onDestroy() {

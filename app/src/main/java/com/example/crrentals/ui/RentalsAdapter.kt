@@ -3,7 +3,6 @@ package com.example.crrentals.ui
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.Placeholder
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -39,8 +38,8 @@ class RentalsAdapter(
                     .load(rentedItem.itemImage)
                     .apply(
                         RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.ic_baseline_broken_image))
+                            .placeholder(R.drawable.loading_animation)
+                            .error(R.drawable.ic_baseline_broken_image))
                     .into(rentalImage)
                 binding.executePendingBindings()
             }
