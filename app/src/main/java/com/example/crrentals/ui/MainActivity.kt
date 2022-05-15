@@ -30,7 +30,6 @@ import java.util.*
 /**
  * todo: Bottom sheet
  *
- * todo: make fragment .xml
  * todo: make fragment .kt
  * todo: set up the bottom sheet fragment into it's parent fragment
  * todo: make rounded edges on the sheet
@@ -77,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+        vm = ViewModelProvider(this)[RentItemsViewModel::class.java]
         binding?.apply {
             lifecycleOwner = this@MainActivity
             addRentalFab.setOnClickListener {
@@ -87,11 +87,10 @@ class MainActivity : AppCompatActivity() {
 //                vm.updateRental(RentedItem())
             }
         }
-        vm = ViewModelProvider(this)[RentItemsViewModel::class.java]
         rentalsAdapter = RentalsAdapter(vm, this, this)
         setUpItemAnimation()
         setObservers()
-        vm.setUpDatabase(this)
+        vm.setUpDatabase(applicationContext)
         setUpItemEdit()
 
         // todo: call this when going to take a picture
