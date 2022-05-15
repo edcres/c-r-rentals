@@ -30,7 +30,6 @@ import java.util.*
 /**
  * todo: Bottom sheet
  *
- * todo: make fragment .kt
  * todo: make fragment edit texts
  * todo: alocate edit text inputs into the respective functions (insert/update)
  * todo: set up the bottom sheet fragment into it's parent fragment

@@ -11,8 +11,11 @@ import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.FragmentBottomSheetBinding
 import com.example.crrentals.ui.RentItemsViewModel
+import com.example.crrentals.util.SHEET_STR_KEY
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+
+private const val TAG = "ModalBottomSheet_TAG"
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -67,5 +70,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    companion object {
+        fun newInstance(testString: String) = BottomSheetFragment().apply {
+            arguments = Bundle().apply {
+                putString(SHEET_STR_KEY, testString)
+            }
+        }
     }
 }
