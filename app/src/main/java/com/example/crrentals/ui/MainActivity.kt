@@ -31,6 +31,8 @@ import java.util.*
  * todo: Bottom sheet
  *
  * todo: make fragment .kt
+ * todo: make fragment edit texts
+ * todo: alocate edit text inputs into the respective functions (insert/update)
  * todo: set up the bottom sheet fragment into it's parent fragment
  * todo: make rounded edges on the sheet
  * todo: The bottom sheet has a button for the user to add a picture

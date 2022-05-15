@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.crrentals.R
+import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.FragmentBottomSheetBinding
 import com.example.crrentals.ui.RentItemsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -39,12 +40,26 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         vm.setUpDatabase(requireActivity().applicationContext)
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
-            // todo: to dismiss the dialog
             addItemBtn.setOnClickListener {
+                vm.insertRental(RentedItem(
+                    // todo:
+                ))
                 dialog.dismiss()
             }
             acceptItemBtn.setOnClickListener {
+                vm.updateRental(RentedItem(
+                    // todo:
+                ))
                 dialog.dismiss()
+            }
+            deleteItemBtn.setOnClickListener {
+                // todo:
+            }
+            addImgBtn.setOnClickListener {
+                // todo:
+            }
+            duplicateItemBtn.setOnClickListener {
+                // todo:
             }
         }
     }
