@@ -47,7 +47,15 @@ class RentItemsViewModel : ViewModel() {
             return false
         }
     }
+    // todo: probable delete this function
+//    fun deleteFileAt(position: Int, files: Array<File>?): Boolean {
+//        files?.filter {
+//            it.canRead() && it.isFile && it.name.endsWith(".jpg")
+//        } ?: return false
+//        return files[position].delete()
+//    }
     fun makeTmpFile(cacheDir: File, appContext: Context): Uri {
+        // pass in the chosen name of the file instead of "tmp_image_file"
         val tmpFile = File.createTempFile("tmp_image_file", JPG_SUFFIX, cacheDir).apply {
             createNewFile()
             deleteOnExit()

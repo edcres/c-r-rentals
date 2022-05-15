@@ -94,6 +94,9 @@ class MainActivity : AppCompatActivity() {
 //            latestTmpUri = uri
 //            takeImageResult.launch(uri)
 //        }
+        // todo: delete file
+//        vm.deleteFilWithName("sds", cacheDir.listFiles())
+
     }
 
     override fun onDestroy() {
