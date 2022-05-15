@@ -85,15 +85,26 @@
                 app:layout_constraintStart_toStartOf="@+id/duplicate_item_btn"
                 app:layout_constraintTop_toBottomOf="@+id/duplicate_item_btn" />
 
-<!--            todo: add a separator here (bike shop app)-->
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/dividerHorizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_img_txt" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/item_type_txt"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/delete_item_txt"
-                style="@style/TextAppearance.Material3.BodyLarge"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
                 tools:text="bike" />
 
             <com.google.android.material.textview.MaterialTextView
