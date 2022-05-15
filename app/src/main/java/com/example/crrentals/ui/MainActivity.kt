@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.ActivityMainBinding
+import com.example.crrentals.ui.bottomsheet.BottomSheetFragment
 import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 import java.io.File
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
     private lateinit var vm: RentItemsViewModel
     private lateinit var rentalsAdapter: RentalsAdapter
-    private var listener: OnBottomSheetCallListener? = null
+    private var bottomSheetFragment: BottomSheetFragment? = null
 
     private var latestTmpUri: Uri? = null
     private val takeImageResult =
@@ -82,7 +83,13 @@ class MainActivity : AppCompatActivity() {
             lifecycleOwner = this@MainActivity
             addRentalFab.setOnClickListener {
                 // todo: pop up the bottom sheet and say whether to add or update an item
-                if (listener != null) listener!!.sendTestString(BottomSheetAction.ADD.toString())
+                // todo: send string to the sheet fragment
+                bottomSheetFragment =
+                    BottomSheetFragment.newInstance(BottomSheetAction.ADD.toString())
+                bottomSheetFragment?.show(supportFragmentManager, bottomSheetFragment?.tag)
+
+                // todo: probably get rid of this
+//                if (listener != null) listener!!.sendTestString(BottomSheetAction.ADD.toString())
             }
         }
         rentalsAdapter = RentalsAdapter(vm, this, this)
@@ -141,7 +148,8 @@ class MainActivity : AppCompatActivity() {
         itemTouchHelper.attachToRecyclerView(binding!!.rentalsRecycler)
     }
 
-    interface OnBottomSheetCallListener {
-        fun sendTestString(testString: String)
-    }
+    // todo: probably get rid of this
+//    interface OnBottomSheetCallListener {
+//        fun sendTestString(addOrUpdate: String)
+//    }
 }
