@@ -3,6 +3,7 @@ package com.example.crrentals.ui
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -35,7 +36,7 @@ class RentalsAdapter(
         fun bind(rentedItem: RentedItem) {
             binding.apply {
                 Glide.with(rentalImage.context)
-                    .load(rentedItem.imageUri)
+                    .load(rentedItem.imageUri?:"noUri".toUri())
                     .apply(
                         RequestOptions()
                             .placeholder(R.drawable.loading_animation)
