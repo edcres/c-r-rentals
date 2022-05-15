@@ -2,15 +2,13 @@ package com.example.crrentals.ui.bottomsheet
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.FragmentBottomSheetBinding
-import com.example.crrentals.ui.RentItemsViewModel
+import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.SHEET_STR_KEY
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -22,6 +20,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private var binding: FragmentBottomSheetBinding? = null
     private lateinit var dialog: BottomSheetDialog
     private lateinit var vm: BottomSheetViewModel
+    private lateinit var addOrUpdate: String
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
@@ -65,6 +64,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 // todo:
             }
         }
+        showCorrectFab(addOrUpdate)
     }
 
     override fun onDestroyView() {
@@ -72,10 +72,22 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         binding = null
     }
 
+    private fun showCorrectFab(addOrUpdatePassed: String) {
+        binding!!.apply {
+            when (addOrUpdatePassed) {
+                BottomSheetAction.ADD.toString() -> addItemBtn.visibility = View.VISIBLE
+                BottomSheetAction.UPDATE.toString() -> acceptItemBtn.visibility = View.VISIBLE
+            }
+        }
+    }
+
     companion object {
-        fun newInstance(testString: String) = BottomSheetFragment().apply {
+
+        // todo: call this
+        fun newInstance(addOrUpdatePassed: String) = BottomSheetFragment().apply {
             arguments = Bundle().apply {
-                putString(SHEET_STR_KEY, testString)
+                putString(SHEET_STR_KEY, addOrUpdatePassed)
+                addOrUpdate = addOrUpdatePassed
             }
         }
     }
