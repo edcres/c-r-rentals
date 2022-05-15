@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.ActivityMainBinding
+import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 import java.io.File
 import java.util.*
@@ -30,11 +31,9 @@ import java.util.*
 /**
  * todo: Bottom sheet
  *
+ * todo: set up the bottom sheet fragment into it's parent view
  * todo: make fragment edit texts
- * todo: alocate edit text inputs into the respective functions (insert/update)
- * todo: set up the bottom sheet fragment into it's parent fragment
- * todo: make rounded edges on the sheet
- * todo: The bottom sheet has a button for the user to add a picture
+ * todo: allocate edit text inputs into the respective functions (insert/update)
  *
  *
  */
@@ -53,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
     private lateinit var vm: RentItemsViewModel
     private lateinit var rentalsAdapter: RentalsAdapter
+    private var listener: OnBottomSheetCallListener? = null
 
     private var latestTmpUri: Uri? = null
     private val takeImageResult =
@@ -81,11 +81,8 @@ class MainActivity : AppCompatActivity() {
         binding?.apply {
             lifecycleOwner = this@MainActivity
             addRentalFab.setOnClickListener {
-
-                // todo: pop up the bottom sheet and put in the new item info
-                //  when the user clicks the checkmark, the item is either inserted or updated
-//                vm.insertRental(RentedItem())
-//                vm.updateRental(RentedItem())
+                // todo: pop up the bottom sheet and say whether to add or update an item
+                if (listener != null) listener!!.sendTestString(BottomSheetAction.ADD.toString())
             }
         }
         rentalsAdapter = RentalsAdapter(vm, this, this)
@@ -142,5 +139,9 @@ class MainActivity : AppCompatActivity() {
         }
         val itemTouchHelper = ItemTouchHelper(editItemCallback)
         itemTouchHelper.attachToRecyclerView(binding!!.rentalsRecycler)
+    }
+
+    interface OnBottomSheetCallListener {
+        fun sendTestString(testString: String)
     }
 }
