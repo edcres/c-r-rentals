@@ -6,10 +6,9 @@ import androidx.room.Room
 import com.example.crrentals.data.RentedItem
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.crrentals.util.Converters
 
 @Database(entities = [RentedItem::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
+//@TypeConverters(Converters::class)  // todo: probably get rid of this
 abstract class RentsRoomDatabase: RoomDatabase() {
 
     abstract fun rentedItemsDao(): RentedItemsDao
