@@ -10,4 +10,6 @@
 
     <color name="delete_color">#FA0000</color>
     <color name="grey">#B3B3B3</color>
+    <color name="transparent">#00B3B3B3</color>
+    <color name="bottom_sheet_icon">#FF6200EE</color>
 </resources>
