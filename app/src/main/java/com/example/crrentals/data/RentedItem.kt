@@ -1,10 +1,8 @@
 package com.example.crrentals.data
 
-import android.net.Uri
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 @Entity(tableName = "rented_item_table")
 data class RentedItem (
@@ -16,13 +14,13 @@ data class RentedItem (
     @ColumnInfo(name = "image_name")
     var imageName: String?,
     @ColumnInfo(name = "image_uri")
-    var imageUri: Uri?,
+    var imageUri: String?,  // Turn this String into a Uri type
     @ColumnInfo(name = "room_number")
     var roomNumber: Int,
     @ColumnInfo(name = "daily_rentals")
     var dailyRentals: Boolean,
     @ColumnInfo(name = "time")
-    var time: Date,
+    var time: String,     // Turn this String into a Date type
     @ColumnInfo(name = "lock")
     var lock: Int?,
     @ColumnInfo(name = "number")

@@ -24,11 +24,11 @@ import java.util.*
  * - do todos
  * - do warnings
  * - check comments
+ * - clean imports
  */
 
 /**
  *
- * todo: delete an image (when an item is deleted)
  * todo: The bottom sheet has a button for the user to add a picture
  *
  *
@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity() {
 //        }
         // todo: delete file
 //        vm.deleteFilWithName("sds", cacheDir.listFiles())
-
     }
 
     override fun onDestroy() {
