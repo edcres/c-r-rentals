@@ -2,9 +2,13 @@ package com.example.crrentals.ui
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.net.Uri
+import android.util.Log
+import androidx.core.content.FileProvider
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.crrentals.BuildConfig
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.data.Repository
 import com.example.crrentals.data.room.RentsRoomDatabase
@@ -12,8 +16,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.io.File
 
 private const val TAG = "ViewModel_TAG"
+private const val JPG_SUFFIX = ".jpg"
 
 class RentItemsViewModel : ViewModel() {
 
@@ -28,6 +34,25 @@ class RentItemsViewModel : ViewModel() {
         if (rentedItems.value != null) {
             deleteRental(rentedItems.value!![position])
         }
+    }
+    fun deleteFilWithName(name: String, files: Array<File>?): Boolean {
+        // todo: do this in a background thread
+        if (files.isNullOrEmpty()) {
+            Log.e(TAG, "deleteFile: Error loading files.")
+            return false
+        } else {
+            files.filter {
+                it.canRead() && it.isFile && it.name.endsWith(JPG_SUFFIX)
+            }.forEach { if (it.name == name) return it.delete() }
+            return false
+        }
+    }
+    fun makeTmpFile(cacheDir: File, appContext: Context): Uri {
+        val tmpFile = File.createTempFile("tmp_image_file", JPG_SUFFIX, cacheDir).apply {
+            createNewFile()
+            deleteOnExit()
+        }
+        return FileProvider.getUriForFile(appContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
     }
     // HELPERS //
 

@@ -13,8 +13,6 @@ import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.RentalListItemBinding
 
-// todo: make imageUri optional
-
 class RentalsAdapter(
     private val vm: RentItemsViewModel,
     private val context: Context,

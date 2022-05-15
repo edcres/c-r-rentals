@@ -11,8 +11,8 @@ data class RentedItem (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Long = 0,
-    @ColumnInfo(name = "item")
-    var item: ItemType,
+    @ColumnInfo(name = "itemType")
+    var itemType: ItemType,
     @ColumnInfo(name = "image_name")
     var imageName: String?,
     @ColumnInfo(name = "image_uri")
