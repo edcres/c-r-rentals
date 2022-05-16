@@ -31,10 +31,12 @@ import java.util.*
 
 /**
  * todo: Bottom sheet
- *
  * todo: make fragment edit texts
  * todo: allocate edit text inputs into the respective functions (insert/update)
  *
+ * todo: put everything together
+ *
+ * todo: work with Date
  *
  */
 
