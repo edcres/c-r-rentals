@@ -21,6 +21,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var dialog: BottomSheetDialog
     private lateinit var vm: BottomSheetViewModel
     private lateinit var addOrUpdate: String
+    private lateinit var currentRental: RentedItem
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
@@ -40,30 +41,31 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         vm = ViewModelProvider(requireActivity())[BottomSheetViewModel::class.java]
         vm.setUpDatabase(requireActivity().applicationContext)
+        vm.setRentalItem(currentRental)
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
-//            addItemBtn.setOnClickListener {
-                // todo: add a new Date, turn it into a string (check if it can be turned back into a Date)
-//                vm.insertRental(RentedItem(
-//                    // todo:
-//                ))
-//                dialog.dismiss()
-//            }
-//            acceptItemBtn.setOnClickListener {
-//                vm.updateRental(RentedItem(
-//                    // todo:
-//                ))
-//                dialog.dismiss()
-//            }
-//            deleteItemBtn.setOnClickListener {
-//                // todo:
-//            }
-//            addImgBtn.setOnClickListener {
-//                // todo:
-//            }
-//            duplicateItemBtn.setOnClickListener {
-//                // todo:
-//            }
+            // todo: set UI data
+
+            addItemBtn.setOnClickListener {
+//                 todo: add a new Date, turn it into a string (check if it can be turned back into a Date)
+                vm.insertRental(RentedItem(
+                    // todo:
+                ))
+                dialog.dismiss()
+            }
+            acceptItemBtn.setOnClickListener {
+                updateRentalObject()
+                dialog.dismiss()
+            }
+            deleteItemBtn.setOnClickListener {
+                // todo:
+            }
+            addImgBtn.setOnClickListener {
+                // todo:
+            }
+            duplicateItemBtn.setOnClickListener {
+                // todo:
+            }
         }
         showCorrectFab(addOrUpdate)
     }
@@ -73,6 +75,22 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         binding = null
     }
 
+    // HELPERS //
+    private fun updateRentalObject() {
+        binding?.apply {
+            vm.currentRental.roomNumber = roomNumEt.text.toString().toInt();
+            vm.currentRental.itemType = when (chooseTypeRadio.checkedRadioButtonId) {
+                bikeBtn.id -> RentedItem.ItemType.BIKE
+                paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
+                else -> RentedItem.ItemType.CHAIR
+            }
+            vm.currentRental.number =numEt.text.toString().toInt();
+            vm.currentRental.lock = lockNumEt.text.toString().toInt();
+            vm.currentRental.dailyRentals = dailyRentalsSwitch.isChecked;
+            vm.currentRental.paid = paidSwitch.isChecked;
+            vm.updateRental(vm.currentRental)
+        }
+    }
     private fun showCorrectFab(addOrUpdatePassed: String) {
         binding!!.apply {
             when (addOrUpdatePassed) {
@@ -81,15 +99,16 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             }
         }
     }
+    // HELPERS //
 
     companion object {
-
-        // todo: call this
-        fun newInstance(addOrUpdatePassed: String) = BottomSheetFragment().apply {
-            arguments = Bundle().apply {
-                putString(SHEET_STR_KEY, addOrUpdatePassed)
-                addOrUpdate = addOrUpdatePassed
-            }
+        fun newInstance(addOrUpdatePassed: String, passedRental: RentedItem) =
+            BottomSheetFragment().apply {
+                arguments = Bundle().apply {
+                    putString(SHEET_STR_KEY, addOrUpdatePassed)
+                    addOrUpdate = addOrUpdatePassed
+                    currentRental = passedRental
+                }
         }
     }
 }

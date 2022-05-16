@@ -14,6 +14,11 @@ class BottomSheetViewModel : ViewModel() {
 
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
+    lateinit var currentRental: RentedItem
+
+    fun setRentalItem(passedRental: RentedItem) {
+        currentRental = passedRental
+    }
 
     fun setUpDatabase(context: Context) {
         roomDb = RentsRoomDatabase.getInstance(context)

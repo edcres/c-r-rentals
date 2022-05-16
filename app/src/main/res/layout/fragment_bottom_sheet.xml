@@ -12,7 +12,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="200dp">
 
@@ -33,8 +33,8 @@
                 android:layout_height="wrap_content"
                 android:text="delete"
                 android:textAllCaps="true"
-                android:textStyle="bold"
                 android:textColor="@color/bottom_sheet_icon"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/delete_item_btn"
                 app:layout_constraintStart_toStartOf="@+id/delete_item_btn"
                 app:layout_constraintTop_toBottomOf="@+id/delete_item_btn" />
@@ -56,8 +56,8 @@
                 android:layout_height="wrap_content"
                 android:text="add picture"
                 android:textAllCaps="true"
-                android:textStyle="bold"
                 android:textColor="@color/bottom_sheet_icon"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/add_img_btn"
                 app:layout_constraintStart_toStartOf="@+id/add_img_btn"
                 app:layout_constraintTop_toBottomOf="@+id/add_img_btn" />
@@ -79,8 +79,8 @@
                 android:layout_height="wrap_content"
                 android:text="duplicate"
                 android:textAllCaps="true"
-                android:textStyle="bold"
                 android:textColor="@color/bottom_sheet_icon"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/duplicate_item_btn"
                 app:layout_constraintStart_toStartOf="@+id/duplicate_item_btn"
                 app:layout_constraintTop_toBottomOf="@+id/duplicate_item_btn" />
@@ -90,8 +90,8 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,12 +103,71 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:hint="room #"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider_1">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/room_num_et"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/choose_type_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/room_num_et_box">
+
+                <RadioButton
+                    android:id="@+id/bike_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="bike"
+                    tools:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/paddle_board_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="paddle board" />
+
+                <RadioButton
+                    android:id="@+id/chair_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="chair" />
+
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/num_et_box"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:hint="number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/choose_type_radio">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/num_et"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
@@ -120,9 +179,11 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:hint="lock #"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/room_num_et_box">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/num_et_box">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/lock_num_et"
@@ -132,164 +193,50 @@
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/num_et_box"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="number"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rented_on_txt">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/num_et"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:textSize="16sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
-            <RadioGroup
-                android:id="@+id/choose_priority_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lock_num_et_box">
-
-                <RadioButton
-                    android:id="@+id/priority_button_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:text="bike" />
-
-                <RadioButton
-                    android:id="@+id/priority_button_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:text="paddle board"
-                    tools:checked="true" />
-
-                <RadioButton
-                    android:id="@+id/priority_button_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:text="chair" />
-
-            </RadioGroup>
-
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/daily_rentals_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:checked="false"
                 android:text="daily rentals"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/choose_priority_button" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lock_num_et_box" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/paid_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:checked="false"
                 android:text="paid"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/daily_rentals_switch" />
-
-
-
-
-
-
-
-
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/item_type_txt"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider_1"
-                tools:text="bike" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/room_number_txt"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_type_txt"
-                tools:text="204" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/daily_rentals_txt"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/room_number_txt"
-                tools:text="daily rentals" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/rented_on_txt"
                 style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/paid_switch"
-                tools:text="rented on 3/5/72" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/lock_txt"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="rented on 3/5/72"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/daily_rentals_txt"
-                tools:text="lock 134" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/number_txt"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lock_txt"
-                tools:text="234234" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/paid_txt"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/number_txt"
-                tools:text="paid" />
+                app:layout_constraintTop_toBottomOf="@+id/paid_switch" />
 
             <View
                 android:id="@+id/divider_2"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/num_et_box" />
-
+                app:layout_constraintTop_toBottomOf="@+id/rented_on_txt" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_btn"
@@ -322,36 +269,36 @@
                 style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/bottom_sheet_icon"
-                android:textColor="@color/bottom_sheet_background"
+                android:text="accept"
                 android:textAllCaps="true"
+                android:textColor="@color/bottom_sheet_background"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:visibility="visible"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/separator_txt"
-                app:layout_constraintTop_toTopOf="@+id/cancel_btn"
-                android:text="accept" />
+                app:layout_constraintTop_toTopOf="@+id/cancel_btn" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/add_item_btn"
                 style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/bottom_sheet_icon"
-                android:textColor="@color/bottom_sheet_background"
+                android:text="add rental"
                 android:textAllCaps="true"
+                android:textColor="@color/bottom_sheet_background"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:visibility="visible"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/separator_txt"
-                app:layout_constraintTop_toTopOf="@+id/cancel_btn"
-                android:text="add rental"/>
+                app:layout_constraintTop_toTopOf="@+id/cancel_btn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

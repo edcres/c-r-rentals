@@ -38,6 +38,8 @@ import java.util.*
  *
  * todo: work with Date
  *
+ * todo: make string resources
+ * todo: check if all drawables are used
  */
 
 /** Eventually
