@@ -12,7 +12,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="600dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="200dp">
 
@@ -86,7 +86,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/duplicate_item_btn" />
 
             <View
-                android:id="@+id/divider"
+                android:id="@+id/divider_1"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
@@ -97,6 +97,123 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_img_txt" />
 
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/room_num_et_box"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="room #"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/room_num_et"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lock_num_et_box"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="lock #"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/room_num_et_box">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lock_num_et"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/num_et_box"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rented_on_txt">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/num_et"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <RadioGroup
+                android:id="@+id/choose_priority_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lock_num_et_box">
+
+                <RadioButton
+                    android:id="@+id/priority_button_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="bike" />
+
+                <RadioButton
+                    android:id="@+id/priority_button_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="paddle board"
+                    tools:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/priority_button_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="chair" />
+
+            </RadioGroup>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/daily_rentals_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="daily rentals"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/choose_priority_button" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/paid_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="paid"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/daily_rentals_switch" />
+
+
+
+
+
+
+
+
+
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/item_type_txt"
                 style="@style/TextAppearance.Material3.BodyLarge"
@@ -104,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:layout_constraintTop_toBottomOf="@+id/divider_1"
                 tools:text="bike" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -130,8 +247,8 @@
                 style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/daily_rentals_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paid_switch"
                 tools:text="rented on 3/5/72" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -140,7 +257,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rented_on_txt"
+                app:layout_constraintTop_toBottomOf="@+id/daily_rentals_txt"
                 tools:text="lock 134" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -161,24 +278,36 @@
                 app:layout_constraintTop_toBottomOf="@+id/number_txt"
                 tools:text="paid" />
 
+            <View
+                android:id="@+id/divider_2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/num_et_box" />
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_btn"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="cancel"
+                android:textAllCaps="true"
+                android:textColor="@color/bottom_sheet_icon"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/bottom_sheet_icon"
-                app:strokeColor="@color/bottom_sheet_icon"
-                android:textAllCaps="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/separator_txt"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/paid_txt"
-                android:text="cancel" />
+                app:layout_constraintTop_toBottomOf="@+id/divider_2"
+                app:strokeColor="@color/bottom_sheet_icon" />
 
             <TextView
                 android:id="@+id/separator_txt"
@@ -186,7 +315,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/paid_txt" />
+                app:layout_constraintTop_toBottomOf="@+id/num_et_box" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/accept_item_btn"

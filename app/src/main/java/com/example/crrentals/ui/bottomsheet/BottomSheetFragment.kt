@@ -43,6 +43,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
 //            addItemBtn.setOnClickListener {
+                // todo: add a new Date, turn it into a string (check if it can be turned back into a Date)
 //                vm.insertRental(RentedItem(
 //                    // todo:
 //                ))
