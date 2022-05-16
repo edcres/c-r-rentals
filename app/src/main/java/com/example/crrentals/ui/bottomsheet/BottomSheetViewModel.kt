@@ -25,11 +25,15 @@ class BottomSheetViewModel : ViewModel() {
         repo = Repository(roomDb)
     }
 
+    // HELPERS //
+
+    // HELPERS //
+
     // DATABASE QUERIES //
     fun updateRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
         repo.updateRental(rentedItem)
     }
-    private fun deleteRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
+    fun deleteRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
         repo.deleteRental(rentedItem)
     }
     fun insertRental(rentedItem: RentedItem): MutableLiveData<Long> {

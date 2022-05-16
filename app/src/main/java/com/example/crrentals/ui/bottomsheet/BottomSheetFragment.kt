@@ -45,12 +45,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
             // todo: set UI data
+            setUpUI(vm.currentRental)
 
             addItemBtn.setOnClickListener {
-//                 todo: add a new Date, turn it into a string (check if it can be turned back into a Date)
-                vm.insertRental(RentedItem(
-                    // todo:
-                ))
+                insertRentalObject()
                 dialog.dismiss()
             }
             acceptItemBtn.setOnClickListener {
@@ -58,7 +56,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 dialog.dismiss()
             }
             deleteItemBtn.setOnClickListener {
-                // todo:
+                vm.deleteRental(vm.currentRental)
             }
             addImgBtn.setOnClickListener {
                 // todo:
@@ -76,18 +74,60 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     // HELPERS //
+    private fun setUpUI(rentalToLoad: RentedItem) {
+        binding?.apply {
+            val rentedOnString = "rented on ${rentalToLoad.time}"
+            roomNumEt.setText(rentalToLoad.roomNumber)
+            when (rentalToLoad.itemType) {
+                RentedItem.ItemType.BIKE -> chooseTypeRadio.check(bikeBtn.id)
+                RentedItem.ItemType.PADDLE_BOARD -> chooseTypeRadio.check(paddleBoardBtn.id)
+                else -> chooseTypeRadio.check(chairBtn.id)
+            }
+            numEt.setText(rentalToLoad.number)
+            lockNumEt.setText(rentalToLoad.lock?.toString() ?: "")
+            dailyRentalsSwitch.isChecked = rentalToLoad.dailyRentals
+            paidSwitch.isChecked = rentalToLoad.paid
+            rentedOnTxt.text = rentedOnString
+
+            if (rentalToLoad.imageUri.isNullOrEmpty()) {
+                addImgTxt.text = "NEW PICTURE"
+            }
+        }
+    }
+    private fun insertRentalObject() {
+        // todo: add a new Date, turn it into a string (check if it can be turned back into a Date)
+        val startTime = ;
+        binding?.apply {
+            vm.insertRental(RentedItem(
+                // todo:
+                itemType = when (chooseTypeRadio.checkedRadioButtonId) {
+                    bikeBtn.id -> RentedItem.ItemType.BIKE
+                    paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
+                    else -> RentedItem.ItemType.CHAIR
+                },
+                imageName = startTime,
+                imageUri = ,
+                roomNumber = roomNumEt.text.toString().toInt(),
+                dailyRentals = dailyRentalsSwitch.isChecked,
+                time = ,
+                lock = lockNumEt.text.toString().toInt(),
+                number = numEt.text.toString().toInt(),
+                paid = paidSwitch.isChecked
+            ))
+        }
+    }
     private fun updateRentalObject() {
         binding?.apply {
-            vm.currentRental.roomNumber = roomNumEt.text.toString().toInt();
+            vm.currentRental.roomNumber = roomNumEt.text.toString().toInt()
             vm.currentRental.itemType = when (chooseTypeRadio.checkedRadioButtonId) {
                 bikeBtn.id -> RentedItem.ItemType.BIKE
                 paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
                 else -> RentedItem.ItemType.CHAIR
             }
-            vm.currentRental.number =numEt.text.toString().toInt();
-            vm.currentRental.lock = lockNumEt.text.toString().toInt();
-            vm.currentRental.dailyRentals = dailyRentalsSwitch.isChecked;
-            vm.currentRental.paid = paidSwitch.isChecked;
+            vm.currentRental.number = numEt.text.toString().toInt()
+            vm.currentRental.lock = lockNumEt.text.toString().toInt()
+            vm.currentRental.dailyRentals = dailyRentalsSwitch.isChecked
+            vm.currentRental.paid = paidSwitch.isChecked
             vm.updateRental(vm.currentRental)
         }
     }

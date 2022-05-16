@@ -40,6 +40,8 @@ import java.util.*
  *
  * todo: make string resources
  * todo: check if all drawables are used
+ *
+ * todo: set which items are null
  */
 
 /** Eventually
@@ -85,10 +87,9 @@ class MainActivity : AppCompatActivity() {
         binding?.apply {
             lifecycleOwner = this@MainActivity
             addRentalFab.setOnClickListener {
-                // todo: pop up the bottom sheet and say whether to add or update an item
-                // todo: send string to the sheet fragment
+                // todo: send the item to edit to the sheet fragment. (maybe use and observer from the adapter)
                 bottomSheetFragment =
-                    BottomSheetFragment.newInstance(BottomSheetAction.ADD.toString())
+                    BottomSheetFragment.newInstance(BottomSheetAction.ADD.toString(), )
                 bottomSheetFragment?.show(supportFragmentManager, bottomSheetFragment?.tag)
 
                 // todo: probably get rid of this
