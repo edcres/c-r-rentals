@@ -42,27 +42,27 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         vm.setUpDatabase(requireActivity().applicationContext)
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
-            addItemBtn.setOnClickListener {
-                vm.insertRental(RentedItem(
-                    // todo:
-                ))
-                dialog.dismiss()
-            }
-            acceptItemBtn.setOnClickListener {
-                vm.updateRental(RentedItem(
-                    // todo:
-                ))
-                dialog.dismiss()
-            }
-            deleteItemBtn.setOnClickListener {
-                // todo:
-            }
-            addImgBtn.setOnClickListener {
-                // todo:
-            }
-            duplicateItemBtn.setOnClickListener {
-                // todo:
-            }
+//            addItemBtn.setOnClickListener {
+//                vm.insertRental(RentedItem(
+//                    // todo:
+//                ))
+//                dialog.dismiss()
+//            }
+//            acceptItemBtn.setOnClickListener {
+//                vm.updateRental(RentedItem(
+//                    // todo:
+//                ))
+//                dialog.dismiss()
+//            }
+//            deleteItemBtn.setOnClickListener {
+//                // todo:
+//            }
+//            addImgBtn.setOnClickListener {
+//                // todo:
+//            }
+//            duplicateItemBtn.setOnClickListener {
+//                // todo:
+//            }
         }
         showCorrectFab(addOrUpdate)
     }

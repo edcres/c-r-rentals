@@ -12,4 +12,5 @@
     <color name="grey">#B3B3B3</color>
     <color name="transparent">#00B3B3B3</color>
     <color name="bottom_sheet_icon">#FF6200EE</color>
+    <color name="bottom_sheet_background">#9CD3F1</color>
 </resources>

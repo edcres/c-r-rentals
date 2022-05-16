@@ -32,7 +32,6 @@ import java.util.*
 /**
  * todo: Bottom sheet
  *
- * todo: set up the bottom sheet fragment into it's parent view
  * todo: make fragment edit texts
  * todo: allocate edit text inputs into the respective functions (insert/update)
  *
