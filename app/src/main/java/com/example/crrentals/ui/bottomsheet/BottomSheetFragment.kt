@@ -1,10 +1,13 @@
 package com.example.crrentals.ui.bottomsheet
 
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.FragmentBottomSheetBinding
@@ -12,6 +15,7 @@ import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.SHEET_STR_KEY
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.io.File
 
 private const val TAG = "ModalBottomSheet_TAG"
 
@@ -22,6 +26,19 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var vm: BottomSheetViewModel
     private lateinit var addOrUpdate: String
     private lateinit var currentRental: RentedItem
+
+    private var latestTmpUri: Uri? = null
+    private val takeImageResult =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+            if (!isSuccess) {
+                if (latestTmpUri != null) {
+                    val fileName = File(latestTmpUri!!.path!!).name
+                    val fileDeleted =
+                        vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
+                    Log.d(TAG, "deleted: $fileDeleted")
+                } else Log.d(TAG, "latestTmpUri: is null")
+            }
+        }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
@@ -59,7 +76,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 vm.deleteRental(vm.currentRental)
             }
             addImgBtn.setOnClickListener {
-                // todo:
+                takeImageResult.launch(/* todo: get the uri */)
             }
             duplicateItemBtn.setOnClickListener {
                 // todo:

@@ -18,8 +18,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.File
 
-private const val TAG = "ViewModel_TAG"
-private const val JPG_SUFFIX = ".jpg"
+private const val TAG = "RentalsViewModel__TAG"
 
 class RentItemsViewModel : ViewModel() {
 
@@ -34,33 +33,6 @@ class RentItemsViewModel : ViewModel() {
         if (rentedItems.value != null) {
             deleteRental(rentedItems.value!![position])
         }
-    }
-    fun deleteFilWithName(name: String, files: Array<File>?): Boolean {
-        // todo: do this in a background thread
-        if (files.isNullOrEmpty()) {
-            Log.e(TAG, "deleteFile: Error loading files.")
-            return false
-        } else {
-            files.filter {
-                it.canRead() && it.isFile && it.name.endsWith(JPG_SUFFIX)
-            }.forEach { if (it.name == name) return it.delete() }
-            return false
-        }
-    }
-    // todo: probable delete this function
-//    fun deleteFileAt(position: Int, files: Array<File>?): Boolean {
-//        files?.filter {
-//            it.canRead() && it.isFile && it.name.endsWith(".jpg")
-//        } ?: return false
-//        return files[position].delete()
-//    }
-    fun makeTmpFile(cacheDir: File, appContext: Context): Uri {
-        // pass in the chosen name of the file instead of "tmp_image_file"
-        val tmpFile = File.createTempFile("tmp_image_file", JPG_SUFFIX, cacheDir).apply {
-            createNewFile()
-            deleteOnExit()
-        }
-        return FileProvider.getUriForFile(appContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
     }
     // HELPERS //
 

@@ -31,17 +31,18 @@ import java.util.*
 
 /**
  * todo: Bottom sheet
- * todo: make fragment edit texts
- * todo: allocate edit text inputs into the respective functions (insert/update)
  *
  * todo: put everything together
  *
- * todo: work with Date
+ * todo: appbar
+ *
+ * todo: colors
  *
  * todo: make string resources
  * todo: check if all drawables are used
  *
  * todo: set which items are null
+ * todo: maybe start to take a picture right when the user click the add rental btn
  */
 
 /** Eventually
@@ -59,25 +60,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var vm: RentItemsViewModel
     private lateinit var rentalsAdapter: RentalsAdapter
     private var bottomSheetFragment: BottomSheetFragment? = null
-
-    private var latestTmpUri: Uri? = null
-    private val takeImageResult =
-        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
-            if (isSuccess) {
-                    // todo:
-                    //  have a loading and error image
-//                      Glide.with(binding.photoImg.context)
-//                          .load(latestTmpUri)
-//                          .into(binding.photoImg)
-            } else {
-                if (latestTmpUri != null) {
-                    val fileName = File(latestTmpUri!!.path!!).name
-                    val fileDeleted = vm.deleteFilWithName(fileName, cacheDir.listFiles())
-                    Log.d(TAG, "deleted: $fileDeleted")
-                } else Log.d(TAG, "latestTmpUri: is null")
-
-            }
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -151,9 +133,4 @@ class MainActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(editItemCallback)
         itemTouchHelper.attachToRecyclerView(binding!!.rentalsRecycler)
     }
-
-    // todo: probably get rid of this
-//    interface OnBottomSheetCallListener {
-//        fun sendTestString(addOrUpdate: String)
-//    }
 }
