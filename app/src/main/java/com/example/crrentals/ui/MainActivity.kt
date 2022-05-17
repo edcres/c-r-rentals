@@ -17,43 +17,63 @@ import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 
 /**
- * - do todos
- * - clean logs
- * - do warnings
- * - check comments
- * - clean imports
- */
-
-/**
  *
- * todo: app crashes when pressing on a recycler item
- *
- * todo: set add or update btn visibility to gone
+ * todo: adjust the recyclerView UI
  *
  * todo: app icon
  *
- * todo: put everything together
- *
- * todo: appbar
- *
  * todo: colors
+ *
+ * todo: when adding a new item, display a broken image in the sheet imgView
+ *
+ *
+ * // HARD //
+ * todo: when user takes a picture and the sheet is up, load it to the sheet imgView
+ *
+ * todo: maybe start to take a picture right when the user click the add rental btn
+ *
+ * todo: User has the option to change the image.
+ *
+ * todo: delete the old file when the user replaces the item picture
+ * todo: delete img file when deleting an item
+ * todo: delete img file when user goes to take a picture, accepts it, and doesn't save the item
+ * todo: give functionality to the cancel btn (delete the old img file)
+ *
+ * todo: set up concurrency
+ * // HARD //
+ *
+ *
+ * todo: test if setting the value of '_itemToEdit' to null (when it was already null) will trigger an observation
  *
  * todo: put the logic in the VMs, take it off the views
  *
  * todo: make string resources
  * todo: check if all drawables are used
  *
- * todo: set which items are null
- * todo: maybe start to take a picture right when the user click the add rental btn
+ * todo: set which properties can be null (talk to bruno about this)
  *
- * todo: set up concurrency
+ * todo: make it more pretty
+ *
  */
 
-/** Eventually
+/** todo: Bugs
  *
- * - Compress images as jpg
- * - User has the option to change the image.
- *
+ */
+
+/** todo: future:
+ * Compress images as jpg
+ * maybe add a due date to the rental entity
+ * consider also getting hr, minutes, and seconds on the time property on the entity
+ * functionality to duplicate an item
+ * User can change position of items in recycler
+ */
+
+/**
+ * - do todos
+ * - clean logs
+ * - do warnings
+ * - check comments
+ * - clean imports
  */
 
 private const val TAG = "MainAct__TAG"
@@ -101,7 +121,6 @@ class MainActivity : AppCompatActivity() {
         }
         // Update a rental item
         vm.itemToEdit.observe(this) { itemToEdit ->
-            // todo: open the sheet and send the item as a value
             bottomSheetFragment =
                 BottomSheetFragment.newInstance(BottomSheetAction.UPDATE.toString(), itemToEdit)
             bottomSheetFragment?.show(supportFragmentManager, bottomSheetFragment?.tag)

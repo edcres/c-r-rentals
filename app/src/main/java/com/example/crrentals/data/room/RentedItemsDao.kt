@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface RentedItemsDao {
 
-    @Query("SELECT * FROM rented_item_table ORDER BY id DESC")
+    @Query("SELECT * FROM rented_item_table ORDER BY id ASC")
     fun getOrderedRentedItems(): Flow<List<RentedItem>>
 
     @Delete

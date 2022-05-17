@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// todo: maybe add a due date
 @Entity(tableName = "rented_item_table")
 data class RentedItem (
     @PrimaryKey(autoGenerate = true)

@@ -86,9 +86,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     )
                 )
             }
-            duplicateItemBtn.setOnClickListener {
-                // todo:
-            }
+            duplicateItemBtn.setOnClickListener {}
         }
         showCorrectBtn(vm.addOrUpdate)
     }
@@ -136,7 +134,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 imageUri = vm.latestTmpUri.toString(),
                 roomNumber = roomNumEt.text.toString().toInt(),
                 dailyRentals = dailyRentalsSwitch.isChecked,
-                time = vm.getDateString(),   // todo: consider also getting hr, minutes, and seconds
+                time = vm.getDateString(),
                 lock = lockNumEt.text.toString().toInt(),
                 number = numEt.text.toString().toInt(),
                 paid = paidSwitch.isChecked
@@ -171,15 +169,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         fun newInstance(addOrUpdatePassed: String, passedRental: RentedItem?) =
-            // todo: if passedRental is null, it's a new item, otherwise
-            // todo: test if setting the value to null (when it was already null will trigger an observation)
             BottomSheetFragment().apply {
                 addOrUpdate = addOrUpdatePassed
                 currentRental = passedRental
-//                arguments = Bundle().apply {
-//                    putString(SHEET_STR_KEY, addOrUpdatePassed)
-//
-//                }
         }
     }
 }
