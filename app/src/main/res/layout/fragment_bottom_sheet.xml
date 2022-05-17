@@ -100,9 +100,14 @@
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/item_data_container"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="250dp"
+                android:scrollbars="vertical"
+                android:layout_marginEnd="16dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:scrollbarSize="5dp"
+                android:fadeScrollbars="false"
                 app:layout_constraintBottom_toBottomOf="@+id/divider_2"
-                app:layout_constraintTop_toBottomOf="@+id/add_img_txt">
+                app:layout_constraintTop_toBottomOf="@+id/divider_1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -241,7 +246,7 @@
                         android:id="@+id/sheet_rental_image"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        android:scaleType="fitCenter"
+                        android:scaleType="fitStart"
                         android:layout_margin="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -256,7 +261,6 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/divider"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -337,7 +341,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cancel_btn" />
 
-
+            <ImageView
+                android:id="@+id/sheet_rental_image_test"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="fitStart"
+                android:layout_margin="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_3"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

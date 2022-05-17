@@ -33,7 +33,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (!isSuccess) {
                 if (vm.latestTmpUri != null) {
-
                     val fileName = File(vm.latestTmpUri!!.path!!).name
                     val fileDeleted =
                         vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
@@ -120,6 +119,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                         .placeholder(R.drawable.loading_animation)
                         .error(R.drawable.ic_baseline_broken_image))
                 .into(sheetRentalImage)
+            // todo: delete this test
+            Glide.with(sheetRentalImageTest.context)
+                .load(rentalToLoad.imageUri?:"noUri".toUri())
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_baseline_broken_image))
+                .into(sheetRentalImageTest)
             if (rentalToLoad.imageUri.isNullOrEmpty()) addImgTxt.text = "NEW PICTURE"
         }
     }
