@@ -2,11 +2,13 @@ package com.example.crrentals.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crrentals.R
 import com.example.crrentals.databinding.ActivityMainBinding
@@ -22,6 +24,9 @@ import com.example.crrentals.util.ItemMoveCallback
  */
 
 /**
+ *
+ * BUG: the date is completely wrong
+ *
  * todo: Bottom sheet
  *
  * todo: put everything together
@@ -46,7 +51,7 @@ import com.example.crrentals.util.ItemMoveCallback
  *
  */
 
-private const val TAG = "MainAct_TAG"
+private const val TAG = "MainAct__TAG"
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,15 +65,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         vm = ViewModelProvider(this)[RentItemsViewModel::class.java]
+        rentalsAdapter = RentalsAdapter(vm, this, this)
         binding?.apply {
             lifecycleOwner = this@MainActivity
+            rentalsRecycler.adapter = rentalsAdapter
+            rentalsRecycler.layoutManager = LinearLayoutManager(this@MainActivity)
+
             addRentalFab.setOnClickListener {
                 bottomSheetFragment =
                     BottomSheetFragment.newInstance(BottomSheetAction.ADD.toString(), null)
                 bottomSheetFragment?.show(supportFragmentManager, bottomSheetFragment?.tag)
             }
         }
-        rentalsAdapter = RentalsAdapter(vm, this, this)
         setUpItemAnimation()
         setObservers()
         vm.setUpDatabase(applicationContext)
@@ -82,6 +90,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
+            Log.d(TAG, "setObservers: rentals observed. Size = ${rentals.size}")
+            Log.d(TAG, "setObservers: rentals observed. items = ${rentals.size}")
             rentalsAdapter.submitList(rentals)
         }
         // Update a rental item

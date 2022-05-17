@@ -1,10 +1,11 @@
 package com.example.crrentals.data
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import com.example.crrentals.data.room.RentsRoomDatabase
 import kotlinx.coroutines.flow.Flow
 
-private const val TAG = "WRepo_TAG"
+private const val TAG = "WRepo__TAG"
 
 class Repository(private val db: RentsRoomDatabase) {
 
@@ -12,6 +13,7 @@ class Repository(private val db: RentsRoomDatabase) {
 
     @WorkerThread
     suspend fun insertRental(rentedItem: RentedItem): Long {
+        Log.d(TAG, "insertRental: item inserted")
         return db.rentedItemsDao().insert(rentedItem)
     }
 

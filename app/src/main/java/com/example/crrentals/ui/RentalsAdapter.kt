@@ -1,6 +1,7 @@
 package com.example.crrentals.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
@@ -14,11 +15,17 @@ import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.RentalListItemBinding
 
+private const val TAG = "RentAdapter__TAG"
+
 class RentalsAdapter(
     private val vm: RentItemsViewModel,
     private val context: Context,
     private val viewLifecycleOwner: LifecycleOwner
 ) : ListAdapter<RentedItem, RentalsAdapter.RentalsViewHolder>(RentalsDiffCallback()) {
+
+    init {
+        Log.d(TAG, "adapter init")
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RentalsViewHolder.from(vm, context, viewLifecycleOwner, parent)
@@ -34,6 +41,7 @@ class RentalsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(rentedItem: RentedItem) {
+            Log.d(TAG, "bind: called")
             binding.apply {
                 Glide.with(rentalImage.context)
                     .load(rentedItem.imageUri?:"noUri".toUri())
