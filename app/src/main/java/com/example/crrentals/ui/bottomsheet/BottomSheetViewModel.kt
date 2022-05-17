@@ -23,10 +23,10 @@ class BottomSheetViewModel : ViewModel() {
 
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
-    lateinit var currentRental: RentedItem
+    var currentRental: RentedItem? = null
     var latestTmpUri: Uri? = null
 
-    fun setRentalItem(passedRental: RentedItem) {
+    fun setRentalItem(passedRental: RentedItem?) {
         currentRental = passedRental
     }
 

@@ -24,7 +24,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var dialog: BottomSheetDialog
     private lateinit var vm: BottomSheetViewModel
     private lateinit var addOrUpdate: String
-    private lateinit var currentRental: RentedItem
+    private var currentRental: RentedItem? = null
 
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
@@ -59,19 +59,18 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         vm.setRentalItem(currentRental)
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
-            // todo: set UI data
-            setUpUI(vm.currentRental)
-
+            if (vm.currentRental != null) setUpUI(vm.currentRental!!)
             addItemBtn.setOnClickListener {
                 insertRentalObject()
                 dialog.dismiss()
             }
             acceptItemBtn.setOnClickListener {
-                updateRentalObject()
+                updateRentalObject(vm.currentRental!!)
                 dialog.dismiss()
             }
             deleteItemBtn.setOnClickListener {
-                vm.deleteRental(vm.currentRental)
+                if (vm.currentRental != null) vm.deleteRental(vm.currentRental!!)
+                dialog.dismiss()
             }
             addImgBtn.setOnClickListener {
                 takeImageResult.launch(
@@ -129,19 +128,19 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             ))
         }
     }
-    private fun updateRentalObject() {
+    private fun updateRentalObject(rentalToUpdate: RentedItem) {
         binding?.apply {
-            vm.currentRental.roomNumber = roomNumEt.text.toString().toInt()
-            vm.currentRental.itemType = when (chooseTypeRadio.checkedRadioButtonId) {
+            rentalToUpdate.roomNumber = roomNumEt.text.toString().toInt()
+            rentalToUpdate.itemType = when (chooseTypeRadio.checkedRadioButtonId) {
                 bikeBtn.id -> RentedItem.ItemType.BIKE
                 paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
                 else -> RentedItem.ItemType.CHAIR
             }
-            vm.currentRental.number = numEt.text.toString().toInt()
-            vm.currentRental.lock = lockNumEt.text.toString().toInt()
-            vm.currentRental.dailyRentals = dailyRentalsSwitch.isChecked
-            vm.currentRental.paid = paidSwitch.isChecked
-            vm.updateRental(vm.currentRental)
+            rentalToUpdate.number = numEt.text.toString().toInt()
+            rentalToUpdate.lock = lockNumEt.text.toString().toInt()
+            rentalToUpdate.dailyRentals = dailyRentalsSwitch.isChecked
+            rentalToUpdate.paid = paidSwitch.isChecked
+            vm.updateRental(rentalToUpdate)
         }
     }
     private fun showCorrectFab(addOrUpdatePassed: String) {
@@ -155,7 +154,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     // HELPERS //
 
     companion object {
-        fun newInstance(addOrUpdatePassed: String, passedRental: RentedItem) =
+        fun newInstance(addOrUpdatePassed: String, passedRental: RentedItem?) =
+            // todo: if passedRental is null, it's a new item, otherwise
+            // todo: test if setting the value to null (when it was already null will trigger an observation)
             BottomSheetFragment().apply {
                 arguments = Bundle().apply {
                     putString(SHEET_STR_KEY, addOrUpdatePassed)

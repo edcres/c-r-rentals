@@ -1,26 +1,18 @@
 package com.example.crrentals.ui
 
-import android.content.Context
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.crrentals.R
-import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.ActivityMainBinding
 import com.example.crrentals.ui.bottomsheet.BottomSheetFragment
 import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
-import java.io.File
-import java.util.*
 
 /**
  * - do todos
@@ -43,6 +35,8 @@ import java.util.*
  *
  * todo: set which items are null
  * todo: maybe start to take a picture right when the user click the add rental btn
+ *
+ * todo: set up concurrency
  */
 
 /** Eventually
@@ -69,13 +63,9 @@ class MainActivity : AppCompatActivity() {
         binding?.apply {
             lifecycleOwner = this@MainActivity
             addRentalFab.setOnClickListener {
-                // todo: send the item to edit to the sheet fragment. (maybe use and observer from the adapter)
                 bottomSheetFragment =
-                    BottomSheetFragment.newInstance(BottomSheetAction.ADD.toString(), )
+                    BottomSheetFragment.newInstance(BottomSheetAction.ADD.toString(), null)
                 bottomSheetFragment?.show(supportFragmentManager, bottomSheetFragment?.tag)
-
-                // todo: probably get rid of this
-//                if (listener != null) listener!!.sendTestString(BottomSheetAction.ADD.toString())
             }
         }
         rentalsAdapter = RentalsAdapter(vm, this, this)
@@ -84,11 +74,6 @@ class MainActivity : AppCompatActivity() {
         vm.setUpDatabase(applicationContext)
         setUpItemEdit()
 
-        // todo: call this when going to take a picture
-//        vm.makeTmpFile(cacheDir, applicationContext).let { uri ->
-//            latestTmpUri = uri
-//            takeImageResult.launch(uri)
-//        }
         // todo: delete file
 //        vm.deleteFilWithName("sds", cacheDir.listFiles())
     }
@@ -101,6 +86,13 @@ class MainActivity : AppCompatActivity() {
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
             rentalsAdapter.submitList(rentals)
+        }
+        // Update a rental item
+        vm.itemToEdit.observe(this) { itemToEdit ->
+            // todo: open the sheet and send the item as a value
+            bottomSheetFragment =
+                BottomSheetFragment.newInstance(BottomSheetAction.UPDATE.toString(), itemToEdit)
+            bottomSheetFragment?.show(supportFragmentManager, bottomSheetFragment?.tag)
         }
     }
 
