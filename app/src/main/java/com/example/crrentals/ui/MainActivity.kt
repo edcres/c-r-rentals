@@ -38,6 +38,8 @@ import com.example.crrentals.util.ItemMoveCallback
  *
  * todo: colors
  *
+ * todo: put the logic in the VMs, take it off the views
+ *
  * todo: make string resources
  * todo: check if all drawables are used
  *

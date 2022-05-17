@@ -4,12 +4,14 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
@@ -116,6 +118,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 .load(rentalToLoad.imageUri?:"noUri".toUri())
                 .apply(
                     RequestOptions()
+                        .transform(RoundedCorners(25))
                         .placeholder(R.drawable.loading_animation)
                         .error(R.drawable.ic_baseline_broken_image))
                 .into(sheetRentalImage)
