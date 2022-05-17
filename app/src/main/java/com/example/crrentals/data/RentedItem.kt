@@ -12,8 +12,6 @@ data class RentedItem (
     var id: Long = 0,
     @ColumnInfo(name = "itemType")
     var itemType: ItemType,
-    @ColumnInfo(name = "image_name")
-    var imageName: String?,
     @ColumnInfo(name = "image_uri")
     var imageUri: String?,  // Turn this String into a Uri type
     @ColumnInfo(name = "room_number")
@@ -21,7 +19,7 @@ data class RentedItem (
     @ColumnInfo(name = "daily_rentals")
     var dailyRentals: Boolean,
     @ColumnInfo(name = "time")
-    var time: String,     // Turn this String into a Date type
+    var time: String,
     @ColumnInfo(name = "lock")
     var lock: Int?,
     @ColumnInfo(name = "number")

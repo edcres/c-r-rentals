@@ -24,7 +24,7 @@ class BottomSheetViewModel : ViewModel() {
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
     lateinit var currentRental: RentedItem
-
+    var latestTmpUri: Uri? = null
 
     fun setRentalItem(passedRental: RentedItem) {
         currentRental = passedRental
@@ -61,12 +61,13 @@ class BottomSheetViewModel : ViewModel() {
 
     // FILE QUERIES //
     fun makeTmpFile(cacheDir: File, appContext: Context): Uri {
-        // pass in the chosen name of the file instead of "tmp_image_file"
+        // todo: pass in the chosen name of the file instead of "tmp_image_file"
         val tmpFile = File.createTempFile("tmp_image_file", JPG_SUFFIX, cacheDir).apply {
             createNewFile()
             deleteOnExit()
         }
-        return FileProvider.getUriForFile(appContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
+        latestTmpUri = FileProvider.getUriForFile(appContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
+        return latestTmpUri!!
     }
     fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
         // todo: do this in a background thread

@@ -1,7 +1,6 @@
 package com.example.crrentals.ui.bottomsheet
 
 import android.app.Dialog
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,12 +26,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var addOrUpdate: String
     private lateinit var currentRental: RentedItem
 
-    private var latestTmpUri: Uri? = null
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (!isSuccess) {
-                if (latestTmpUri != null) {
-                    val fileName = File(latestTmpUri!!.path!!).name
+                if (vm.latestTmpUri != null) {
+                    val fileName = File(vm.latestTmpUri!!.path!!).name
                     val fileDeleted =
                         vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
                     Log.d(TAG, "deleted: $fileDeleted")
@@ -76,7 +74,12 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 vm.deleteRental(vm.currentRental)
             }
             addImgBtn.setOnClickListener {
-                takeImageResult.launch(/* todo: get the uri */)
+                takeImageResult.launch(
+                    vm.makeTmpFile(
+                        requireActivity().cacheDir,
+                        requireActivity().applicationContext
+                    )
+                )
             }
             duplicateItemBtn.setOnClickListener {
                 // todo:
@@ -109,7 +112,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
     private fun insertRentalObject() {
-        val startTime = vm.getDateString()   // todo: consider also getting hr, minutes, and seconds
         binding?.apply {
             vm.insertRental(RentedItem(
                 itemType = when (chooseTypeRadio.checkedRadioButtonId) {
@@ -117,11 +119,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
                     else -> RentedItem.ItemType.CHAIR
                 },
-                imageName = startTime,
-                imageUri = ,        // todo:
+                imageUri = vm.latestTmpUri.toString(),
                 roomNumber = roomNumEt.text.toString().toInt(),
                 dailyRentals = dailyRentalsSwitch.isChecked,
-                time = vm.getDateString(),
+                time = vm.getDateString(),   // todo: consider also getting hr, minutes, and seconds
                 lock = lockNumEt.text.toString().toInt(),
                 number = numEt.text.toString().toInt(),
                 paid = paidSwitch.isChecked
