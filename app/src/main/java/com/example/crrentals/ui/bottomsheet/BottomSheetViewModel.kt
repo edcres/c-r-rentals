@@ -9,6 +9,7 @@ import com.example.crrentals.data.room.RentsRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class BottomSheetViewModel : ViewModel() {
 
@@ -26,7 +27,11 @@ class BottomSheetViewModel : ViewModel() {
     }
 
     // HELPERS //
-
+    fun getDateString(): String {
+        val calendar = Calendar.getInstance()
+        return "${calendar.get(Calendar.MONTH)+1}/" +
+                "${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.YEAR)}"
+    }
     // HELPERS //
 
     // DATABASE QUERIES //

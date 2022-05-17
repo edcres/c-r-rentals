@@ -88,28 +88,23 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             dailyRentalsSwitch.isChecked = rentalToLoad.dailyRentals
             paidSwitch.isChecked = rentalToLoad.paid
             rentedOnTxt.text = rentedOnString
-
-            if (rentalToLoad.imageUri.isNullOrEmpty()) {
-                addImgTxt.text = "NEW PICTURE"
-            }
+            if (rentalToLoad.imageUri.isNullOrEmpty()) addImgTxt.text = "NEW PICTURE"
         }
     }
     private fun insertRentalObject() {
-        // todo: add a new Date, turn it into a string (check if it can be turned back into a Date)
-        val startTime = ;
+        val startTime = vm.getDateString()   // todo: consider also getting hr, minutes, and seconds
         binding?.apply {
             vm.insertRental(RentedItem(
-                // todo:
                 itemType = when (chooseTypeRadio.checkedRadioButtonId) {
                     bikeBtn.id -> RentedItem.ItemType.BIKE
                     paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
                     else -> RentedItem.ItemType.CHAIR
                 },
                 imageName = startTime,
-                imageUri = ,
+                imageUri = ,        // todo:
                 roomNumber = roomNumEt.text.toString().toInt(),
                 dailyRentals = dailyRentalsSwitch.isChecked,
-                time = ,
+                time = vm.getDateString(),
                 lock = lockNumEt.text.toString().toInt(),
                 number = numEt.text.toString().toInt(),
                 paid = paidSwitch.isChecked
