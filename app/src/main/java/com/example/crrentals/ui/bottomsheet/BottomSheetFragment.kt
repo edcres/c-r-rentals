@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.FragmentBottomSheetBinding
 import com.example.crrentals.util.BottomSheetAction
-import com.example.crrentals.util.SHEET_STR_KEY
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.io.File
@@ -85,7 +84,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 // todo:
             }
         }
-        showCorrectFab(vm.addOrUpdate)
+        showCorrectBtn(vm.addOrUpdate)
     }
 
     override fun onDestroyView() {
@@ -145,7 +144,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             vm.updateRental(rentalToUpdate)
         }
     }
-    private fun showCorrectFab(addOrUpdatePassed: String) {
+    private fun showCorrectBtn(addOrUpdatePassed: String) {
+        Log.d(TAG, "showCorrectFab: add/update = $addOrUpdatePassed")
         binding!!.apply {
             when (addOrUpdatePassed) {
                 BottomSheetAction.ADD.toString() -> addItemBtn.visibility = View.VISIBLE

@@ -278,7 +278,7 @@
                 android:textColor="@color/bottom_sheet_background"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/separator_txt"
                 app:layout_constraintTop_toTopOf="@+id/cancel_btn" />
@@ -296,7 +296,7 @@
                 android:textColor="@color/bottom_sheet_background"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/separator_txt"
                 app:layout_constraintTop_toTopOf="@+id/cancel_btn" />
