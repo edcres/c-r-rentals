@@ -73,9 +73,6 @@ class MainActivity : AppCompatActivity() {
         setObservers()
         vm.setUpDatabase(applicationContext)
         setUpItemEdit()
-
-        // todo: delete file
-//        vm.deleteFilWithName("sds", cacheDir.listFiles())
     }
 
     override fun onDestroy() {

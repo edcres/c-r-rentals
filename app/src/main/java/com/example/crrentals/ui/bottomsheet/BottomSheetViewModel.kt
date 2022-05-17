@@ -23,6 +23,7 @@ class BottomSheetViewModel : ViewModel() {
 
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
+    lateinit var addOrUpdate: String
     var currentRental: RentedItem? = null
     var latestTmpUri: Uri? = null
 
@@ -69,6 +70,7 @@ class BottomSheetViewModel : ViewModel() {
         latestTmpUri = FileProvider.getUriForFile(appContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
         return latestTmpUri!!
     }
+    // todo: delete a file when user replaces the item picture
     fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
         // todo: do this in a background thread
         if (files.isNullOrEmpty()) {

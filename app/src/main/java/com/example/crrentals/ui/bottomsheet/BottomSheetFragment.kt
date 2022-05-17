@@ -23,7 +23,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private var binding: FragmentBottomSheetBinding? = null
     private lateinit var dialog: BottomSheetDialog
     private lateinit var vm: BottomSheetViewModel
-    private lateinit var addOrUpdate: String
+    private var addOrUpdate: String? = null
     private var currentRental: RentedItem? = null
 
     private val takeImageResult =
@@ -57,9 +57,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         vm = ViewModelProvider(requireActivity())[BottomSheetViewModel::class.java]
         vm.setUpDatabase(requireActivity().applicationContext)
         vm.setRentalItem(currentRental)
+        if (addOrUpdate != null) vm.addOrUpdate = addOrUpdate!!
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
-            if (vm.currentRental != null) setUpUI(vm.currentRental!!)
+            if (vm.currentRental != null && vm.addOrUpdate == BottomSheetAction.UPDATE.toString()) setUpUI(vm.currentRental!!)
             addItemBtn.setOnClickListener {
                 insertRentalObject()
                 dialog.dismiss()
@@ -84,7 +85,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 // todo:
             }
         }
-        showCorrectFab(addOrUpdate)
+        showCorrectFab(vm.addOrUpdate)
     }
 
     override fun onDestroyView() {
@@ -158,11 +159,12 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             // todo: if passedRental is null, it's a new item, otherwise
             // todo: test if setting the value to null (when it was already null will trigger an observation)
             BottomSheetFragment().apply {
-                arguments = Bundle().apply {
-                    putString(SHEET_STR_KEY, addOrUpdatePassed)
-                    addOrUpdate = addOrUpdatePassed
-                    currentRental = passedRental
-                }
+                addOrUpdate = addOrUpdatePassed
+                currentRental = passedRental
+//                arguments = Bundle().apply {
+//                    putString(SHEET_STR_KEY, addOrUpdatePassed)
+//
+//                }
         }
     }
 }
