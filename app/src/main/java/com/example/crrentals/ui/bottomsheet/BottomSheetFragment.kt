@@ -98,13 +98,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         binding?.apply {
             val rentedOnString = "rented on ${rentalToLoad.time}"
             rentedOnTxt.visibility = View.VISIBLE
-            roomNumEt.setText(rentalToLoad.roomNumber)
+            roomNumEt.setText(rentalToLoad.roomNumber.toString())
             when (rentalToLoad.itemType) {
                 RentedItem.ItemType.BIKE -> chooseTypeRadio.check(bikeBtn.id)
                 RentedItem.ItemType.PADDLE_BOARD -> chooseTypeRadio.check(paddleBoardBtn.id)
                 else -> chooseTypeRadio.check(chairBtn.id)
             }
-            numEt.setText(rentalToLoad.number)
+            numEt.setText(rentalToLoad.number.toString())
             lockNumEt.setText(rentalToLoad.lock?.toString() ?: "")
             dailyRentalsSwitch.isChecked = rentalToLoad.dailyRentals
             paidSwitch.isChecked = rentalToLoad.paid

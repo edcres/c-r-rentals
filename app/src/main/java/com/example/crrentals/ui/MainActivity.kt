@@ -25,7 +25,7 @@ import com.example.crrentals.util.ItemMoveCallback
 
 /**
  *
- * todo: Bottom sheet
+ * todo: app crashes when pressing on a recycler item
  *
  * todo: set add or update btn visibility to gone
  *
