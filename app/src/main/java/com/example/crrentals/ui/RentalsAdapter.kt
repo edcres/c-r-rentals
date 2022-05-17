@@ -43,6 +43,10 @@ class RentalsAdapter(
                             .error(R.drawable.ic_baseline_broken_image))
                     .into(rentalImage)
                 binding.executePendingBindings()
+
+                rentalItemContainer.setOnClickListener {
+                    vm.setItemToEdit(rentedItem)
+                }
             }
         }
 

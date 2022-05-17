@@ -38,6 +38,9 @@ class RentItemsViewModel : ViewModel() {
             deleteRental(rentedItems.value!![position])
         }
     }
+    fun setItemToEdit(rentedItem: RentedItem) {
+        _itemToEdit.postValue(rentedItem)
+    }
     // HELPERS //
 
     // SETUP //
