@@ -97,6 +97,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private fun setUpUI(rentalToLoad: RentedItem) {
         binding?.apply {
             val rentedOnString = "rented on ${rentalToLoad.time}"
+            rentedOnTxt.visibility = View.VISIBLE
             roomNumEt.setText(rentalToLoad.roomNumber)
             when (rentalToLoad.itemType) {
                 RentedItem.ItemType.BIKE -> chooseTypeRadio.check(bikeBtn.id)

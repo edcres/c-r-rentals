@@ -25,9 +25,11 @@ import com.example.crrentals.util.ItemMoveCallback
 
 /**
  *
- * BUG: the date is completely wrong
- *
  * todo: Bottom sheet
+ *
+ * todo: set add or update btn visibility to gone
+ *
+ * todo: app icon
  *
  * todo: put everything together
  *
