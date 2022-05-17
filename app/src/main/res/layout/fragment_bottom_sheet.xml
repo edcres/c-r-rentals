@@ -100,18 +100,30 @@
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/item_data_container"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scrollbars="vertical"
-                android:layout_marginEnd="16dp"
+                android:layout_height="350dp"
+                android:fadeScrollbars="false"
                 android:scrollbarAlwaysDrawHorizontalTrack="true"
                 android:scrollbarSize="5dp"
-                android:fadeScrollbars="false"
+                android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="@+id/divider_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider_1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/sheet_rental_image"
+                        android:layout_width="90dp"
+                        android:layout_height="110dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="fitEnd"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/backgrounds/scenic" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/room_num_et_box"
@@ -119,10 +131,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="1dp"
                         android:hint="room #"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintBottom_toTopOf="@+id/paid_switch"
+                        app:layout_constraintStart_toEndOf="@+id/sheet_rental_image">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/room_num_et"
@@ -131,6 +143,16 @@
                             android:inputType="number"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/paid_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:checked="false"
+                        android:text="paid"
+                        app:layout_constraintBottom_toBottomOf="@+id/sheet_rental_image"
+                        app:layout_constraintStart_toEndOf="@id/sheet_rental_image" />
 
                     <RadioGroup
                         android:id="@+id/choose_type_radio"
@@ -141,16 +163,14 @@
                         android:gravity="start"
                         android:orientation="horizontal"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/room_num_et_box">
+                        app:layout_constraintTop_toBottomOf="@+id/sheet_rental_image">
 
                         <RadioButton
                             android:id="@+id/bike_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginLeft="8dp"
                             android:text="bike"
-                            tools:checked="true"/>
+                            tools:checked="true" />
 
                         <RadioButton
                             android:id="@+id/paddle_board_btn"
@@ -194,15 +214,15 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
                         android:hint="lock #"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/num_et_box">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/num_et_box"
+                        app:layout_constraintTop_toTopOf="@+id/num_et_box">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/lock_num_et"
-                            android:layout_width="200dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:textSize="16sp" />
@@ -219,17 +239,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/lock_num_et_box" />
 
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/paid_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:checked="false"
-                        android:text="paid"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/daily_rentals_switch" />
-
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/rented_on_txt"
                         style="@style/TextAppearance.Material3.BodyLarge"
@@ -237,21 +246,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
+                        android:paddingBottom="8dp"
                         android:visibility="gone"
-                        android:text="rented on 3/5/72"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/paid_switch" />
-
-                    <ImageView
-                        android:id="@+id/sheet_rental_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:scaleType="fitStart"
-                        android:layout_margin="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rented_on_txt"
-                        tools:src="@tools:sample/backgrounds/scenic" />
+                        app:layout_constraintTop_toBottomOf="@+id/daily_rentals_switch"
+                        tools:text="rented on 3/5/72" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
@@ -328,29 +327,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/separator_txt"
                 app:layout_constraintTop_toTopOf="@+id/cancel_btn" />
-
-            <View
-                android:id="@+id/divider_3"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/divider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cancel_btn" />
-
-            <ImageView
-                android:id="@+id/sheet_rental_image_test"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="fitStart"
-                android:layout_margin="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider_3"
-                tools:src="@tools:sample/backgrounds/scenic" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
