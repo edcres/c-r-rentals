@@ -18,6 +18,7 @@ import com.example.crrentals.util.ItemMoveCallback
 
 /**
  * - do todos
+ * - clean logs
  * - do warnings
  * - check comments
  * - clean imports

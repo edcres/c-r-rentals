@@ -7,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.FragmentBottomSheetBinding
 import com.example.crrentals.util.BottomSheetAction
@@ -29,6 +33,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (!isSuccess) {
                 if (vm.latestTmpUri != null) {
+
                     val fileName = File(vm.latestTmpUri!!.path!!).name
                     val fileDeleted =
                         vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
@@ -108,6 +113,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             dailyRentalsSwitch.isChecked = rentalToLoad.dailyRentals
             paidSwitch.isChecked = rentalToLoad.paid
             rentedOnTxt.text = rentedOnString
+            Glide.with(sheetRentalImage.context)
+                .load(rentalToLoad.imageUri?:"noUri".toUri())
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_baseline_broken_image))
+                .into(sheetRentalImage)
             if (rentalToLoad.imageUri.isNullOrEmpty()) addImgTxt.text = "NEW PICTURE"
         }
     }
