@@ -29,7 +29,7 @@ data class RentedItem (
 ) {
     enum class ItemType(val type: String) {
         BIKE("bike"),
-        PADDLE_BOARD("paddleBoard"),
+        PADDLE_BOARD("paddle board"),
         CHAIR("chair")
     }
 }

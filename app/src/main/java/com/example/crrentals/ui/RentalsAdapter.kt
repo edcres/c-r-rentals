@@ -50,6 +50,11 @@ class RentalsAdapter(
                             .placeholder(R.drawable.loading_animation)
                             .error(R.drawable.ic_baseline_broken_image))
                     .into(rentalImage)
+                rentalNameTxt.text = rentedItem.itemType.type.uppercase()
+                roomNumTxt.text = rentedItem.roomNumber.toString()
+                val rentedOnString = "Rented on ${rentedItem.time}"
+                timeStartedTxt.text = rentedOnString
+
                 binding.executePendingBindings()
 
                 rentalItemContainer.setOnClickListener {
