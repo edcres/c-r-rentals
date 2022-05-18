@@ -19,8 +19,6 @@ import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 
 /**
- * todo: make the app bar
- *
  * todo: make string resources
  *
  * // HARD //

@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">CR Rentals</string>
+
+    <string name="delete_label">DELETE</string>
+    <string name="add_picture_label">ADD PICTURE</string>
+    <string name="new_picture_label">NEW PICTURE</string>
+    <string name="duplicate_label">Duplicate</string>
+
+    <string name="room_num_hint">room #</string>
+    <string name="paid_label">paid</string>
+    <string name="bike_label">bike</string>
+    <string name="paddle_board_label">paddle board</string>
+    <string name="chair_label">chair</string>
+    <string name="num_hint">number</string>
+    <string name="lock_num_hint">lock #</string>
+    <string name="daily_rentals_label">daily rentals</string>
+
+    <string name="accept_btn">accept</string>
+    <string name="add_rental_btn">add rental</string>
 </resources>

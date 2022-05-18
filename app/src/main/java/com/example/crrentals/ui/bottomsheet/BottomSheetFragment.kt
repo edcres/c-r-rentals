@@ -123,7 +123,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             rentedOnTxt.text = rentedOnString
             setImgOnView(rentalToLoad.imageUri?:"noUri".toUri())
             if (rentalToLoad.imageUri.isNullOrEmpty()) {
-                addImgTxt.text = "NEW PICTURE"
+                addImgTxt.text = requireActivity().getString(R.string.new_picture_label)
             }
         }
     }

@@ -31,7 +31,7 @@
                 android:id="@+id/delete_item_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="delete"
+                android:text="@string/delete_label"
                 android:textAllCaps="true"
                 android:textColor="@color/secondary"
                 android:textStyle="bold"
@@ -54,7 +54,7 @@
                 android:id="@+id/add_img_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="add picture"
+                android:text="@string/add_picture_label"
                 android:textAllCaps="true"
                 android:textColor="@color/secondary"
                 android:textStyle="bold"
@@ -77,7 +77,7 @@
                 android:id="@+id/duplicate_item_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="duplicate"
+                android:text="@string/duplicate_label"
                 android:textAllCaps="true"
                 android:textColor="@color/secondary"
                 android:textStyle="bold"
@@ -134,7 +134,7 @@
                         android:layout_marginBottom="8dp"
                         app:boxStrokeColor="@color/secondary"
                         app:hintTextColor="@color/secondary"
-                        android:hint="room #"
+                        android:hint="@string/room_num_hint"
                         app:layout_constraintBottom_toTopOf="@+id/paid_switch"
                         app:layout_constraintStart_toEndOf="@+id/sheet_rental_image">
 
@@ -154,7 +154,7 @@
                         android:checked="false"
                         app:trackTint="@color/secondary"
                         app:thumbTint="@color/secondary_dark"
-                        android:text="paid"
+                        android:text="@string/paid_label"
                         app:layout_constraintBottom_toBottomOf="@+id/sheet_rental_image"
                         app:layout_constraintStart_toEndOf="@id/sheet_rental_image" />
 
@@ -174,7 +174,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:buttonTint="@color/secondary"
-                            android:text="bike"
+                            android:text="@string/bike_label"
                             tools:checked="true" />
 
                         <RadioButton
@@ -182,18 +182,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginLeft="8dp"
                             android:buttonTint="@color/secondary"
-                            android:text="paddle board" />
+                            android:text="@string/paddle_board_label" />
 
                         <RadioButton
                             android:id="@+id/chair_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginLeft="8dp"
                             android:buttonTint="@color/secondary"
-                            android:text="chair" />
+                            android:text="@string/chair_label" />
 
                     </RadioGroup>
 
@@ -206,7 +204,7 @@
                         android:layout_marginTop="8dp"
                         app:boxStrokeColor="@color/secondary"
                         app:hintTextColor="@color/secondary"
-                        android:hint="number"
+                        android:hint="@string/num_hint"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/choose_type_radio">
 
@@ -224,7 +222,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:hint="lock #"
+                        android:hint="@string/lock_num_hint"
                         app:boxStrokeColor="@color/secondary"
                         app:hintTextColor="@color/secondary"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -246,7 +244,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:checked="false"
-                        android:text="daily rentals"
+                        android:text="@string/daily_rentals_label"
                         app:trackTint="@color/secondary"
                         app:thumbTint="@color/secondary_dark"
                         app:layout_constraintStart_toStartOf="parent"
@@ -287,7 +285,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="cancel"
+                android:text="@android:string/cancel"
                 android:textAllCaps="true"
                 android:textColor="@color/secondary"
                 android:textSize="14sp"
@@ -313,7 +311,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/secondary"
-                android:text="accept"
+                android:text="@string/accept_btn"
                 android:textAllCaps="true"
                 android:textColor="@color/secondary_background"
                 android:textSize="14sp"
@@ -331,7 +329,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/secondary"
-                android:text="add rental"
+                android:text="@string/add_rental_btn"
                 android:textAllCaps="true"
                 android:textColor="@color/secondary_background"
                 android:textSize="14sp"
