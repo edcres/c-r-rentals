@@ -3,6 +3,7 @@ package com.example.crrentals.ui
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleOwner
@@ -43,13 +44,16 @@ class RentalsAdapter(
         fun bind(rentedItem: RentedItem) {
             Log.d(TAG, "bind: called")
             binding.apply {
-                Glide.with(rentalImage.context)
-                    .load(rentedItem.imageUri?:"noUri".toUri())
-                    .apply(
-                        RequestOptions()
-                            .placeholder(R.drawable.loading_animation)
-                            .error(R.drawable.ic_baseline_broken_image))
-                    .into(rentalImage)
+                if (rentedItem.imageUri != null) {
+                    Glide.with(rentalImage.context)
+                        .load(rentedItem.imageUri ?: "noUri".toUri())
+                        .apply(
+                            RequestOptions()
+                                .placeholder(R.drawable.loading_animation)
+                                .error(R.drawable.ic_baseline_broken_image)
+                        )
+                        .into(rentalImage)
+                } else rentalImage.visibility = View.GONE
                 rentalNameTxt.text = rentedItem.itemType.type.uppercase()
                 roomNumTxt.text = rentedItem.roomNumber.toString()
                 val rentedOnString = "Rented on ${rentedItem.time}"

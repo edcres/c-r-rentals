@@ -19,9 +19,9 @@ import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 
 /**
- * todo: make string resources
- *
  * // HARD //
+ * todo: check if all drawables are used
+ *
  * todo: delete the old file when the user replaces the item picture
  * todo: delete img file when deleting an item
  * todo: delete img file when user goes to take a picture, accepts it, and doesn't save the item
@@ -31,15 +31,8 @@ import com.example.crrentals.util.ItemMoveCallback
  * // HARD //
  *
  * todo: test if setting the value of '_itemToEdit' to null (when it was already null) will trigger an observation
- *
  * todo: put the logic in the VMs, take it off the views
- *
- * todo: check if all drawables are used
- *
  * todo: set which properties can be null (talk to bruno about this) (app now crashers bc of this sometimes)
- *
- * todo: make it more pretty
- *
  */
 
 /** todo: Bugs
