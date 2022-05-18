@@ -38,7 +38,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 setImgOnView(vm.latestTmpUri!!)
                 if(vm.currentRental != null) {
                     // todo: delete the old file
-                    vm.currentRental!!.imageUri = vm.latestTmpUri.toString()
+                    vm.currentRental!!.imageUri =
+                        if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
+                        else null
                     updateRentalObject(vm.currentRental!!)
                 }
             } else {
@@ -122,7 +124,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             paidSwitch.isChecked = rentalToLoad.paid
             rentedOnTxt.text = rentedOnString
             setImgOnView(rentalToLoad.imageUri?:"noUri".toUri())
-            if (!rentalToLoad.imageUri.isNullOrEmpty()) addImgTxt.text = "NEW PICTURE"
+            if (rentalToLoad.imageUri.isNullOrEmpty()) {
+                addImgTxt.text = "NEW PICTURE"
+            }
         }
     }
     private fun insertRentalObject() {
@@ -133,7 +137,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
                     else -> RentedItem.ItemType.CHAIR
                 },
-                imageUri = vm.latestTmpUri.toString(),
+                imageUri = if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
+                else null,
                 roomNumber = roomNumEt.text.toString().toInt(),
                 dailyRentals = dailyRentalsSwitch.isChecked,
                 time = vm.getDateString(),

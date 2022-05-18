@@ -19,14 +19,13 @@ import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 
 /**
+ * todo: if the img in the sheet is the placeholder drawable, make it clickable and user can take a picture
+ *
+ * todo: make the app bar
+ *
+ * todo: make string resources
  *
  * // HARD //
- * todo: when user takes a picture and the sheet is up, load it to the sheet imgView
- *
- * todo: maybe start to take a picture right when the user click the add rental btn
- *
- * todo: User has the option to change the image.
- *
  * todo: delete the old file when the user replaces the item picture
  * todo: delete img file when deleting an item
  * todo: delete img file when user goes to take a picture, accepts it, and doesn't save the item
@@ -39,10 +38,9 @@ import com.example.crrentals.util.ItemMoveCallback
  *
  * todo: put the logic in the VMs, take it off the views
  *
- * todo: make string resources
  * todo: check if all drawables are used
  *
- * todo: set which properties can be null (talk to bruno about this)
+ * todo: set which properties can be null (talk to bruno about this) (app now crashers bc of this sometimes)
  *
  * todo: make it more pretty
  *
@@ -59,6 +57,7 @@ import com.example.crrentals.util.ItemMoveCallback
  * consider also getting hr, minutes, and seconds on the time property on the entity
  * functionality to duplicate an item
  * User can change position of items in recyclerView
+ * Maybe start to take a picture right when the user click the add rental btn
  */
 
 /**
