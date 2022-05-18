@@ -4,12 +4,14 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.crrentals.BuildConfig
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.data.Repository
 import com.example.crrentals.data.room.RentsRoomDatabase
+import com.example.crrentals.util.JPG_SUFFIX
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +19,6 @@ import java.io.File
 import java.util.*
 
 private const val TAG = "SheetViewModel__TAG"
-private const val JPG_SUFFIX = ".jpg"
 
 class BottomSheetViewModel : ViewModel() {
 
@@ -48,7 +49,11 @@ class BottomSheetViewModel : ViewModel() {
     fun updateRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
         repo.updateRental(rentedItem)
     }
-    fun deleteRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
+    fun deleteRental(filesList: Array<File>?, rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
+        if (rentedItem.imageUri != null) {
+            val fileName = File(rentedItem.imageUri!!.toUri().path!!).name
+            deleteFileWithName(fileName, filesList)
+        }
         repo.deleteRental(rentedItem)
     }
     fun insertRental(rentedItem: RentedItem): MutableLiveData<Long> {

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +13,7 @@ import com.example.crrentals.BuildConfig
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.data.Repository
 import com.example.crrentals.data.room.RentsRoomDatabase
+import com.example.crrentals.util.JPG_SUFFIX
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -35,9 +37,9 @@ class RentItemsViewModel : ViewModel() {
 //    fun nullItemToEdit() {
 //        _itemToEdit.postValue(null)
 //    }
-    fun deleteRentalAt(position: Int) {
+    fun deleteRentalAt(files: Array<File>?, position: Int) {
         if (rentedItems.value != null) {
-            deleteRental(rentedItems.value!![position])
+            deleteRental(files, rentedItems.value!![position])
         }
     }
     fun setItemToEdit(rentedItem: RentedItem) {
@@ -61,8 +63,28 @@ class RentItemsViewModel : ViewModel() {
             }
         }
     }
-    private fun deleteRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
-        repo.deleteRental(rentedItem)
-    }
+
+    private fun deleteRental(filesList: Array<File>?, rentedItem: RentedItem) =
+        CoroutineScope(Dispatchers.IO).launch {
+            if (rentedItem.imageUri != null) {
+                val fileName = File(rentedItem.imageUri!!.toUri().path!!).name
+                deleteFileWithName(fileName, filesList)
+            }
+            repo.deleteRental(rentedItem)
+        }
     // DATABASE QUERIES //
+
+    // FILE QUERIES //
+    private fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
+        if (files.isNullOrEmpty()) {
+            Log.e(TAG, "deleteFile: Error loading files.")
+            return false
+        } else {
+            files.filter {
+                it.canRead() && it.isFile && it.name.endsWith(JPG_SUFFIX)
+            }.forEach { if (it.name == name) return it.delete() }
+            return false
+        }
+    }
+    // FILE QUERIES //
 }

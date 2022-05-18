@@ -89,7 +89,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 dialog.dismiss()
             }
             deleteItemBtn.setOnClickListener {
-                if (vm.currentRental != null) vm.deleteRental(vm.currentRental!!)
+                if (vm.currentRental != null)
+                    vm.deleteRental(requireActivity().cacheDir.listFiles(), vm.currentRental!!)
                 dialog.dismiss()
             }
             addImgBtn.setOnClickListener {

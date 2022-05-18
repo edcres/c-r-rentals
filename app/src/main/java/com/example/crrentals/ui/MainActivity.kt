@@ -20,7 +20,11 @@ import com.example.crrentals.util.ItemMoveCallback
 
 /**
  * // HARD //
- * todo: delete img file when deleting an item
+ * todo: test: delete the old file when the user replaces the item picture
+ *
+ * todo: delete img file when deleting an item:
+ *      - test: from the activity swipe
+ *      - from sheet fragment btn
  * todo: delete img file when user goes to take a picture, accepts it, and doesn't save the item
  * todo: give functionality to the cancel btn (delete the old img file)
  *
@@ -135,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                vm.deleteRentalAt(viewHolder.adapterPosition)
+                vm.deleteRentalAt(cacheDir.listFiles(), viewHolder.adapterPosition)
             }
         }
         val itemTouchHelper = ItemTouchHelper(editItemCallback)
