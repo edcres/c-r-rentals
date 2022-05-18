@@ -1,6 +1,7 @@
 package com.example.crrentals.ui.bottomsheet
 
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,7 +34,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
-            if (!isSuccess) {
+
+            if (isSuccess) {
+                setImgOnView(vm.latestTmpUri!!)
+            } else {
                 if (vm.latestTmpUri != null) {
                     val fileName = File(vm.latestTmpUri!!.path!!).name
                     val fileDeleted =
@@ -113,15 +117,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             dailyRentalsSwitch.isChecked = rentalToLoad.dailyRentals
             paidSwitch.isChecked = rentalToLoad.paid
             rentedOnTxt.text = rentedOnString
-            Glide.with(sheetRentalImage.context)
-                .load(rentalToLoad.imageUri?:"noUri".toUri())
-                .apply(
-                    RequestOptions()
-                        .transform(RoundedCorners(25))
-                        .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.ic_baseline_broken_image))
-                .into(sheetRentalImage)
-            if (rentalToLoad.imageUri.isNullOrEmpty()) addImgTxt.text = "NEW PICTURE"
+            setImgOnView(rentalToLoad.imageUri?:"noUri".toUri())
+            if (!rentalToLoad.imageUri.isNullOrEmpty()) addImgTxt.text = "NEW PICTURE"
         }
     }
     private fun insertRentalObject() {
@@ -164,6 +161,19 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 BottomSheetAction.ADD.toString() -> addItemBtn.visibility = View.VISIBLE
                 BottomSheetAction.UPDATE.toString() -> acceptItemBtn.visibility = View.VISIBLE
             }
+        }
+    }
+    private fun setImgOnView(uri: Any) {
+        binding?.apply {
+            Glide.with(sheetRentalImage.context)
+                .load(uri)
+                .apply(
+                    RequestOptions()
+                        .transform(RoundedCorners(25))
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_baseline_broken_image)
+                )
+                .into(sheetRentalImage)
         }
     }
     // HELPERS //

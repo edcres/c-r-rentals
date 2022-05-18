@@ -20,8 +20,6 @@ import com.example.crrentals.util.ItemMoveCallback
 
 /**
  *
- * todo: make delete icon bigger (check material.io first)
- *
  * // HARD //
  * todo: when user takes a picture and the sheet is up, load it to the sheet imgView
  *
@@ -36,7 +34,6 @@ import com.example.crrentals.util.ItemMoveCallback
  *
  * todo: set up concurrency
  * // HARD //
- *
  *
  * todo: test if setting the value of '_itemToEdit' to null (when it was already null) will trigger an observation
  *
@@ -60,7 +57,7 @@ import com.example.crrentals.util.ItemMoveCallback
  * maybe add a due date to the rental entity
  * consider also getting hr, minutes, and seconds on the time property on the entity
  * functionality to duplicate an item
- * User can change position of items in recycler
+ * User can change position of items in recyclerView
  */
 
 /**
