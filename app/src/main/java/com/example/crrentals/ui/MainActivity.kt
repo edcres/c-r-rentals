@@ -50,6 +50,7 @@ import com.example.crrentals.util.ItemMoveCallback
 
 /** todo: Bugs
  *
+ * when an item is updated, the recyclerview is not refreshed
  */
 
 /** todo: future:

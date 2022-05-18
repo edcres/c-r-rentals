@@ -34,9 +34,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
-
             if (isSuccess) {
                 setImgOnView(vm.latestTmpUri!!)
+                if(vm.currentRental != null) {
+                    // todo: delete the old file
+                    vm.currentRental!!.imageUri = vm.latestTmpUri.toString()
+                    updateRentalObject(vm.currentRental!!)
+                }
             } else {
                 if (vm.latestTmpUri != null) {
                     val fileName = File(vm.latestTmpUri!!.path!!).name
