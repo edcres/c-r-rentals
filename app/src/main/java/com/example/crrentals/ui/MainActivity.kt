@@ -17,8 +17,6 @@ import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 
 /**
- * todo: adjust the recyclerView UI
- *
  * todo: app icon
  *
  * todo: colors
