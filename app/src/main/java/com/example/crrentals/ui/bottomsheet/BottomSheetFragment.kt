@@ -135,7 +135,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
                     else -> RentedItem.ItemType.CHAIR
                 },
-                imageUri = if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
+                imageUri = if (vm.latestTmpUri != null) {
+                    Log.d(TAG, "latest temp uri: ${vm.latestTmpUri}")
+                    vm.latestTmpUri.toString()
+                }
                 else null,
                 roomNumber = roomNumEt.text.toString().toInt(),
                 dailyRentals = dailyRentalsSwitch.isChecked,

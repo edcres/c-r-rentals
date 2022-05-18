@@ -32,6 +32,9 @@ class RentItemsViewModel : ViewModel() {
     val rentedItems: LiveData<MutableList<RentedItem>> get() = _rentedItems
 
     // HELPERS //
+//    fun nullItemToEdit() {
+//        _itemToEdit.postValue(null)
+//    }
     fun deleteRentalAt(position: Int) {
         if (rentedItems.value != null) {
             deleteRental(rentedItems.value!![position])

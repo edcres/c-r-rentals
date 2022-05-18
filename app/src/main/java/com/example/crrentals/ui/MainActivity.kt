@@ -45,9 +45,9 @@ import com.example.crrentals.util.ItemMoveCallback
  */
 
 /** todo: Bugs
- *
  * when an item is updated, the recyclerview is not refreshed
- * when adding an item with a picture, adding another item without a picture uses the same picture as the precious item
+ * when adding an item with a picture, adding another item without a picture uses the same picture as the previous item
+ * when i go add a new item, take a picture, click the img to take another picture but don't take that picture, then add the item, the item has not picture (it should have the picture that was takek bc it's still being displayed on the sheet, as it should)
  */
 
 /** todo: future:
@@ -114,11 +114,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
-            Log.d(TAG, "setObservers: rentals observed. Size = ${rentals.size}")
-            Log.d(TAG, "setObservers: rentals observed. items = ${rentals.size}")
+            Log.d(TAG, "rentals observed")
             rentalsAdapter.submitList(rentals)
         }
-        // Update a rental item
         vm.itemToEdit.observe(this) { itemToEdit ->
             bottomSheetFragment =
                 BottomSheetFragment.newInstance(BottomSheetAction.UPDATE.toString(), itemToEdit)
