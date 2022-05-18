@@ -1,10 +1,12 @@
 package com.example.crrentals.ui
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,8 +19,6 @@ import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 
 /**
- *
- * todo: do the default setting in the main activity
  *
  * todo: make delete icon bigger (check material.io first)
  *
@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setUpDefaultSettings()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         vm = ViewModelProvider(this)[RentItemsViewModel::class.java]
@@ -106,6 +107,13 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    private fun setUpDefaultSettings() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
+        }
     }
 
     private fun setObservers() {
