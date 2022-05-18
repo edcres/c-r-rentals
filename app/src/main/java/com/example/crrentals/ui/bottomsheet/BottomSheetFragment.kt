@@ -65,7 +65,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         if (addOrUpdate != null) vm.addOrUpdate = addOrUpdate!!
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
-            if (vm.currentRental != null && vm.addOrUpdate == BottomSheetAction.UPDATE.toString()) setUpUI(vm.currentRental!!)
+            if (vm.currentRental != null && vm.addOrUpdate == BottomSheetAction.UPDATE.toString())
+                setUpUI(vm.currentRental!!)
             addItemBtn.setOnClickListener {
                 insertRentalObject()
                 dialog.dismiss()
