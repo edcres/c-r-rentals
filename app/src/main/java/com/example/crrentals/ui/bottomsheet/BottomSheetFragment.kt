@@ -181,7 +181,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     RequestOptions()
                         .transform(RoundedCorners(25))
                         .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.ic_baseline_broken_image)
+                        .error(R.drawable.ic_placeholder_image_24)
                 )
                 .into(sheetRentalImage)
         }
