@@ -17,12 +17,13 @@ import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 
 /**
- * todo: app icon
- *
  * todo: colors
  *
  * todo: when adding a new item, display a broken image in the sheet imgView
  *
+ * todo: do the default setting in the main activity
+ *
+ * todo: make delete icon bigger
  *
  * // HARD //
  * todo: when user takes a picture and the sheet is up, load it to the sheet imgView

@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@color/purple_200">
+        android:background="@color/primary_background">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rentals_recycler"
