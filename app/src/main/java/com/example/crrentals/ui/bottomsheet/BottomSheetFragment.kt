@@ -1,11 +1,9 @@
 package com.example.crrentals.ui.bottomsheet
 
 import android.app.Dialog
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
@@ -90,20 +88,20 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 dialog.dismiss()
             }
             addImgBtn.setOnClickListener {
-                takeImageResult.launch(
-                    vm.makeTmpFile(
-                        requireActivity().cacheDir,
-                        requireActivity().applicationContext
-                    )
-                )
+                takePicture()
             }
             duplicateItemBtn.setOnClickListener {}
+            sheetRentalImage.setOnClickListener {
+                if(vm.currentRental == null) takePicture()
+                else if(vm.currentRental!!.imageUri == null) takePicture()
+            }
         }
         showCorrectBtn(vm.addOrUpdate)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d(TAG, "onDestroyView: ")
         binding = null
     }
 
@@ -184,6 +182,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 )
                 .into(sheetRentalImage)
         }
+    }
+    private fun takePicture() {
+        takeImageResult.launch(
+            vm.makeTmpFile(
+                requireActivity().cacheDir,
+                requireActivity().applicationContext
+            )
+        )
     }
     // HELPERS //
 

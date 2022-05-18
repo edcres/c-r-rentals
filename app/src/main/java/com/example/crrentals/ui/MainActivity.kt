@@ -19,8 +19,6 @@ import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 
 /**
- * todo: if the img in the sheet is the placeholder drawable, make it clickable and user can take a picture
- *
  * todo: make the app bar
  *
  * todo: make string resources
@@ -49,6 +47,7 @@ import com.example.crrentals.util.ItemMoveCallback
 /** todo: Bugs
  *
  * when an item is updated, the recyclerview is not refreshed
+ * when adding an item with a picture, adding another item without a picture uses the same picture as the precious item
  */
 
 /** todo: future:
