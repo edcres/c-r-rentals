@@ -35,13 +35,18 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             if (isSuccess) {
                 setImgOnView(vm.latestTmpUri!!)
                 if(vm.currentRental != null) {
-                    // todo: delete the old file
+                    // Replace previous image
+                    val fileName = File(vm.latestTmpUri!!.path!!).name
+                    val fileDeleted =
+                        vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
+                    Log.d(TAG, "deleted: $fileDeleted")
                     vm.currentRental!!.imageUri =
                         if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
                         else null
                     updateRentalObject(vm.currentRental!!)
                 }
             } else {
+                // Did not accept an image
                 if (vm.latestTmpUri != null) {
                     val fileName = File(vm.latestTmpUri!!.path!!).name
                     val fileDeleted =

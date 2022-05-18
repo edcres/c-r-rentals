@@ -20,9 +20,6 @@ import com.example.crrentals.util.ItemMoveCallback
 
 /**
  * // HARD //
- * todo: check if all drawables are used
- *
- * todo: delete the old file when the user replaces the item picture
  * todo: delete img file when deleting an item
  * todo: delete img file when user goes to take a picture, accepts it, and doesn't save the item
  * todo: give functionality to the cancel btn (delete the old img file)
