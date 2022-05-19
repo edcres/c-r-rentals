@@ -22,33 +22,15 @@ import com.example.crrentals.util.ItemMoveCallback
 import kotlin.math.log
 
 /**
- * todo: put the logic in the VMs, take it off the views
- * todo: set which properties can be null (talk to bruno about this) (app now crashers bc of this sometimes)
- */
-
-/** todo: Bugs
- * When i go add a new item, take a picture, click the img to take another picture but don't take that picture, then add the item, the item has no picture (it should have the picture that was taken bc it's still being displayed on the sheet, as it should)
- * When i went to update a rental, the add rental button was show and when clicked it crashed (have not been able to recreate this bug)
- * when an item is updated, the recyclerview is not refreshed
- *      - I fixed it in a hacky way. Now always return false in areContentsTheSame() in the adapter, bc for some reason the first time an item is updated, the oldItem updates as well right before the function checks if both are the same.
- */
-
-/** todo: future:
- * Compress images as jpg
- * Maybe add a due date to the rental entity
- * Consider also getting hr, minutes, and seconds on the time property on the entity
- * functionality to duplicate an item
- * User can change position of items in recyclerView
- * Maybe start to take a picture right when the user click the add rental btn
- * Set up concurrency for file queries
- */
-
-/**
- * - do todos
- * - clean logs
- * - do warnings
- * - check comments
- * - clean imports
+ * App explanation
+ *
+ * There's a list of Rented items that show:
+ *  - A picture of the item, type of the item, date rented, and room number
+ * More data is displayed when the user clicks on an item and a bottom sheet pops up
+ *  - Here the user can edit the item
+ * To create an item, the user clicks the add button on the main screen,
+ *  fills out the bottom sheet, and clicks the add button.
+ *
  */
 
 private const val TAG = "MainAct__TAG"
