@@ -181,7 +181,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
     private fun showCorrectBtn(addOrUpdatePassed: String) {
-        Log.d(TAG, "showCorrectFab: add/update = $addOrUpdatePassed")
         binding!!.apply {
             when (addOrUpdatePassed) {
                 BottomSheetAction.ADD.toString() -> addItemBtn.visibility = View.VISIBLE
@@ -190,6 +189,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
     private fun setImgOnView(uri: Any) {
+        Log.d(TAG, "setImgOnView: \n$uri")
         binding?.apply {
             Glide.with(sheetRentalImage.context)
                 .load(uri)

@@ -76,6 +76,7 @@ class RentItemsViewModel : ViewModel() {
 
     // FILE QUERIES //
     private fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
+        Log.d(TAG, "deleteFileWithName: main")
         if (files.isNullOrEmpty()) {
             Log.e(TAG, "deleteFile: Error loading files.")
             return false

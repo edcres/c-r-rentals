@@ -39,10 +39,10 @@ class RentalsAdapter(
 
         fun bind(rentedItem: RentedItem) {
             binding.apply {
-                Log.d(TAG, "load uri: \n${rentedItem.imageUri}")
+                Log.d(TAG, "load uri1: \n${rentedItem.imageUri}")
                 if (rentedItem.imageUri != null) {
                     Glide.with(rentalImage.context)
-                        .load(rentedItem.imageUri ?: "noUri".toUri())
+                        .load(rentedItem.imageUri!!.toUri())
                         .apply(
                             RequestOptions()
                                 .placeholder(R.drawable.loading_animation)

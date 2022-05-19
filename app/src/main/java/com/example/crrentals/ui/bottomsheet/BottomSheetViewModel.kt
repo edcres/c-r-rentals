@@ -77,6 +77,7 @@ class BottomSheetViewModel : ViewModel() {
         return latestTmpUri!!
     }
     fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
+        Log.d(TAG, "deleteFileWithName: sheet")
         if (files.isNullOrEmpty()) {
             Log.e(TAG, "deleteFile: Error loading files.")
             return false
