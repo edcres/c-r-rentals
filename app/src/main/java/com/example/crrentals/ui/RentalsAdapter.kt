@@ -39,7 +39,6 @@ class RentalsAdapter(
 
         fun bind(rentedItem: RentedItem) {
             binding.apply {
-                Log.d(TAG, "load uri1: \n${rentedItem.imageUri}")
                 if (rentedItem.imageUri != null) {
                     Glide.with(rentalImage.context)
                         .load(rentedItem.imageUri!!.toUri())
@@ -54,12 +53,10 @@ class RentalsAdapter(
                 roomNumTxt.text = rentedItem.roomNumber.toString()
                 val rentedOnString = "Rented on ${rentedItem.time}"
                 timeStartedTxt.text = rentedOnString
-
-                binding.executePendingBindings()
-
                 rentalItemContainer.setOnClickListener {
                     vm.setItemToEdit(rentedItem)
                 }
+                binding.executePendingBindings()
             }
         }
 

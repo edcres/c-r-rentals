@@ -36,13 +36,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 setImgOnView(vm.latestTmpUri!!)
                 if(vm.currentRental != null) {
                     // Replace previous image
-                    val fileName = File(vm.latestTmpUri!!.path!!).name
-                    val fileDeleted =
-                        vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
-                    Log.d(TAG, "deleted: $fileDeleted")
+                    val fileName = File(vm.currentRental!!.imageUri!!.toUri().path!!).name
+                    // todo: put this back:
+                    val fileDeleted = vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
+                    Log.i(TAG, "replaced deleted: $fileDeleted")
                     vm.currentRental!!.imageUri =
                         if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
                         else null
+                    Log.d(TAG, "new uri: ${vm.currentRental!!.imageUri}")
                     updateRentalObject(vm.currentRental!!)
                 }
             } else {
@@ -177,6 +178,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             rentalToUpdate.lock = lockNumEt.text.toString().toInt()
             rentalToUpdate.dailyRentals = dailyRentalsSwitch.isChecked
             rentalToUpdate.paid = paidSwitch.isChecked
+            Log.d(TAG, "updateRentalObject: ${rentalToUpdate.imageUri}")
             vm.updateRental(rentalToUpdate)
         }
     }
@@ -203,11 +205,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
     private fun takePicture() {
+        val uriCreated = vm.makeTmpFile(
+            requireActivity().cacheDir,
+            requireActivity().applicationContext
+        )
+        Log.d(TAG, "takenPicture: uriCreated: \n$uriCreated")
         takeImageResult.launch(
-            vm.makeTmpFile(
-                requireActivity().cacheDir,
-                requireActivity().applicationContext
-            )
+            uriCreated
         )
     }
     // HELPERS //
