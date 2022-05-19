@@ -24,10 +24,6 @@ class RentalsAdapter(
     private val viewLifecycleOwner: LifecycleOwner
 ) : ListAdapter<RentedItem, RentalsAdapter.RentalsViewHolder>(RentalsDiffCallback()) {
 
-    init {
-        Log.d(TAG, "adapter init")
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RentalsViewHolder.from(vm, context, viewLifecycleOwner, parent)
 
@@ -42,8 +38,8 @@ class RentalsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(rentedItem: RentedItem) {
-            Log.d(TAG, "bind: called")
             binding.apply {
+                Log.d(TAG, "load uri: \n${rentedItem.imageUri}")
                 if (rentedItem.imageUri != null) {
                     Glide.with(rentalImage.context)
                         .load(rentedItem.imageUri ?: "noUri".toUri())

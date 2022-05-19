@@ -82,6 +82,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 setUpUI(vm.currentRental!!)
             addItemBtn.setOnClickListener {
                 insertRentalObject()
+                vm.itemSentToSave = true
                 dialog.dismiss()
             }
             acceptItemBtn.setOnClickListener {
@@ -110,7 +111,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        if(!vm.itemSentToSave && vm.latestTmpUri != null) {
+        if (!vm.itemSentToSave && vm.latestTmpUri != null &&
+            addOrUpdate == BottomSheetAction.UPDATE.toString()
+        ) {
             // Delete the img file if the item is not saved.
             val fileName = File(vm.latestTmpUri!!.path!!).name
             vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
