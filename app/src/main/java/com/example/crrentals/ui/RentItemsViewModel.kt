@@ -68,7 +68,7 @@ class RentItemsViewModel : ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             if (rentedItem.imageUri != null) {
                 val fileName = File(rentedItem.imageUri!!.toUri().path!!).name
-                deleteFileWithName(fileName, filesList)
+                Log.i(TAG, "file deleted: ${deleteFileWithName(fileName, filesList)}")
             }
             repo.deleteRental(rentedItem)
         }

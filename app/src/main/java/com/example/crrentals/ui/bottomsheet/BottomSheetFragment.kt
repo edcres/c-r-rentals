@@ -19,6 +19,7 @@ import com.example.crrentals.util.BottomSheetAction
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.io.File
+import kotlin.math.log
 
 private const val TAG = "ModalBottomSheet_TAG"
 
@@ -37,7 +38,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 if(vm.currentRental != null) {
                     // Replace previous image
                     val fileName = File(vm.currentRental!!.imageUri!!.toUri().path!!).name
-                    // todo: put this back:
                     val fileDeleted = vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
                     Log.i(TAG, "replaced deleted: $fileDeleted")
                     vm.currentRental!!.imageUri =
@@ -112,13 +112,19 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d(TAG, "onDestroyView: called")
+        Log.d(TAG, "111 ${!vm.itemSentToSave}")
+        Log.d(TAG, "222 ${vm.latestTmpUri != null}")
+        Log.d(TAG, "333 ${addOrUpdate == BottomSheetAction.ADD.toString()}")
         if (!vm.itemSentToSave && vm.latestTmpUri != null &&
-            addOrUpdate == BottomSheetAction.UPDATE.toString()
+            addOrUpdate == BottomSheetAction.ADD.toString()
         ) {
+            Log.d(TAG, "onDestroyView: delete file called")
             // Delete the img file if the item is not saved.
             val fileName = File(vm.latestTmpUri!!.path!!).name
-            vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
+            Log.d(TAG, "file deleted ${vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())}")
         }
+        vm.itemSentToSave = false
         binding = null
     }
 
