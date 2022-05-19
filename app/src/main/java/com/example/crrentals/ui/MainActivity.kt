@@ -33,8 +33,9 @@ import kotlin.math.log
  */
 
 /** todo: Bugs
- * when i go add a new item, take a picture, click the img to take another picture but don't take that picture, then add the item, the item has no picture (it should have the picture that was taken bc it's still being displayed on the sheet, as it should)
- * when i went to update a rental, the add rental button was show and when clicked it crashed
+ * When i go add a new item, take a picture, click the img to take another picture but don't take that picture, then add the item, the item has no picture (it should have the picture that was taken bc it's still being displayed on the sheet, as it should)
+ * When i went to update a rental, the add rental button was show and when clicked it crashed (have not been able to recreate this bug)
+ * I fixed it in a hacky way. Now always return false in areContentsTheSame() in the adapter, bc for some reason the first time an item is updated, the oldItem updates as well right before the function checks if both are the same.
  */
 
 /** todo: future:
@@ -103,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         vm.rentedItems.observe(this) { rentals ->
             Log.d(TAG, "rentals observed")
             Log.d(TAG, "rental room#: ${rentals[0].roomNumber}")
-            rentalsAdapter.submitList(rentals)
+            rentalsAdapter.submitList(rentals.toList())
         }
         vm.itemToEdit.observe(this) { itemToEdit ->
             if(itemToEdit != null) {

@@ -36,10 +36,15 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             if (isSuccess) {
                 setImgOnView(vm.latestTmpUri!!)
                 if(vm.currentRental != null) {
-                    // Replace previous image
-                    val fileName = File(vm.currentRental!!.imageUri!!.toUri().path!!).name
-                    val fileDeleted = vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
-                    Log.i(TAG, "file deleted: $fileDeleted")
+                    // If previous rental had an image, replace previous image.
+                    if(vm.currentRental!!.imageUri != null) {
+                        // Delete previous file
+                        val fileName = File(vm.currentRental!!.imageUri!!.toUri().path!!).name
+                        val fileDeleted =
+                            vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
+                        Log.i(TAG, "file deleted: $fileDeleted")
+                    }
+                    // Set the Uri
                     vm.currentRental!!.imageUri =
                         if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
                         else null
@@ -112,6 +117,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d(TAG, "onDestroyView: called")
         // Delete a file when an item to be inserted is canceled
         if (!vm.itemSentToSave && vm.latestTmpUri != null &&
             addOrUpdate == BottomSheetAction.ADD.toString()

@@ -79,7 +79,8 @@ class RentalsAdapter(
             return oldItem.id == newItem.id
         }
         override fun areContentsTheSame(oldItem: RentedItem, newItem: RentedItem): Boolean {
-            return oldItem == newItem
+            val areTheSame = oldItem == newItem
+            return false
         }
     }
 }
