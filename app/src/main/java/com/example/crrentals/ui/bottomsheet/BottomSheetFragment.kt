@@ -49,10 +49,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                         if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
                         else null
                     Log.i(TAG, "new uri: ${vm.currentRental!!.imageUri}")
-                    updateRentalObject(vm.currentRental!!)
+//                    updateRentalObject(vm.currentRental!!)
                 }
             } else {
-                // Did not accept an image
+                // If it did not accept an image, remove the file created
                 if (vm.latestTmpUri != null) {
                     val fileName = File(vm.latestTmpUri!!.path!!).name
                     val fileDeleted =

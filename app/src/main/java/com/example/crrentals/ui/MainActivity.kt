@@ -22,7 +22,7 @@ import com.example.crrentals.util.ItemMoveCallback
 import kotlin.math.log
 
 /**
- * todo: BUG: when an item is updated, the recyclerview is not refreshed
+ * todo: BUG: it looks like the recyclerview is updated as soon as a picture is taken, it should be when the btn is clicked
  *
  * // HARD //
  * todo: set up concurrency
@@ -35,7 +35,8 @@ import kotlin.math.log
 /** todo: Bugs
  * When i go add a new item, take a picture, click the img to take another picture but don't take that picture, then add the item, the item has no picture (it should have the picture that was taken bc it's still being displayed on the sheet, as it should)
  * When i went to update a rental, the add rental button was show and when clicked it crashed (have not been able to recreate this bug)
- * I fixed it in a hacky way. Now always return false in areContentsTheSame() in the adapter, bc for some reason the first time an item is updated, the oldItem updates as well right before the function checks if both are the same.
+ * when an item is updated, the recyclerview is not refreshed
+ *      - I fixed it in a hacky way. Now always return false in areContentsTheSame() in the adapter, bc for some reason the first time an item is updated, the oldItem updates as well right before the function checks if both are the same.
  */
 
 /** todo: future:
