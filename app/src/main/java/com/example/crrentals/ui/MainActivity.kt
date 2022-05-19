@@ -22,12 +22,6 @@ import com.example.crrentals.util.ItemMoveCallback
 import kotlin.math.log
 
 /**
- * todo: BUG: it looks like the recyclerview is updated as soon as a picture is taken, it should be when the btn is clicked
- *
- * // HARD //
- * todo: set up concurrency
- * // HARD //
- *
  * todo: put the logic in the VMs, take it off the views
  * todo: set which properties can be null (talk to bruno about this) (app now crashers bc of this sometimes)
  */
@@ -41,11 +35,12 @@ import kotlin.math.log
 
 /** todo: future:
  * Compress images as jpg
- * maybe add a due date to the rental entity
- * consider also getting hr, minutes, and seconds on the time property on the entity
+ * Maybe add a due date to the rental entity
+ * Consider also getting hr, minutes, and seconds on the time property on the entity
  * functionality to duplicate an item
  * User can change position of items in recyclerView
  * Maybe start to take a picture right when the user click the add rental btn
+ * Set up concurrency for file queries
  */
 
 /**

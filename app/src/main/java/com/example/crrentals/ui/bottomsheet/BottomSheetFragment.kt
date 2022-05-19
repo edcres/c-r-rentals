@@ -106,7 +106,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             addImgBtn.setOnClickListener {
                 takePicture()
             }
-            duplicateItemBtn.setOnClickListener {}
+//            duplicateItemBtn.setOnClickListener {}
             sheetRentalImage.setOnClickListener {
                 if(vm.currentRental == null) takePicture()
                 else if(vm.currentRental!!.imageUri == null) takePicture()

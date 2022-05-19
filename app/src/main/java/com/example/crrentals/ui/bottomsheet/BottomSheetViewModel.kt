@@ -34,7 +34,6 @@ class BottomSheetViewModel : ViewModel() {
         Log.d(TAG, "sheetVM clear called")
     }
 
-
     fun setRentalItem(passedRental: RentedItem?) {
         currentRental = passedRental
     }
@@ -74,6 +73,7 @@ class BottomSheetViewModel : ViewModel() {
 
     // FILE QUERIES //
     fun makeTmpFile(cacheDir: File, appContext: Context): Uri {
+        // todo: concurrency here
         val tmpFile = File.createTempFile("tmp_image_file", JPG_SUFFIX, cacheDir).apply {
             createNewFile()
             deleteOnExit()
@@ -83,6 +83,7 @@ class BottomSheetViewModel : ViewModel() {
         return latestTmpUri!!
     }
     fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
+        // todo: concurrency here
         if (files.isNullOrEmpty()) {
             Log.e(TAG, "deleteFile: Error loading files.")
             return false
