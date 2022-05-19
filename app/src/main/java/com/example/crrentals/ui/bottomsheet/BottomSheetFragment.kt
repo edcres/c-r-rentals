@@ -88,6 +88,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 updateRentalObject(vm.currentRental!!)
                 dialog.dismiss()
             }
+            cancelBtn.setOnClickListener {
+                dialog.dismiss()
+            }
             deleteItemBtn.setOnClickListener {
                 if (vm.currentRental != null)
                     vm.deleteRental(requireActivity().cacheDir.listFiles(), vm.currentRental!!)
@@ -107,7 +110,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "onDestroyView: ")
+        if(!vm.itemSentToSave && vm.latestTmpUri != null) {
+            // Delete the img file if the item is not saved.
+            val fileName = File(vm.latestTmpUri!!.path!!).name
+            vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
+        }
         binding = null
     }
 

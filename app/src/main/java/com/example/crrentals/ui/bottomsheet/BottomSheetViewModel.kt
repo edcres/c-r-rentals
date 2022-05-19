@@ -27,6 +27,7 @@ class BottomSheetViewModel : ViewModel() {
     lateinit var addOrUpdate: String
     var currentRental: RentedItem? = null
     var latestTmpUri: Uri? = null
+    var itemSentToSave = false
 
     fun setRentalItem(passedRental: RentedItem?) {
         currentRental = passedRental
@@ -71,7 +72,8 @@ class BottomSheetViewModel : ViewModel() {
             createNewFile()
             deleteOnExit()
         }
-        latestTmpUri = FileProvider.getUriForFile(appContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
+        latestTmpUri = FileProvider
+            .getUriForFile(appContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
         return latestTmpUri!!
     }
     fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
