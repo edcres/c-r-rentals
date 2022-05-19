@@ -27,16 +27,16 @@ class RentItemsViewModel : ViewModel() {
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
 
-    private var _itemToEdit = MutableLiveData<RentedItem>()
-    val itemToEdit: LiveData<RentedItem> get() = _itemToEdit
+    private var _itemToEdit = MutableLiveData<RentedItem?>()
+    val itemToEdit: LiveData<RentedItem?> get() = _itemToEdit
 
     private val _rentedItems = MutableLiveData<MutableList<RentedItem>>()
     val rentedItems: LiveData<MutableList<RentedItem>> get() = _rentedItems
 
     // HELPERS //
-//    fun nullItemToEdit() {
-//        _itemToEdit.postValue(null)
-//    }
+    fun nullItemToEdit() {
+        _itemToEdit.postValue(null)
+    }
     fun deleteRentalAt(files: Array<File>?, position: Int) {
         if (rentedItems.value != null) {
             deleteRental(files, rentedItems.value!![position])
@@ -76,7 +76,6 @@ class RentItemsViewModel : ViewModel() {
 
     // FILE QUERIES //
     private fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
-        Log.d(TAG, "deleteFileWithName: main")
         if (files.isNullOrEmpty()) {
             Log.e(TAG, "deleteFile: Error loading files.")
             return false

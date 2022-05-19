@@ -64,7 +64,6 @@ class BottomSheetViewModel : ViewModel() {
         repo.deleteRental(rentedItem)
     }
     fun insertRental(rentedItem: RentedItem): MutableLiveData<Long> {
-        Log.d(TAG, "insertRental: item inserted\n${rentedItem.imageUri}")
         val itemId = MutableLiveData<Long>()
         CoroutineScope(Dispatchers.IO).launch {
             itemId.postValue(repo.insertRental(rentedItem))
@@ -84,7 +83,6 @@ class BottomSheetViewModel : ViewModel() {
         return latestTmpUri!!
     }
     fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
-        Log.d(TAG, "deleteFileWithName: sheet")
         if (files.isNullOrEmpty()) {
             Log.e(TAG, "deleteFile: Error loading files.")
             return false

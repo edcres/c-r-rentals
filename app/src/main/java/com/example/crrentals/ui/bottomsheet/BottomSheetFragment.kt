@@ -39,11 +39,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     // Replace previous image
                     val fileName = File(vm.currentRental!!.imageUri!!.toUri().path!!).name
                     val fileDeleted = vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
-                    Log.i(TAG, "replaced deleted: $fileDeleted")
+                    Log.i(TAG, "file deleted: $fileDeleted")
                     vm.currentRental!!.imageUri =
                         if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
                         else null
-                    Log.d(TAG, "new uri: ${vm.currentRental!!.imageUri}")
+                    Log.i(TAG, "new uri: ${vm.currentRental!!.imageUri}")
                     updateRentalObject(vm.currentRental!!)
                 }
             } else {
@@ -52,8 +52,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     val fileName = File(vm.latestTmpUri!!.path!!).name
                     val fileDeleted =
                         vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
-                    Log.d(TAG, "deleted: $fileDeleted")
-                } else Log.d(TAG, "latestTmpUri: is null")
+                    Log.i(TAG, "deleted: $fileDeleted")
+                }
             }
         }
 
@@ -112,7 +112,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "sheetDestroy called")
         // Delete a file when an item to be inserted is canceled
         if (!vm.itemSentToSave && vm.latestTmpUri != null &&
             addOrUpdate == BottomSheetAction.ADD.toString()
@@ -157,8 +156,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
                     else -> RentedItem.ItemType.CHAIR
                 },
-
-                // todo: the bug is here
                 imageUri = if (vm.latestTmpUri != null) {
                     Log.d(TAG, "latest temp uri: ${vm.latestTmpUri}")
                     vm.latestTmpUri.toString()
@@ -171,7 +168,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 number = numEt.text.toString().toInt(),
                 paid = paidSwitch.isChecked
             )
-            Log.d(TAG, "itemToInsert: uri: \n${itemToInsert.imageUri}")
             vm.insertRental(itemToInsert)
         }
     }
@@ -187,7 +183,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             rentalToUpdate.lock = lockNumEt.text.toString().toInt()
             rentalToUpdate.dailyRentals = dailyRentalsSwitch.isChecked
             rentalToUpdate.paid = paidSwitch.isChecked
-            Log.d(TAG, "updateRentalObject: ${rentalToUpdate.imageUri}")
             vm.updateRental(rentalToUpdate)
         }
     }
@@ -200,7 +195,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
     private fun setImgOnView(uri: Any) {
-        Log.d(TAG, "setImgOnView: \n$uri")
         binding?.apply {
             Glide.with(sheetRentalImage.context)
                 .load(uri)
@@ -218,7 +212,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             requireActivity().cacheDir,
             requireActivity().applicationContext
         )
-        Log.d(TAG, "takenPicture: uriCreated: \n$uriCreated")
+        Log.i(TAG, "takenPicture: uriCreated: \n$uriCreated")
         takeImageResult.launch(
             uriCreated
         )

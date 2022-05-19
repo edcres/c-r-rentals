@@ -40,7 +40,6 @@ class RentalsAdapter(
         fun bind(rentedItem: RentedItem) {
             binding.apply {
                 if (rentedItem.imageUri != null) {
-                    Log.d(TAG, "uri: \n${rentedItem.imageUri}")
                     Glide.with(rentalImage.context)
                         .load(rentedItem.imageUri!!.toUri())
                         .apply(
