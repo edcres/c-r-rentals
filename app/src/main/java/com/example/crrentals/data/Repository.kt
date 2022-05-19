@@ -13,7 +13,6 @@ class Repository(private val db: RentsRoomDatabase) {
 
     @WorkerThread
     suspend fun insertRental(rentedItem: RentedItem): Long {
-        Log.d(TAG, "insertRental: item inserted")
         return db.rentedItemsDao().insert(rentedItem)
     }
 

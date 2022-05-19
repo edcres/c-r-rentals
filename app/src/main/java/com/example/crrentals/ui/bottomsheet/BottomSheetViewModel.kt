@@ -29,6 +29,12 @@ class BottomSheetViewModel : ViewModel() {
     var latestTmpUri: Uri? = null
     var itemSentToSave = false
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d(TAG, "sheetVM clear called")
+    }
+
+
     fun setRentalItem(passedRental: RentedItem?) {
         currentRental = passedRental
     }
@@ -58,6 +64,7 @@ class BottomSheetViewModel : ViewModel() {
         repo.deleteRental(rentedItem)
     }
     fun insertRental(rentedItem: RentedItem): MutableLiveData<Long> {
+        Log.d(TAG, "insertRental: item inserted\n${rentedItem.imageUri}")
         val itemId = MutableLiveData<Long>()
         CoroutineScope(Dispatchers.IO).launch {
             itemId.postValue(repo.insertRental(rentedItem))

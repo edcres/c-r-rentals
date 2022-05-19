@@ -21,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.io.File
 import kotlin.math.log
 
-private const val TAG = "ModalBottomSheet_TAG"
+private const val TAG = "ModalBottomSheet__TAG"
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -112,18 +112,17 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "onDestroyView: called")
-        Log.d(TAG, "111 ${!vm.itemSentToSave}")
-        Log.d(TAG, "222 ${vm.latestTmpUri != null}")
-        Log.d(TAG, "333 ${addOrUpdate == BottomSheetAction.ADD.toString()}")
+        Log.d(TAG, "sheetDestroy called")
+        // Delete a file when an item to be inserted is canceled
         if (!vm.itemSentToSave && vm.latestTmpUri != null &&
             addOrUpdate == BottomSheetAction.ADD.toString()
         ) {
-            Log.d(TAG, "onDestroyView: delete file called")
             // Delete the img file if the item is not saved.
             val fileName = File(vm.latestTmpUri!!.path!!).name
             Log.d(TAG, "file deleted ${vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())}")
         }
+        vm.currentRental = null
+        vm.latestTmpUri = null
         vm.itemSentToSave = false
         binding = null
     }
@@ -152,12 +151,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
     private fun insertRentalObject() {
         binding?.apply {
-            vm.insertRental(RentedItem(
+            val itemToInsert = RentedItem(
                 itemType = when (chooseTypeRadio.checkedRadioButtonId) {
                     bikeBtn.id -> RentedItem.ItemType.BIKE
                     paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
                     else -> RentedItem.ItemType.CHAIR
                 },
+
+                // todo: the bug is here
                 imageUri = if (vm.latestTmpUri != null) {
                     Log.d(TAG, "latest temp uri: ${vm.latestTmpUri}")
                     vm.latestTmpUri.toString()
@@ -169,7 +170,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 lock = lockNumEt.text.toString().toInt(),
                 number = numEt.text.toString().toInt(),
                 paid = paidSwitch.isChecked
-            ))
+            )
+            Log.d(TAG, "itemToInsert: uri: \n${itemToInsert.imageUri}")
+            vm.insertRental(itemToInsert)
         }
     }
     private fun updateRentalObject(rentalToUpdate: RentedItem) {
