@@ -1,12 +1,10 @@
 package com.example.crrentals.ui
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -20,20 +18,16 @@ private const val TAG = "RentAdapter__TAG"
 
 class RentalsAdapter(
     private val vm: RentItemsViewModel,
-    private val context: Context,
-    private val viewLifecycleOwner: LifecycleOwner
 ) : ListAdapter<RentedItem, RentalsAdapter.RentalsViewHolder>(RentalsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        RentalsViewHolder.from(vm, context, viewLifecycleOwner, parent)
+        RentalsViewHolder.from(vm, parent)
 
     override fun onBindViewHolder(rentalsViewHolder: RentalsViewHolder, position: Int) =
         rentalsViewHolder.bind(getItem(position))
 
     class RentalsViewHolder private constructor(
         private val vm: RentItemsViewModel,
-        private val context: Context,
-        private val viewLifecycleOwner: LifecycleOwner,
         private val binding: RentalListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -63,13 +57,11 @@ class RentalsAdapter(
         companion object {
             fun from(
                 vm: RentItemsViewModel,
-                context: Context,
-                viewLifecycleOwner: LifecycleOwner,
                 parent: ViewGroup
             ): RentalsViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RentalListItemBinding.inflate(layoutInflater, parent, false)
-                return RentalsViewHolder(vm, context, viewLifecycleOwner, binding)
+                return RentalsViewHolder(vm, binding)
             }
         }
     }

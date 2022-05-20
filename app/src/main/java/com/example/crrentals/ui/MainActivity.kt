@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         vm = ViewModelProvider(this)[RentItemsViewModel::class.java]
-        rentalsAdapter = RentalsAdapter(vm, this, this)
+        rentalsAdapter = RentalsAdapter(vm)
         binding?.apply {
             lifecycleOwner = this@MainActivity
             rentalsRecycler.adapter = rentalsAdapter
