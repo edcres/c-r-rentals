@@ -115,6 +115,7 @@ class MainActivity : AppCompatActivity() {
                 target: RecyclerView.ViewHolder
             ): Boolean {
                 // Fill this when integrating a feature to change item position.
+
                 return false
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
