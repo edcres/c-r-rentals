@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "rentals observed")
             Log.d(TAG, "rental room#: ${rentals[0].roomNumber}")
             rentalsAdapter.submitList(rentals.toList())
+            binding!!.rentalsRecycler.startLayoutAnimation()
         }
         vm.itemToEdit.observe(this) { itemToEdit ->
             if(itemToEdit != null) {
