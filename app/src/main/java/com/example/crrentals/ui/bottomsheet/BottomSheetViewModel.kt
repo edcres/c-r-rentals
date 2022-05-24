@@ -5,16 +5,14 @@ import android.net.Uri
 import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.crrentals.BuildConfig
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.data.Repository
 import com.example.crrentals.data.room.RentsRoomDatabase
 import com.example.crrentals.util.JPG_SUFFIX
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
@@ -53,21 +51,21 @@ class BottomSheetViewModel : ViewModel() {
     // HELPERS //
 
     // DATABASE QUERIES //
-    fun updateRental(rentedItem: RentedItem) = CoroutineScope(Dispatchers.IO).launch {
+    fun updateRental(rentedItem: RentedItem) = viewModelScope.launch {
         repo.updateRental(rentedItem)
     }
 
     fun deleteRental(filesList: Array<File>?, rentedItem: RentedItem) =
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             if (rentedItem.imageUri != null) {
                 val fileName = File(rentedItem.imageUri!!.toUri().path!!).name
                 Log.i(TAG, "file deleted: ${deleteFileWithName(fileName, filesList)}")
             }
             repo.deleteRental(rentedItem)
         }
-    fun insertRental(rentedItem: RentedItem): LiveData<Long> {
+    fun insertRental(rentedItem: RentedItem): MutableLiveData<Long> {
         val itemId = MutableLiveData<Long>()
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             itemId.postValue(repo.insertRental(rentedItem))
         }
         return itemId
