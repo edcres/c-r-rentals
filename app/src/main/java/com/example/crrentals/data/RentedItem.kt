@@ -9,7 +9,7 @@ data class RentedItem (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Long = 0,
-    @ColumnInfo(name = "itemType")
+    @ColumnInfo(name = "item_type")
     var itemType: ItemType,
     @ColumnInfo(name = "image_uri")
     var imageUri: String?,  // Turn this String into a Uri type
@@ -24,7 +24,9 @@ data class RentedItem (
     @ColumnInfo(name = "number")
     var number: Int,
     @ColumnInfo(name = "paid")
-    var paid: Boolean
+    var paid: Boolean,
+    @ColumnInfo(name = "list_position")
+    var listPosition: Int   // starts at 0
 ) {
     enum class ItemType(val type: String) {
         BIKE("bike"),

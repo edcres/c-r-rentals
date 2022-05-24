@@ -19,6 +19,7 @@ import com.example.crrentals.databinding.ActivityMainBinding
 import com.example.crrentals.ui.bottomsheet.BottomSheetFragment
 import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
+import java.util.*
 import kotlin.math.log
 
 /**
@@ -55,8 +56,11 @@ class MainActivity : AppCompatActivity() {
             rentalsRecycler.layoutManager = LinearLayoutManager(this@MainActivity)
 
             addRentalFab.setOnClickListener {
-                bottomSheetFragment =
-                    BottomSheetFragment.newInstance(BottomSheetAction.ADD.toString(), null)
+                bottomSheetFragment = BottomSheetFragment.newInstance(
+                    BottomSheetAction.ADD.toString(),
+                    null,
+                    vm.rentedItems.value!!.size
+                )
                 bottomSheetFragment?.show(supportFragmentManager, bottomSheetFragment?.tag)
             }
         }
@@ -80,16 +84,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
-            Log.d(TAG, "rentals observed")
-            Log.d(TAG, "rental room#: ${rentals[0].roomNumber}")
             rentalsAdapter.submitList(rentals.toList())
             binding!!.rentalsRecycler.startLayoutAnimation()
         }
         vm.itemToEdit.observe(this) { itemToEdit ->
             if(itemToEdit != null) {
                 Log.d(TAG, "itemToEdit observed \n$itemToEdit")
-                bottomSheetFragment =
-                    BottomSheetFragment.newInstance(BottomSheetAction.UPDATE.toString(), itemToEdit)
+                bottomSheetFragment = BottomSheetFragment.newInstance(
+                    BottomSheetAction.UPDATE.toString(),
+                    itemToEdit,
+                    vm.rentedItems.value!!.size
+                )
                 bottomSheetFragment?.show(supportFragmentManager, bottomSheetFragment?.tag)
                 vm.nullItemToEdit()
             }
@@ -115,7 +120,15 @@ class MainActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                // Fill this when integrating a feature to change item position.
+                // todo: change position
+
+                val fromPosition = viewHolder.adapterPosition
+                val toPosition = target.adapterPosition
+
+                Collections.swap(vm.rentedItems.value!!, fromPosition, toPosition)
+
+                rentalsAdapter.notifyItemMoved(fromPosition, toPosition)
+//                vm.updateRental(vm)
 
                 return false
             }

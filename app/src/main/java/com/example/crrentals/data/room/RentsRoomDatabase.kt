@@ -6,7 +6,7 @@ import androidx.room.Room
 import com.example.crrentals.data.RentedItem
 import androidx.room.RoomDatabase
 
-@Database(entities = [RentedItem::class], version = 2, exportSchema = false)
+@Database(entities = [RentedItem::class], version = 3, exportSchema = false)
 abstract class RentsRoomDatabase: RoomDatabase() {
 
     abstract fun rentedItemsDao(): RentedItemsDao

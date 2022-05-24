@@ -58,7 +58,9 @@ class RentItemsViewModel : ViewModel() {
             }
         }
     }
-
+    fun updateRental(rentedItem: RentedItem) = viewModelScope.launch {
+        repo.updateRental(rentedItem)
+    }
     private fun deleteRental(filesList: Array<File>?, rentedItem: RentedItem) =
         viewModelScope.launch {
             if (rentedItem.imageUri != null) {

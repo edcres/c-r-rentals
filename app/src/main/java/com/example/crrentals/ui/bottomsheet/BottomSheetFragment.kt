@@ -28,8 +28,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private var binding: FragmentBottomSheetBinding? = null
     private lateinit var dialog: BottomSheetDialog
     private lateinit var vm: BottomSheetViewModel
+
     private var addOrUpdate: String? = null
     private var currentRental: RentedItem? = null
+    private var listSize: Int? = null
 
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
@@ -82,6 +84,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         vm.setUpDatabase(requireActivity().applicationContext)
         vm.setRentalItem(currentRental)
         if (addOrUpdate != null) vm.addOrUpdate = addOrUpdate!!
+        vm.listSize = listSize
+
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
             if (vm.currentRental != null && vm.addOrUpdate == BottomSheetAction.UPDATE.toString())
@@ -172,7 +176,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 time = vm.getDateString(),
                 lock = lockNumEt.text.toString().toInt(),
                 number = numEt.text.toString().toInt(),
-                paid = paidSwitch.isChecked
+                paid = paidSwitch.isChecked,
+                listPosition = vm.listSize ?: 0 // todo: get the size of the list
             )
             vm.insertRental(itemToInsert)
         }
@@ -226,10 +231,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     // HELPERS //
 
     companion object {
-        fun newInstance(addOrUpdatePassed: String, passedRental: RentedItem?) =
+        fun newInstance(addOrUpdatePassed: String, passedRental: RentedItem?, listSizePassed: Int) =
             BottomSheetFragment().apply {
                 addOrUpdate = addOrUpdatePassed
                 currentRental = passedRental
+                listSize = listSizePassed
         }
     }
 }

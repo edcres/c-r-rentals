@@ -23,10 +23,11 @@ class BottomSheetViewModel : ViewModel() {
 
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
-    lateinit var addOrUpdate: String
-    var currentRental: RentedItem? = null
     var latestTmpUri: Uri? = null
     var itemSentToSave = false
+    lateinit var addOrUpdate: String
+    var currentRental: RentedItem? = null
+    var listSize: Int? = null
 
     override fun onCleared() {
         super.onCleared()
