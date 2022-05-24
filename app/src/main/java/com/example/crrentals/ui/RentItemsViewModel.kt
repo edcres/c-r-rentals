@@ -21,6 +21,7 @@ class RentItemsViewModel : ViewModel() {
 
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
+    var appStarting = true
 
     private var _itemToEdit = MutableLiveData<RentedItem?>()
     val itemToEdit: LiveData<RentedItem?> get() = _itemToEdit

@@ -85,7 +85,11 @@ class MainActivity : AppCompatActivity() {
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
             rentalsAdapter.submitList(rentals.toList())
-            binding!!.rentalsRecycler.startLayoutAnimation()
+            if (vm.appStarting) {
+                // Constraints recyclerView update only for the creation of this view.
+                binding!!.rentalsRecycler.startLayoutAnimation()
+                vm.appStarting = false
+            }
         }
         vm.itemToEdit.observe(this) { itemToEdit ->
             if(itemToEdit != null) {
