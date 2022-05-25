@@ -26,7 +26,7 @@ data class RentedItem (
     @ColumnInfo(name = "paid")
     var paid: Boolean,
     @ColumnInfo(name = "list_position")
-    var listPosition: Int   // starts at 0
+    var listPosition: Int   // Starts at 0
 ) {
     enum class ItemType(val type: String) {
         BIKE("bike"),

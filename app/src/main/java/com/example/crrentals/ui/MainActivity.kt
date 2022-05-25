@@ -8,12 +8,10 @@ import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.crrentals.R
 import com.example.crrentals.databinding.ActivityMainBinding
 import com.example.crrentals.ui.bottomsheet.BottomSheetFragment
@@ -124,15 +122,15 @@ class MainActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                // todo: change position
-
                 val fromPosition = viewHolder.adapterPosition
                 val toPosition = target.adapterPosition
-
                 Collections.swap(vm.rentedItems.value!!, fromPosition, toPosition)
 
+                Log.d(TAG, "onMove: called: $fromPosition -> $toPosition")
+                // todo: change position in Room
                 rentalsAdapter.notifyItemMoved(fromPosition, toPosition)
-//                vm.updateRental(vm)
+//                vm.updateRentalPosition(vm)
+                vm.updateRentalsPositions(fromPosition, toPosition)
 
                 return false
             }

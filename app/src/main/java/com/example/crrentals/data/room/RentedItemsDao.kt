@@ -1,6 +1,5 @@
 package com.example.crrentals.data.room
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.crrentals.data.RentedItem
 import kotlinx.coroutines.flow.Flow
@@ -16,6 +15,9 @@ interface RentedItemsDao {
 
     @Update
     suspend fun update(rentedItem: RentedItem)
+
+    @Update
+    suspend fun update(rentedItems: List<RentedItem>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(rentedItem: RentedItem): Long

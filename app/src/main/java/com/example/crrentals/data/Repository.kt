@@ -22,6 +22,11 @@ class Repository(private val db: RentsRoomDatabase) {
     }
 
     @WorkerThread
+    suspend fun updateRentals(rentedItems: List<RentedItem>) {
+        db.rentedItemsDao().update(rentedItems)
+    }
+
+    @WorkerThread
     suspend fun deleteRental(rentedItem: RentedItem) {
         db.rentedItemsDao().delete(rentedItem)
     }
