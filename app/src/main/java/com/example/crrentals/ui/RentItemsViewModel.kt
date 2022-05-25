@@ -41,63 +41,16 @@ class RentItemsViewModel : ViewModel() {
     fun setItemToEdit(rentedItem: RentedItem) {
         _itemToEdit.postValue(rentedItem)
     }
-    fun updateRentalsPositions(fromPosition: Int, toPosition: Int) {
+    fun updateRentalsPositions() {
         // maybe do this in a background thread
         // todo:
-        val rentalsList = _rentedItems.value!!.toList()
-//        var itemToMove: RentedItem? = null
-
-
-//        if(fromPosition < toPosition) {
-//            // moving down
-//
-//        } else if(fromPosition > toPosition) {
-//            // moving up
-//        }
-        Log.d(TAG, "rentalsList: \n$rentalsList")
-        rentalsList[toPosition].listPosition = toPosition
-        rentalsList[fromPosition].listPosition = fromPosition
-
-        Log.d(TAG, "rentalsList: \n$rentalsList")
-
+        val rentalsList = _rentedItems.value!!
+        Log.d(TAG, "updateRentalsPositions: \n$rentalsList")
+        for(i in rentalsList.indices) {
+            rentalsList[i].listPosition = i
+        }
+        Log.d(TAG, "updateRentalsPositions: \n$rentalsList")
         updateRentals(rentalsList)
-
-
-
-//        if(fromPosition < toPosition) {
-//            // moving down
-//            for(i in fromPosition until toPosition) {
-//                rentalsList[i].listPosition = i
-//            }
-//        } else if(fromPosition > toPosition) {
-//            // moving up
-//            for(i in toPosition until fromPosition) {
-//
-//            }
-//        }
-
-
-
-//        for(i in fromPosition until rentalsList.size) {
-//            if (i == fromPosition) {
-//                itemToMove = rentalsList[i]
-//            }
-//            if(itemToMove != null) {
-//                // if moving down
-//                rentalsList[i].listPosition = i
-//            }
-////            rentalsList[i].listPosition = i
-//        }
-
-
-
-
-
-
-
-
-
-        // todo: update the items in the database
     }
     // HELPERS //
 

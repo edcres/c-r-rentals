@@ -83,8 +83,11 @@ class MainActivity : AppCompatActivity() {
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
             rentalsAdapter.submitList(rentals.toList())
+
+            Log.d(TAG, "setObservers: \n${rentals}")
+
             if (vm.appStarting) {
-                // Constraints recyclerView update only for the creation of this view.
+                // Constraints recyclerView update only for the creation of this activity.
                 binding!!.rentalsRecycler.startLayoutAnimation()
                 vm.appStarting = false
             }
@@ -117,6 +120,15 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.getColor(this, R.color.delete_color),
             R.drawable.ic_delete_24
         ) {
+
+            override fun clearView(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ) {
+                super.clearView(recyclerView, viewHolder)
+                vm.updateRentalsPositions()
+            }
+
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -130,7 +142,7 @@ class MainActivity : AppCompatActivity() {
                 // todo: change position in Room
                 rentalsAdapter.notifyItemMoved(fromPosition, toPosition)
 //                vm.updateRentalPosition(vm)
-                vm.updateRentalsPositions(fromPosition, toPosition)
+//                vm.updateRentalsPositions(fromPosition, toPosition)
 
                 return false
             }
