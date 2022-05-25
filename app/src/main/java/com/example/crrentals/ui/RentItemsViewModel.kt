@@ -22,6 +22,7 @@ class RentItemsViewModel : ViewModel() {
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
     var appStarting = true
+    var positionJustUpdated = false
 
     private var _itemToEdit = MutableLiveData<RentedItem?>()
     val itemToEdit: LiveData<RentedItem?> get() = _itemToEdit
@@ -35,10 +36,8 @@ class RentItemsViewModel : ViewModel() {
         // Because sometimes it doesn't update the view the first time an item is updated.
         if(_rentedItems.value!!.size > 0) {
             _rentedItems.value!![0].time = "${_rentedItems.value!![0].time} "
-            //todo: update db
             updateRental(_rentedItems.value!![0])
             _rentedItems.value!![0].time = _rentedItems.value!![0].time.dropLast(1)
-            //todo: update db
             updateRental(_rentedItems.value!![0])
         }
     }
@@ -56,12 +55,19 @@ class RentItemsViewModel : ViewModel() {
     fun updateRentalsPositions() {
         // maybe do this in a background thread
         // todo:
-        val rentalsList = _rentedItems.value!!
-        Log.d(TAG, "updateRentalsPositions: \n$rentalsList")
+        val rentalsList = _rentedItems.value!!.toList()
+
+        var str1 = ""
+        for(i in rentalsList.indices) { str1 += "\n${rentalsList[i].id}-${rentalsList[i].roomNumber}-${rentalsList[i].listPosition}" }
+        Log.d(TAG, "updateRentalsPositions1: $str1")
         for(i in rentalsList.indices) {
             rentalsList[i].listPosition = i
         }
-        Log.d(TAG, "updateRentalsPositions: \n$rentalsList")
+
+        var str2 = ""
+        for(i in rentalsList.indices) { str2 += "\n${rentalsList[i].id}-${rentalsList[i].roomNumber}-${rentalsList[i].listPosition}" }
+        Log.d(TAG, "updateRentalsPositions2: $str2")
+        positionJustUpdated = true
         updateRentals(rentalsList)
     }
     // HELPERS //

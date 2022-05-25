@@ -82,17 +82,26 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
-            rentalsAdapter.submitList(rentals.toList())
 
-            Log.d(TAG, "setObservers: \n${rentals}")
+//            Log.d(TAG, "updated ${vm.positionJustUpdated}")
+//            if(vm.positionJustUpdated) {
+//                vm.positionJustUpdated = false
+//            } else {
+//                Log.d(TAG, "list submitted")
+                rentalsAdapter.submitList(rentals.toList())
+            rentalsAdapter.notifyDataSetChanged()
+//            }
+
+//            var str1 = ""
+//            for(i in rentals.indices) { str1 += "\n${rentals[i].id}-${rentals[i].roomNumber}-${rentals[i].listPosition}" }
+//            Log.d(TAG, "rentals observed: ___________________$str1")
 
             if (vm.appStarting) {
                 // Constraints recyclerView update only for the creation of this activity.
                 binding!!.rentalsRecycler.startLayoutAnimation()
                 vm.appStarting = false
-
-                // This is just to cover a bug
-                vm.refreshRecycler()
+                // This is just to cover a bug updating the recycler item
+//                vm.refreshRecycler()
             }
         }
         vm.itemToEdit.observe(this) { itemToEdit ->
@@ -129,7 +138,8 @@ class MainActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder
             ) {
                 super.clearView(recyclerView, viewHolder)
-                vm.updateRentalsPositions()
+//                vm.updateRentalsPositions()
+//                rentalsAdapter.notifyDataSetChanged()
             }
 
             override fun onMove(
