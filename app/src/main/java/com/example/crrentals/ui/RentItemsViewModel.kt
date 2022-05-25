@@ -30,6 +30,18 @@ class RentItemsViewModel : ViewModel() {
     val rentedItems: LiveData<MutableList<RentedItem>> get() = _rentedItems
 
     // HELPERS //
+    fun refreshRecycler() {
+        // To cover up a bug
+        // Because sometimes it doesn't update the view the first time an item is updated.
+        if(_rentedItems.value!!.size > 0) {
+            _rentedItems.value!![0].time = "${_rentedItems.value!![0].time} "
+            //todo: update db
+            updateRental(_rentedItems.value!![0])
+            _rentedItems.value!![0].time = _rentedItems.value!![0].time.dropLast(1)
+            //todo: update db
+            updateRental(_rentedItems.value!![0])
+        }
+    }
     fun nullItemToEdit() {
         _itemToEdit.postValue(null)
     }
@@ -70,8 +82,11 @@ class RentItemsViewModel : ViewModel() {
             }
         }
     }
-    fun updateRentals(rentedItems: List<RentedItem>) = viewModelScope.launch {
+    private fun updateRentals(rentedItems: List<RentedItem>) = viewModelScope.launch {
         repo.updateRentals(rentedItems)
+    }
+    private fun updateRental(rentedItem: RentedItem) = viewModelScope.launch {
+        repo.updateRental(rentedItem)
     }
     private fun deleteRental(filesList: Array<File>?, rentedItem: RentedItem) =
         viewModelScope.launch {

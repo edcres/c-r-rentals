@@ -90,6 +90,9 @@ class MainActivity : AppCompatActivity() {
                 // Constraints recyclerView update only for the creation of this activity.
                 binding!!.rentalsRecycler.startLayoutAnimation()
                 vm.appStarting = false
+
+                // This is just to cover a bug
+                vm.refreshRecycler()
             }
         }
         vm.itemToEdit.observe(this) { itemToEdit ->

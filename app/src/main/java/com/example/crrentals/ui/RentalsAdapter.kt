@@ -1,6 +1,5 @@
 package com.example.crrentals.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,8 +70,7 @@ class RentalsAdapter(
             return oldItem.id == newItem.id
         }
         override fun areContentsTheSame(oldItem: RentedItem, newItem: RentedItem): Boolean {
-            val areTheSame = oldItem == newItem
-            return false
+            return oldItem == newItem
         }
     }
 }
