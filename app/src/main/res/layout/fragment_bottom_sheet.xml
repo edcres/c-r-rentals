@@ -116,11 +116,11 @@
 
                     <ImageView
                         android:id="@+id/sheet_rental_image"
-                        android:layout_width="90dp"
-                        android:layout_height="110dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:scaleType="fitEnd"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="fitCenter"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_placeholder_image_24" />
@@ -128,15 +128,17 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/room_num_et_box"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginBottom="8dp"
+                        android:hint="@string/room_num_hint"
                         app:boxStrokeColor="@color/secondary"
                         app:hintTextColor="@color/secondary"
-                        android:hint="@string/room_num_hint"
                         app:layout_constraintBottom_toTopOf="@+id/paid_switch"
-                        app:layout_constraintStart_toEndOf="@+id/sheet_rental_image">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/sheet_rental_image"
+                        app:layout_constraintTop_toTopOf="@+id/sheet_rental_image">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/room_num_et"
@@ -150,24 +152,25 @@
                         android:id="@+id/paid_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:checked="false"
-                        app:trackTint="@color/secondary"
-                        app:thumbTint="@color/secondary_dark"
                         android:text="@string/paid_label"
-                        app:layout_constraintBottom_toBottomOf="@+id/sheet_rental_image"
-                        app:layout_constraintStart_toEndOf="@id/sheet_rental_image" />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sheet_rental_image"
+                        app:thumbTint="@color/secondary_dark"
+                        app:trackTint="@color/secondary" />
 
                     <RadioGroup
                         android:id="@+id/choose_type_radio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
                         android:gravity="start"
                         android:orientation="horizontal"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/sheet_rental_image">
+                        app:layout_constraintTop_toBottomOf="@+id/paid_switch">
 
                         <RadioButton
                             android:id="@+id/bike_btn"
