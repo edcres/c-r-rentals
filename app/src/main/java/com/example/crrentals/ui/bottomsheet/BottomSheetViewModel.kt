@@ -32,7 +32,7 @@ class BottomSheetViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        Log.d(TAG, "sheetVM clear called")
+        Log.i(TAG, "sheetVM clear called")
     }
 
     fun setUpDatabase(context: Context) {
@@ -41,6 +41,34 @@ class BottomSheetViewModel : ViewModel() {
     }
 
     // HELPERS //
+    fun replacePreviousImgIfExists(filesList: Array<File>) {
+        if (currentRental != null) {
+            // If previous rental had an image, replace previous image.
+            if(currentRental!!.imageUri != null) {
+                // Delete previous file
+                val fileName = File(currentRental!!.imageUri!!.toUri().path!!).name
+                val fileDeleted =
+                    deleteFileWithName(fileName, filesList)
+                Log.i(TAG, "file deleted: $fileDeleted")
+            }
+            // Set the Uri
+            currentRental!!.imageUri =
+                if (latestTmpUri != null) latestTmpUri.toString()
+                else null
+            Log.i(TAG, "new uri: \n${currentRental!!.imageUri}")
+        }
+    }
+    fun deleteFileIfImageIsRejected(filesList: Array<File>) {
+        // If the image was not accepted, remove the file created
+        if (filesList.isNotEmpty()) {
+            if (latestTmpUri != null) {
+                val fileName = File(latestTmpUri!!.path!!).name
+                val fileDeleted =
+                    deleteFileWithName(fileName, filesList)
+                Log.i(TAG, "deleted: $fileDeleted")
+            }
+        }
+    }
     fun deleteFileIfItemIsCanceled(filesList: Array<File>) {
         // Delete a file when an item to be inserted is canceled
         if (filesList.isNotEmpty()) {

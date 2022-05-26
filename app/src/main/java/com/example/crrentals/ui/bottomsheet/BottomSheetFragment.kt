@@ -35,29 +35,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
                 setImgOnView(vm.latestTmpUri!!)
-                if(vm.currentRental != null) {
-                    // If previous rental had an image, replace previous image.
-                    if(vm.currentRental!!.imageUri != null) {
-                        // Delete previous file
-                        val fileName = File(vm.currentRental!!.imageUri!!.toUri().path!!).name
-                        val fileDeleted =
-                            vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
-                        Log.i(TAG, "file deleted: $fileDeleted")
-                    }
-                    // Set the Uri
-                    vm.currentRental!!.imageUri =
-                        if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
-                        else null
-                    Log.i(TAG, "new uri: ${vm.currentRental!!.imageUri}")
-                }
+                vm.replacePreviousImgIfExists(requireActivity().cacheDir.listFiles() ?: arrayOf())
             } else {
-                // If it did not accept an image, remove the file created
-                if (vm.latestTmpUri != null) {
-                    val fileName = File(vm.latestTmpUri!!.path!!).name
-                    val fileDeleted =
-                        vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())
-                    Log.i(TAG, "deleted: $fileDeleted")
-                }
+                vm.deleteFileIfImageIsRejected(requireActivity().cacheDir.listFiles() ?: arrayOf())
             }
         }
 
