@@ -12,6 +12,7 @@ import com.example.crrentals.BuildConfig
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.data.Repository
 import com.example.crrentals.data.room.RentsRoomDatabase
+import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.JPG_SUFFIX
 import kotlinx.coroutines.launch
 import java.io.File
@@ -34,16 +35,27 @@ class BottomSheetViewModel : ViewModel() {
         Log.d(TAG, "sheetVM clear called")
     }
 
-    fun setRentalItem(passedRental: RentedItem?) {
-        currentRental = passedRental
-    }
-
     fun setUpDatabase(context: Context) {
         roomDb = RentsRoomDatabase.getInstance(context)
         repo = Repository(roomDb)
     }
 
     // HELPERS //
+    fun deleteFileIfItemIsCanceled(filesList: Array<File>) {
+        // Delete a file when an item to be inserted is canceled
+        if (filesList.isNotEmpty()) {
+            if (!itemSentToSave && latestTmpUri != null &&
+                addOrUpdate == BottomSheetAction.ADD.toString()
+            ) {
+                // Delete the img file if the item is not saved.
+                val fileName = File(latestTmpUri!!.path!!).name
+                Log.i(TAG, "file deleted: ${deleteFileWithName(fileName, filesList)}")
+            }
+        }
+    }
+    fun setRentalItem(passedRental: RentedItem?) {
+        currentRental = passedRental
+    }
     fun getDateString(): String {
         val calendar = Calendar.getInstance()
         return "${calendar.get(Calendar.MONTH)+1}/" +

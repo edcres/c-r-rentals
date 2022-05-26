@@ -19,7 +19,6 @@ import com.example.crrentals.util.BottomSheetAction
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.io.File
-import kotlin.math.log
 
 private const val TAG = "ModalBottomSheet__TAG"
 
@@ -28,7 +27,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private var binding: FragmentBottomSheetBinding? = null
     private lateinit var dialog: BottomSheetDialog
     private lateinit var vm: BottomSheetViewModel
-
     private var addOrUpdate: String? = null
     private var currentRental: RentedItem? = null
     private var listSize: Int? = null
@@ -51,7 +49,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                         if (vm.latestTmpUri != null) vm.latestTmpUri.toString()
                         else null
                     Log.i(TAG, "new uri: ${vm.currentRental!!.imageUri}")
-//                    updateRentalObject(vm.currentRental!!)
                 }
             } else {
                 // If it did not accept an image, remove the file created
@@ -85,7 +82,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         vm.setRentalItem(currentRental)
         if (addOrUpdate != null) vm.addOrUpdate = addOrUpdate!!
         vm.listSize = listSize
-
         binding!!.apply {
             lifecycleOwner = viewLifecycleOwner
             if (vm.currentRental != null && vm.addOrUpdate == BottomSheetAction.UPDATE.toString())
@@ -121,15 +117,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "onDestroyView: called")
         // Delete a file when an item to be inserted is canceled
-        if (!vm.itemSentToSave && vm.latestTmpUri != null &&
-            addOrUpdate == BottomSheetAction.ADD.toString()
-        ) {
-            // Delete the img file if the item is not saved.
-            val fileName = File(vm.latestTmpUri!!.path!!).name
-            Log.d(TAG, "file deleted ${vm.deleteFileWithName(fileName, requireActivity().cacheDir.listFiles())}")
-        }
+        vm.deleteFileIfItemIsCanceled(requireActivity().cacheDir.listFiles() ?: arrayOf())
         vm.currentRental = null
         vm.latestTmpUri = null
         vm.itemSentToSave = false

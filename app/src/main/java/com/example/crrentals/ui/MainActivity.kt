@@ -18,7 +18,6 @@ import com.example.crrentals.ui.bottomsheet.BottomSheetFragment
 import com.example.crrentals.util.BottomSheetAction
 import com.example.crrentals.util.ItemMoveCallback
 import java.util.*
-import kotlin.math.log
 
 /**
  * App explanation
@@ -52,7 +51,6 @@ class MainActivity : AppCompatActivity() {
             lifecycleOwner = this@MainActivity
             rentalsRecycler.adapter = rentalsAdapter
             rentalsRecycler.layoutManager = LinearLayoutManager(this@MainActivity)
-
             addRentalFab.setOnClickListener {
                 bottomSheetFragment = BottomSheetFragment.newInstance(
                     BottomSheetAction.ADD.toString(),
@@ -73,31 +71,31 @@ class MainActivity : AppCompatActivity() {
         binding = null
     }
 
+    // SETUP //
     private fun setUpDefaultSettings() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
         }
     }
-
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
             if (!vm.positionJustUpdated) {
                 rentalsAdapter.submitList(rentals.toList())
                 rentalsAdapter.notifyDataSetChanged()
             } else {
-                // This is just to cover a bug updating the recycler item
+                // This is just to cover a bug updating the recycler items
                 vm.positionJustUpdated = false
             }
             if (vm.appStarting) {
-                // Constraints recyclerView update only for the creation of this activity.
+                // Constraints recyclerView update only to the creation of this activity.
                 binding!!.rentalsRecycler.startLayoutAnimation()
                 vm.appStarting = false
             }
         }
         vm.itemToEdit.observe(this) { itemToEdit ->
             if(itemToEdit != null) {
-                Log.d(TAG, "itemToEdit observed \n$itemToEdit")
+                Log.i(TAG, "itemToEdit observed \n$itemToEdit")
                 bottomSheetFragment = BottomSheetFragment.newInstance(
                     BottomSheetAction.UPDATE.toString(),
                     itemToEdit,
@@ -108,7 +106,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun setUpItemAnimation() {
         val animController = LayoutAnimationController(
             AnimationUtils
@@ -117,22 +114,18 @@ class MainActivity : AppCompatActivity() {
         animController.order = LayoutAnimationController.ORDER_NORMAL
         binding!!.rentalsRecycler.layoutAnimation = animController
     }
-
     private fun setUpItemEdit() {
         val editItemCallback = object : ItemMoveCallback(
             ContextCompat.getColor(this, R.color.delete_color),
             R.drawable.ic_delete_24
         ) {
-
             override fun clearView(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder
             ) {
                 super.clearView(recyclerView, viewHolder)
                 vm.updateRentalsPositions()
-//                rentalsAdapter.notifyDataSetChanged()
             }
-
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -141,13 +134,7 @@ class MainActivity : AppCompatActivity() {
                 val fromPosition = viewHolder.adapterPosition
                 val toPosition = target.adapterPosition
                 Collections.swap(vm.rentedItems.value!!, fromPosition, toPosition)
-
-                Log.d(TAG, "onMove: called: $fromPosition -> $toPosition")
-                // todo: change position in Room
                 rentalsAdapter.notifyItemMoved(fromPosition, toPosition)
-//                vm.updateRentalPosition(vm)
-//                vm.updateRentalsPositions(fromPosition, toPosition)
-
                 return false
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -157,4 +144,5 @@ class MainActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(editItemCallback)
         itemTouchHelper.attachToRecyclerView(binding!!.rentalsRecycler)
     }
+    // SETUP //
 }

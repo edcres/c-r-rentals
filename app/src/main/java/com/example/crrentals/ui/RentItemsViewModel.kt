@@ -23,24 +23,12 @@ class RentItemsViewModel : ViewModel() {
     private lateinit var repo: Repository
     var appStarting = true
     var positionJustUpdated = false
-
     private var _itemToEdit = MutableLiveData<RentedItem?>()
     val itemToEdit: LiveData<RentedItem?> get() = _itemToEdit
-
     private val _rentedItems = MutableLiveData<MutableList<RentedItem>>()
     val rentedItems: LiveData<MutableList<RentedItem>> get() = _rentedItems
 
     // HELPERS //
-    fun refreshRecycler() {
-        // To cover up a bug
-        // Because sometimes it doesn't update the view the first time an item is updated.
-        if(_rentedItems.value!!.size > 0) {
-            _rentedItems.value!![0].time = "${_rentedItems.value!![0].time} "
-            updateRental(_rentedItems.value!![0])
-            _rentedItems.value!![0].time = _rentedItems.value!![0].time.dropLast(1)
-            updateRental(_rentedItems.value!![0])
-        }
-    }
     fun nullItemToEdit() {
         _itemToEdit.postValue(null)
     }
@@ -53,20 +41,9 @@ class RentItemsViewModel : ViewModel() {
         _itemToEdit.postValue(rentedItem)
     }
     fun updateRentalsPositions() {
-        // maybe do this in a background thread
-        // todo:
+        // Maybe have this in a background thread
         val rentalsList = _rentedItems.value!!.toList()
-
-        var str1 = ""
-        for(i in rentalsList.indices) { str1 += "\n${rentalsList[i].id}-${rentalsList[i].roomNumber}-${rentalsList[i].listPosition}" }
-        Log.d(TAG, "updateRentalsPositions1: $str1")
-        for(i in rentalsList.indices) {
-            rentalsList[i].listPosition = i
-        }
-
-        var str2 = ""
-        for(i in rentalsList.indices) { str2 += "\n${rentalsList[i].id}-${rentalsList[i].roomNumber}-${rentalsList[i].listPosition}" }
-        Log.d(TAG, "updateRentalsPositions2: $str2")
+        for(i in rentalsList.indices) { rentalsList[i].listPosition = i }
         positionJustUpdated = true
         updateRentals(rentalsList)
     }
@@ -91,9 +68,6 @@ class RentItemsViewModel : ViewModel() {
     private fun updateRentals(rentedItems: List<RentedItem>) = viewModelScope.launch {
         repo.updateRentals(rentedItems)
     }
-    private fun updateRental(rentedItem: RentedItem) = viewModelScope.launch {
-        repo.updateRental(rentedItem)
-    }
     private fun deleteRental(filesList: Array<File>?, rentedItem: RentedItem) =
         viewModelScope.launch {
             if (rentedItem.imageUri != null) {
@@ -106,7 +80,7 @@ class RentItemsViewModel : ViewModel() {
 
     // FILE QUERIES //
     private fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
-        // todo: concurrency here
+        // todo: have this in a background thread
         if (files.isNullOrEmpty()) {
             Log.e(TAG, "deleteFile: Error loading files.")
             return false
