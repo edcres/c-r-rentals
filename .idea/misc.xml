@@ -19,6 +19,9 @@
         <entry key="app/src/main/res/drawable/ic_duplicate_24.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/ic_duplicate_sheet_32.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_placeholder_image_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_placeholder_image_48.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_placeholder_image_64.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/sheet_img_shape.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.1784806993272569" />

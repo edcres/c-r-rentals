@@ -18,7 +18,6 @@ import com.example.crrentals.databinding.FragmentBottomSheetBinding
 import com.example.crrentals.util.BottomSheetAction
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import java.io.File
 
 private const val TAG = "ModalBottomSheet__TAG"
 
@@ -30,7 +29,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private var addOrUpdate: String? = null
     private var currentRental: RentedItem? = null
     private var listSize: Int? = null
-
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
@@ -182,7 +180,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     RequestOptions()
                         .transform(RoundedCorners(25))
                         .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.ic_placeholder_image_24)
+                        .error(R.drawable.ic_placeholder_image_144)
                 )
                 .into(sheetRentalImage)
         }
