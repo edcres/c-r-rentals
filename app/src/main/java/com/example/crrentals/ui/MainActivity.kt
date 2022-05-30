@@ -80,13 +80,13 @@ class MainActivity : AppCompatActivity() {
     }
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
-            if (!vm.positionJustUpdated) {
+//            if (!vm.positionJustUpdated) {
                 rentalsAdapter.submitList(rentals)
 //                rentalsAdapter.notifyDataSetChanged()
-            } else {
+//            } else {
                 // This is just to cover a bug updating the recycler items
-                vm.positionJustUpdated = false
-            }
+//                vm.positionJustUpdated = false
+//            }
             if (vm.appStarting) {
                 // Constraints recyclerView update only to the creation of this activity.
                 binding!!.rentalsRecycler.startLayoutAnimation()
