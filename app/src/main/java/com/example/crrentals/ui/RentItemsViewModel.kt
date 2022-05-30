@@ -22,7 +22,7 @@ class RentItemsViewModel : ViewModel() {
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
     var appStarting = true
-    var positionJustUpdated = false
+//    var positionJustUpdated = false
     private var _itemToEdit = MutableLiveData<RentedItem?>()
     val itemToEdit: LiveData<RentedItem?> get() = _itemToEdit
     private val _rentedItems = MutableLiveData<List<RentedItem>>()
@@ -44,7 +44,7 @@ class RentItemsViewModel : ViewModel() {
         // Maybe have this in a background thread
         val rentalsList = _rentedItems.value!!.toList()
         for(i in rentalsList.indices) { rentalsList[i].listPosition = i }
-        positionJustUpdated = true
+//        positionJustUpdated = true
         updateRentals(rentalsList)
     }
     // HELPERS //
