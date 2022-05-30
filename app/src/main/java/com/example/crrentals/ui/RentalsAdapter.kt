@@ -1,5 +1,6 @@
 package com.example.crrentals.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +42,11 @@ class RentalsAdapter(
                                 .error(R.drawable.ic_baseline_broken_image)
                         )
                         .into(rentalImage)
-                } else rentalImage.visibility = View.GONE
+                    Log.d(TAG, "bind: uri:\n${rentedItem.roomNumber}\t${rentedItem.imageUri}")
+                } else {
+                    rentalImage.visibility = View.GONE
+                    Log.d(TAG, "bind: uri:\n${rentedItem.roomNumber}\t${rentedItem.imageUri}")
+                }
                 rentalNameTxt.text = rentedItem.itemType.type.uppercase()
                 roomNumTxt.text = rentedItem.roomNumber.toString()
                 val rentedOnString = "Rented on ${rentedItem.time}"

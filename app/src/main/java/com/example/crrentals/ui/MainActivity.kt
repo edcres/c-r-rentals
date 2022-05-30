@@ -81,8 +81,8 @@ class MainActivity : AppCompatActivity() {
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
             if (!vm.positionJustUpdated) {
-                rentalsAdapter.submitList(rentals.toList())
-                rentalsAdapter.notifyDataSetChanged()
+                rentalsAdapter.submitList(rentals)
+//                rentalsAdapter.notifyDataSetChanged()
             } else {
                 // This is just to cover a bug updating the recycler items
                 vm.positionJustUpdated = false

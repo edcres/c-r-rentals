@@ -25,8 +25,8 @@ class RentItemsViewModel : ViewModel() {
     var positionJustUpdated = false
     private var _itemToEdit = MutableLiveData<RentedItem?>()
     val itemToEdit: LiveData<RentedItem?> get() = _itemToEdit
-    private val _rentedItems = MutableLiveData<MutableList<RentedItem>>()
-    val rentedItems: LiveData<MutableList<RentedItem>> get() = _rentedItems
+    private val _rentedItems = MutableLiveData<List<RentedItem>>()
+    val rentedItems: LiveData<List<RentedItem>> get() = _rentedItems
 
     // HELPERS //
     fun nullItemToEdit() {
@@ -61,7 +61,7 @@ class RentItemsViewModel : ViewModel() {
     private fun collectAllRentItems() {
         viewModelScope.launch {
             repo.allRentedItems.collect {
-                _rentedItems.postValue(it.toMutableList())
+                _rentedItems.postValue(it)
             }
         }
     }
