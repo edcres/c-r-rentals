@@ -16,6 +16,7 @@ import com.example.crrentals.R
 import com.example.crrentals.data.RentedItem
 import com.example.crrentals.databinding.FragmentBottomSheetBinding
 import com.example.crrentals.util.BottomSheetAction
+import com.example.crrentals.util.stringToInt
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -138,11 +139,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                     vm.latestTmpUri.toString()
                 }
                 else null,
-                roomNumber = roomNumEt.text.toString().toInt(),
+                roomNumber = stringToInt(roomNumEt.text.toString()),
                 dailyRentals = dailyRentalsSwitch.isChecked,
                 time = vm.getDateString(),
-                lock = lockNumEt.text.toString().toInt(),
-                number = numEt.text.toString().toInt(),
+                lock = stringToInt(lockNumEt.text.toString()),
+                number = stringToInt(numEt.text.toString()),
                 paid = paidSwitch.isChecked,
                 listPosition = vm.listSize ?: 0 // todo: get the size of the list
             )
