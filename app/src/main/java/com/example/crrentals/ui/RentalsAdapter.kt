@@ -48,7 +48,7 @@ class RentalsAdapter(
                     Log.d(TAG, "bind: uri:\n${rentedItem.roomNumber}\t${rentedItem.imageUri}")
                 }
                 rentalNameTxt.text = rentedItem.itemType.type.uppercase()
-                roomNumTxt.text = rentedItem.roomNumber.toString()
+                roomNumTxt.text = rentedItem.roomNumber?.toString() ?: ""
                 val rentedOnString = "Rented on ${rentedItem.time}"
                 timeStartedTxt.text = rentedOnString
                 rentalItemContainer.setOnClickListener {

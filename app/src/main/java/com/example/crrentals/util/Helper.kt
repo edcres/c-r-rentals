@@ -9,3 +9,5 @@ enum class BottomSheetAction {
 }
 
 fun stringToInt(num: String) = if (num == "") null else num.toInt()
+
+fun displayNum(num: Int?) = num?.toString() ?: ""
