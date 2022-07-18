@@ -62,13 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
         setUpItemAnimation()
         setObservers()
-
-        if (vm.applicationNotStarted) {
-            // Prevents duplicate queries and duplicate database initialization.
-            vm.setUpDatabase(applicationContext)
-            vm.applicationNotStarted = false
-        }
-
+        vm.setUpDatabase(applicationContext)
         setUpItemEdit()
         Log.d(TAG, "onCreate: called")
     }

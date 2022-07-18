@@ -52,9 +52,13 @@ class RentItemsViewModel : ViewModel() {
 
     // SETUP //
     fun setUpDatabase(context: Context) {
-        roomDb = RentsRoomDatabase.getInstance(context)
-        repo = Repository(roomDb)
-        collectAllRentItems()
+        if (applicationNotStarted) {
+            // Prevents duplicate queries and duplicate database initialization.
+            roomDb = RentsRoomDatabase.getInstance(context)
+            repo = Repository(roomDb)
+            collectAllRentItems()
+            applicationNotStarted = false
+        }
     }
     // SETUP //
 
