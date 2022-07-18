@@ -19,6 +19,7 @@ private const val TAG = "RentalsViewModel__TAG"
 
 class RentItemsViewModel : ViewModel() {
 
+    var applicationNotStarted = true
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
     var appStarting = true
@@ -61,6 +62,7 @@ class RentItemsViewModel : ViewModel() {
     private fun collectAllRentItems() {
         viewModelScope.launch {
             repo.allRentedItems.collect {
+                Log.d(TAG, "collectAllRentItems: called")
                 _rentedItems.postValue(it)
             }
         }
