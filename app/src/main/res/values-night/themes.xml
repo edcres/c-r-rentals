@@ -15,13 +15,11 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
-    <style name="AppBottomSheetDialogTheme"
-        parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
-    <style name="AppModalStyle"
-        parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="AppModalStyle" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:background">@drawable/bottom_sheet_background</item>
     </style>
 </resources>

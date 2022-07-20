@@ -16,15 +16,6 @@
     <color name="secondary_dark">#874400</color>
     <color name="neutral">#a98b70</color>
 
-<!--    <color name="primary">#9CD3F1</color>-->
-<!--    <color name="primary_dark">#6ba2be</color>-->
-<!--    <color name="primary_light">#cfffff</color>-->
-<!--    <color name="secondary">#BD712D</color>-->
-<!--    <color name="secondary_light">#f4a05a</color>-->
-<!--    <color name="secondary_dark">#884500</color>-->
-<!--    <color name="highlight">#DA7216</color>-->
-
-<!--    <color name="bottom_sheet_icon">#FF6200EE</color>-->
     <color name="delete_color">#FA0000</color>
     <color name="grey">#B3B3B3</color>
     <color name="divider">#AB9F9F9F</color>

@@ -44,7 +44,7 @@ class BottomSheetViewModel : ViewModel() {
     fun replacePreviousImgIfExists(filesList: Array<File>) {
         if (currentRental != null) {
             // If previous rental had an image, replace previous image.
-            if(currentRental!!.imageUri != null) {
+            if (currentRental!!.imageUri != null) {
                 // Delete previous file
                 val fileName = File(currentRental!!.imageUri!!.toUri().path!!).name
                 val fileDeleted =
@@ -58,6 +58,7 @@ class BottomSheetViewModel : ViewModel() {
             Log.i(TAG, "new uri: \n${currentRental!!.imageUri}")
         }
     }
+
     fun deleteFileIfImageIsRejected(filesList: Array<File>) {
         // If the image was not accepted, remove the file created
         if (filesList.isNotEmpty()) {
@@ -69,6 +70,7 @@ class BottomSheetViewModel : ViewModel() {
             }
         }
     }
+
     fun deleteFileIfItemIsCanceled(filesList: Array<File>) {
         // Delete a file when an item to be inserted is canceled
         if (filesList.isNotEmpty()) {
@@ -81,12 +83,14 @@ class BottomSheetViewModel : ViewModel() {
             }
         }
     }
+
     fun setRentalItem(passedRental: RentedItem?) {
         currentRental = passedRental
     }
+
     fun getDateString(): String {
         val calendar = Calendar.getInstance()
-        return "${calendar.get(Calendar.MONTH)+1}/" +
+        return "${calendar.get(Calendar.MONTH) + 1}/" +
                 "${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.YEAR)}"
     }
     // HELPERS //
@@ -104,6 +108,7 @@ class BottomSheetViewModel : ViewModel() {
             }
             repo.deleteRental(rentedItem)
         }
+
     fun insertRental(rentedItem: RentedItem): MutableLiveData<Long> {
         val itemId = MutableLiveData<Long>()
         viewModelScope.launch {
@@ -115,7 +120,6 @@ class BottomSheetViewModel : ViewModel() {
 
     // FILE QUERIES //
     fun makeTmpFile(cacheDir: File, appContext: Context): Uri {
-        // todo: concurrency here
         val tmpFile = File.createTempFile("tmp_image_file", JPG_SUFFIX, cacheDir).apply {
             createNewFile()
             deleteOnExit()
@@ -124,8 +128,8 @@ class BottomSheetViewModel : ViewModel() {
             .getUriForFile(appContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
         return latestTmpUri!!
     }
-    fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
-        // todo: concurrency here
+
+    private fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
         if (files.isNullOrEmpty()) {
             Log.e(TAG, "deleteFile: Error loading files.")
             return false

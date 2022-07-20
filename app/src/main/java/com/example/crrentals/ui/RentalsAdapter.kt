@@ -42,10 +42,10 @@ class RentalsAdapter(
                                 .error(R.drawable.ic_baseline_broken_image)
                         )
                         .into(rentalImage)
-                    Log.d(TAG, "bind: uri:\n${rentedItem.roomNumber}\t${rentedItem.imageUri}")
+                    Log.i(TAG, "bind: uri:\n${rentedItem.roomNumber}\t${rentedItem.imageUri}")
                 } else {
                     rentalImage.visibility = View.GONE
-                    Log.d(TAG, "bind: uri:\n${rentedItem.roomNumber}\t${rentedItem.imageUri}")
+                    Log.i(TAG, "bind: uri:\n${rentedItem.roomNumber}\t${rentedItem.imageUri}")
                 }
                 rentalNameTxt.text = rentedItem.itemType.type.uppercase()
                 roomNumTxt.text = rentedItem.roomNumber?.toString() ?: ""
@@ -74,6 +74,7 @@ class RentalsAdapter(
         override fun areItemsTheSame(oldItem: RentedItem, newItem: RentedItem): Boolean {
             return oldItem.id == newItem.id
         }
+
         override fun areContentsTheSame(oldItem: RentedItem, newItem: RentedItem): Boolean {
             return oldItem == newItem
         }

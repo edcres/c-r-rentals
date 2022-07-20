@@ -7,7 +7,7 @@ import com.example.crrentals.data.RentedItem
 import androidx.room.RoomDatabase
 
 @Database(entities = [RentedItem::class], version = 4, exportSchema = false)
-abstract class RentsRoomDatabase: RoomDatabase() {
+abstract class RentsRoomDatabase : RoomDatabase() {
 
     abstract fun rentedItemsDao(): RentedItemsDao
 
@@ -18,7 +18,7 @@ abstract class RentsRoomDatabase: RoomDatabase() {
 
         fun getInstance(context: Context): RentsRoomDatabase {
             return INSTANCE ?: synchronized(this) {
-                val instance= Room.databaseBuilder(
+                val instance = Room.databaseBuilder(
                     context.applicationContext,
                     RentsRoomDatabase::class.java,
                     DATABASE_NAME

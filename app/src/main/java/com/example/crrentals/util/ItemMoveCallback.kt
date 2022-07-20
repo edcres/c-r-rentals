@@ -10,22 +10,19 @@ abstract class ItemMoveCallback(private val deleteColor: Int, private val delete
         ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
     ) {
     override fun onChildDraw(
-        c: Canvas,
-        recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder,
-        dX: Float,
-        dY: Float,
-        actionState: Int,
-        isCurrentlyActive: Boolean
+        c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+        dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
     ) {
-        RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+        RecyclerViewSwipeDecorator.Builder(
+            c, recyclerView, viewHolder, dX,
+            dY, actionState, isCurrentlyActive
+        )
             .addSwipeLeftBackgroundColor(deleteColor)
             .addSwipeLeftActionIcon(deleteIcon)
             .addSwipeRightBackgroundColor(deleteColor)
             .addSwipeRightActionIcon(deleteIcon)
             .create()
             .decorate()
-
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
 }

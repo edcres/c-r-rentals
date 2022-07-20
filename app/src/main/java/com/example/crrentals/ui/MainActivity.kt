@@ -22,7 +22,7 @@ import java.util.*
 /**
  * App explanation
  *
- * There's a list of Rented items that show:
+ * There's a list of Rented items that shows:
  *  - A picture of the item, type of the item, date rented, and room number
  * More data is displayed when the user clicks on an item and a bottom sheet pops up
  *  - Here the user can edit the item
@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
         }
     }
+
     private fun setObservers() {
         vm.rentedItems.observe(this) { rentals ->
             rentalsAdapter.submitList(rentals)
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         vm.itemToEdit.observe(this) { itemToEdit ->
-            if(itemToEdit != null) {
+            if (itemToEdit != null) {
                 Log.i(TAG, "itemToEdit observed \n$itemToEdit")
                 bottomSheetFragment = BottomSheetFragment.newInstance(
                     BottomSheetAction.UPDATE.toString(),
@@ -103,14 +104,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun setUpItemAnimation() {
         val animController = LayoutAnimationController(
-            AnimationUtils
-            .loadAnimation(this, R.anim.item_anim))
+            AnimationUtils.loadAnimation(this, R.anim.item_anim)
+        )
         animController.delay = 0.20f
         animController.order = LayoutAnimationController.ORDER_NORMAL
         binding!!.rentalsRecycler.layoutAnimation = animController
     }
+
     private fun setUpItemEdit() {
         val editItemCallback = object : ItemMoveCallback(
             ContextCompat.getColor(this, R.color.delete_color),
@@ -123,6 +126,7 @@ class MainActivity : AppCompatActivity() {
                 super.clearView(recyclerView, viewHolder)
                 vm.updateRentalsPositions()
             }
+
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -134,6 +138,7 @@ class MainActivity : AppCompatActivity() {
                 rentalsAdapter.notifyItemMoved(fromPosition, toPosition)
                 return false
             }
+
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 vm.deleteRentalAt(cacheDir.listFiles(), viewHolder.adapterPosition)
             }

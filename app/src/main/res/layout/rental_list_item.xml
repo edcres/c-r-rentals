@@ -7,11 +7,11 @@
         android:id="@+id/rental_item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/primary">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,10 +36,10 @@
                 android:layout_margin="8dp"
                 android:paddingStart="8dp"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-                tools:text="Bicycle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rental_image"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                tools:text="Bicycle" />
 
             <TextView
                 android:id="@+id/room_num_txt"

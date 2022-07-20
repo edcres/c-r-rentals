@@ -23,7 +23,7 @@ class RentItemsViewModel : ViewModel() {
     private lateinit var roomDb: RentsRoomDatabase
     private lateinit var repo: Repository
     var appStarting = true
-//    var positionJustUpdated = false
+
     private var _itemToEdit = MutableLiveData<RentedItem?>()
     val itemToEdit: LiveData<RentedItem?> get() = _itemToEdit
     private val _rentedItems = MutableLiveData<List<RentedItem>>()
@@ -33,19 +33,20 @@ class RentItemsViewModel : ViewModel() {
     fun nullItemToEdit() {
         _itemToEdit.postValue(null)
     }
+
     fun deleteRentalAt(files: Array<File>?, position: Int) {
-        if (rentedItems.value != null) {
-            deleteRental(files, rentedItems.value!![position])
-        }
+        if (rentedItems.value != null) deleteRental(files, rentedItems.value!![position])
     }
+
     fun setItemToEdit(rentedItem: RentedItem) {
         _itemToEdit.postValue(rentedItem)
     }
+
     fun updateRentalsPositions() {
-        // Maybe have this in a background thread
         val rentalsList = _rentedItems.value!!.toList()
-        for(i in rentalsList.indices) { rentalsList[i].listPosition = i }
-//        positionJustUpdated = true
+        for (i in rentalsList.indices) {
+            rentalsList[i].listPosition = i
+        }
         updateRentals(rentalsList)
     }
     // HELPERS //
@@ -66,14 +67,16 @@ class RentItemsViewModel : ViewModel() {
     private fun collectAllRentItems() {
         viewModelScope.launch {
             repo.allRentedItems.collect {
-                Log.d(TAG, "collectAllRentItems: called")
+                Log.i(TAG, "collectAllRentItems: called")
                 _rentedItems.postValue(it)
             }
         }
     }
+
     private fun updateRentals(rentedItems: List<RentedItem>) = viewModelScope.launch {
         repo.updateRentals(rentedItems)
     }
+
     private fun deleteRental(filesList: Array<File>?, rentedItem: RentedItem) =
         viewModelScope.launch {
             if (rentedItem.imageUri != null) {
@@ -86,7 +89,6 @@ class RentItemsViewModel : ViewModel() {
 
     // FILE QUERIES //
     private fun deleteFileWithName(name: String, files: Array<File>?): Boolean {
-        // todo: have this in a background thread
         if (files.isNullOrEmpty()) {
             Log.e(TAG, "deleteFile: Error loading files.")
             return false

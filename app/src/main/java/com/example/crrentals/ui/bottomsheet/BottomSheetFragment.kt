@@ -48,7 +48,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val fragmentBinding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
@@ -85,10 +85,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             addImgBtn.setOnClickListener {
                 takePicture()
             }
-//            duplicateItemBtn.setOnClickListener {}
             sheetRentalImage.setOnClickListener {
-                if(vm.currentRental == null) takePicture()
-                else if(vm.currentRental!!.imageUri == null) takePicture()
+                if (vm.currentRental == null) takePicture()
+                else if (vm.currentRental!!.imageUri == null) takePicture()
             }
         }
         showCorrectBtn(vm.addOrUpdate)
@@ -96,7 +95,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Delete a file when an item to be inserted is canceled
+        // Delete a file when an item to be inserted is canceled.
         vm.deleteFileIfItemIsCanceled(requireActivity().cacheDir.listFiles() ?: arrayOf())
         vm.currentRental = null
         vm.latestTmpUri = null
@@ -120,12 +119,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             dailyRentalsSwitch.isChecked = rentalToLoad.dailyRentals
             paidSwitch.isChecked = rentalToLoad.paid
             rentedOnTxt.text = rentedOnString
-            setImgOnView(rentalToLoad.imageUri?:"noUri".toUri())
+            setImgOnView(rentalToLoad.imageUri ?: "noUri".toUri())
             if (rentalToLoad.imageUri.isNullOrEmpty()) {
                 addImgTxt.text = requireActivity().getString(R.string.new_picture_label)
             }
         }
     }
+
     private fun insertRentalObject() {
         binding?.apply {
             val itemToInsert = RentedItem(
@@ -137,19 +137,19 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 imageUri = if (vm.latestTmpUri != null) {
                     Log.d(TAG, "latest temp uri: ${vm.latestTmpUri}")
                     vm.latestTmpUri.toString()
-                }
-                else null,
+                } else null,
                 roomNumber = stringToInt(roomNumEt.text.toString()),
                 dailyRentals = dailyRentalsSwitch.isChecked,
                 time = vm.getDateString(),
                 lock = stringToInt(lockNumEt.text.toString()),
                 number = stringToInt(numEt.text.toString()),
                 paid = paidSwitch.isChecked,
-                listPosition = vm.listSize ?: 0 // todo: get the size of the list
+                listPosition = vm.listSize ?: 0
             )
             vm.insertRental(itemToInsert)
         }
     }
+
     private fun updateRentalObject(rentalToUpdate: RentedItem) {
         binding?.apply {
             rentalToUpdate.roomNumber = roomNumEt.text.toString().toInt()
@@ -165,6 +165,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             vm.updateRental(rentalToUpdate)
         }
     }
+
     private fun showCorrectBtn(addOrUpdatePassed: String) {
         binding!!.apply {
             when (addOrUpdatePassed) {
@@ -173,6 +174,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             }
         }
     }
+
     private fun setImgOnView(uri: Any) {
         binding?.apply {
             Glide.with(sheetRentalImage.context)
@@ -186,6 +188,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 .into(sheetRentalImage)
         }
     }
+
     private fun takePicture() {
         val uriCreated = vm.makeTmpFile(
             requireActivity().cacheDir,
@@ -204,6 +207,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 addOrUpdate = addOrUpdatePassed
                 currentRental = passedRental
                 listSize = listSizePassed
-        }
+            }
     }
 }

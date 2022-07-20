@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.bottomsheet.BottomSheetFragment">
 
     <FrameLayout
@@ -62,28 +62,28 @@
                 app:layout_constraintStart_toStartOf="@+id/add_img_btn"
                 app:layout_constraintTop_toBottomOf="@+id/add_img_btn" />
 
-<!--            todo: Uncomment these two widgets when adding functionality to duplicate btn-->
-<!--            <ImageButton-->
-<!--                android:id="@+id/duplicate_item_btn"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:backgroundTint="@color/secondary_background"-->
-<!--                android:padding="8dp"-->
-<!--                android:src="@drawable/ic_duplicate_sheet_32"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/add_img_btn"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
-<!--            <com.google.android.material.textview.MaterialTextView-->
-<!--                android:id="@+id/duplicate_item_txt"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/duplicate_label"-->
-<!--                android:textAllCaps="true"-->
-<!--                android:textColor="@color/secondary"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/duplicate_item_btn"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/duplicate_item_btn"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/duplicate_item_btn" />-->
+            <!--            todo: Uncomment these two widgets when adding functionality to duplicate btn-->
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/duplicate_item_btn"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:backgroundTint="@color/secondary_background"-->
+            <!--                android:padding="8dp"-->
+            <!--                android:src="@drawable/ic_duplicate_sheet_32"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/add_img_btn"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <!--            <com.google.android.material.textview.MaterialTextView-->
+            <!--                android:id="@+id/duplicate_item_txt"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="@string/duplicate_label"-->
+            <!--                android:textAllCaps="true"-->
+            <!--                android:textColor="@color/secondary"-->
+            <!--                android:textStyle="bold"-->
+            <!--                app:layout_constraintEnd_toEndOf="@+id/duplicate_item_btn"-->
+            <!--                app:layout_constraintStart_toStartOf="@+id/duplicate_item_btn"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/duplicate_item_btn" />-->
 
             <View
                 android:id="@+id/divider_1"
@@ -152,10 +152,10 @@
                         android:id="@+id/paid_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
                         android:checked="false"
                         android:text="@string/paid_label"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/sheet_rental_image"
                         app:thumbTint="@color/secondary_dark"
@@ -165,8 +165,8 @@
                         android:id="@+id/choose_type_radio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="start"
                         android:orientation="horizontal"
                         app:layout_constraintStart_toStartOf="parent"
@@ -206,9 +206,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
+                        android:hint="@string/num_hint"
                         app:boxStrokeColor="@color/secondary"
                         app:hintTextColor="@color/secondary"
-                        android:hint="@string/num_hint"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/choose_type_radio">
 
@@ -249,10 +249,10 @@
                         android:layout_marginTop="8dp"
                         android:checked="false"
                         android:text="@string/daily_rentals_label"
-                        app:trackTint="@color/secondary"
-                        app:thumbTint="@color/secondary_dark"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/lock_num_et_box" />
+                        app:layout_constraintTop_toBottomOf="@+id/lock_num_et_box"
+                        app:thumbTint="@color/secondary_dark"
+                        app:trackTint="@color/secondary" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/rented_on_txt"
