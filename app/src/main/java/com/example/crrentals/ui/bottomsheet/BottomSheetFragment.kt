@@ -152,14 +152,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun updateRentalObject(rentalToUpdate: RentedItem) {
         binding?.apply {
-            rentalToUpdate.roomNumber = roomNumEt.text.toString().toInt()
+            rentalToUpdate.roomNumber = stringToInt(roomNumEt.text.toString())
             rentalToUpdate.itemType = when (chooseTypeRadio.checkedRadioButtonId) {
                 bikeBtn.id -> RentedItem.ItemType.BIKE
                 paddleBoardBtn.id -> RentedItem.ItemType.PADDLE_BOARD
                 else -> RentedItem.ItemType.CHAIR
             }
-            rentalToUpdate.number = numEt.text.toString().toInt()
-            rentalToUpdate.lock = lockNumEt.text.toString().toInt()
+            rentalToUpdate.number = stringToInt(numEt.text.toString())
+            rentalToUpdate.lock = stringToInt(lockNumEt.text.toString())
             rentalToUpdate.dailyRentals = dailyRentalsSwitch.isChecked
             rentalToUpdate.paid = paidSwitch.isChecked
             vm.updateRental(rentalToUpdate)
