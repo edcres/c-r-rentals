@@ -23,9 +23,7 @@ Android App for the users to keep track of rentel items using an image, among ot
 
 ---
 
-<a href="https://github.com/edcres/c-r-rentals">
-    <img width=132 src="https://user-images.githubusercontent.com/79296181/183285528-196ec090-ff85-4a1c-886b-e43677df55f8.gif" />
-</a>
+<img width=132 src="https://user-images.githubusercontent.com/79296181/183285528-196ec090-ff85-4a1c-886b-e43677df55f8.gif" />
 
 - The app displays a list of rented items (Bikes, Chairs, Paddle Boards)
 - Each item displays the item type, room number, time it was rented, and a picture of the item
@@ -35,9 +33,7 @@ Android App for the users to keep track of rentel items using an image, among ot
 
 ---
 
-<a href="https://github.com/edcres/c-r-rentals">
-    <img width=132 src="https://user-images.githubusercontent.com/79296181/183285510-cbbb301a-f828-4c8b-8020-4ed4b40741f3.gif" />
-</a>
+<img width=132 src="https://user-images.githubusercontent.com/79296181/183285510-cbbb301a-f828-4c8b-8020-4ed4b40741f3.gif" />
 
 - To add a new item click the Floating Action Button
 - The bottom sheet pops up and the user is able to add infofrmation about the rental item and add it to the database
