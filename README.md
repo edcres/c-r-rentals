@@ -13,6 +13,7 @@ Android App for the users to keep track of rentel items using an image, among ot
 - Take a picture with the native camera app
 - Store a picture in internal storage
 - Current date
+- Glide
 - LiveData
   - Livedata Observers
   - Kotlin Flow
