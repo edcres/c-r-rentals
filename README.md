@@ -1,6 +1,6 @@
 # c-r-rentals
 
-Android App for the users to keep track of rentel items using an image, among other data. (built mostly in kotlin)
+Android App for the users to keep track of rented items using an image, among other data. (built mostly in kotlin)
 
 ---
 
