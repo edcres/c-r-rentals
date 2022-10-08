@@ -17,7 +17,7 @@ Android App for the users to keep track of rented items using an image, among ot
 - LiveData
   - Livedata Observers
   - Kotlin Flow
-- Kotlin coroutines (for synchronous excecutions)
+- Kotlin coroutines (for synchronous executions)
 - RecyclerView
   - Drag and drop to change positions of the items and store the position in the database
   - Swipe to delete functionality and decoration
@@ -30,11 +30,11 @@ Android App for the users to keep track of rented items using an image, among ot
 - Each item displays the item type, room number, time it was rented, and a picture of the item
   - Clicking on an item pops up a bottom sheet with more information on the rented item.
     - Can edit the item (and change the picture) and delete the item.
-- Can change the posotion of the items in the list and the new position is stored in the database
+- Can change the position of the items in the list and the new position is stored in the database
 
 ---
 
 <img width=180 src="https://user-images.githubusercontent.com/79296181/183285510-cbbb301a-f828-4c8b-8020-4ed4b40741f3.gif" />
 
 - To add a new item click the Floating Action Button
-- The bottom sheet pops up and the user is able to add infofrmation about the rental item and add it to the database
+- The bottom sheet pops up and the user is able to add information about the rental item and add it to the database
